@@ -5,12 +5,12 @@ component_params.py
 """
 
 
-input_files  = {"input-vep": "__REQUIRED__"}
+input_files  = {"input_vep": "__REQUIRED__"}
 
-output_files = {"output-maf": "__REQUIRED__"}
+output_files = {"output_maf": "__REQUIRED__"}
 
-input_params = {"tumour-id": "__OPTIONAL__",
-                "normal-id": "__OPTIONAL__"}
+input_params = {"tumour_id": "__OPTIONAL__",
+                "normal_id": "__OPTIONAL__"}
 
 return_value = []
 

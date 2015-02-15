@@ -7,7 +7,6 @@ the ComponentAbstract class. It is the core of a component.
 """
 
 from pipeline_factory.utils import ComponentAbstract
-import os
 
 
 class Component(ComponentAbstract):
@@ -36,8 +35,13 @@ class Component(ComponentAbstract):
         pass
 
     def make_cmd(self, chunk=None):
-        cmd = self.requirements["perl"] + " " + self.requirements["vcf2maf.pl"]
-        cmd_args = ["--{} {}".format(k, v) for k, v in vars(self.args).items()]
+        cmd = self.requirements["perl"] + " " + self.requirements["vcf2maf"]
+        cmd_args = ["--input-vep", self.args.input_vep,
+                    "--output-maf", self.args.output_maf]
+        if "tumour_id" in vars(self.args):
+            cmd_args.extend(["--tumour-id", self.args.tumour_id])
+        if "normal_id" in vars(self.args):
+            cmd_args.extend(["--tumour-id", self.args.normal_id])
         return cmd, cmd_args
 
 
