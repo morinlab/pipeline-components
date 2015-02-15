@@ -39,9 +39,9 @@ class Component(ComponentAbstract):
         cmd_args = ["--input-vep", self.args.input_vep,
                     "--output-maf", self.args.output_maf]
         if "tumour_id" in vars(self.args):
-            cmd_args.extend(["--tumour-id", self.args.tumour_id])
+            cmd_args.extend(["--tumor-id", self.args.tumour_id])
         if "normal_id" in vars(self.args):
-            cmd_args.extend(["--tumour-id", self.args.normal_id])
+            cmd_args.extend(["--normal-id", self.args.normal_id])
         return cmd, cmd_args
 
 
