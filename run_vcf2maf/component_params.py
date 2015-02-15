@@ -1,7 +1,7 @@
 """
 component_params.py
 
-@author: Bruno Grande
+@author: bgrande
 """
 
 

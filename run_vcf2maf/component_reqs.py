@@ -1,7 +1,7 @@
 """
 component_reqs.py
 
-@author: Bruno Grande
+@author: bgrande
 """
 
 env_vars = {}

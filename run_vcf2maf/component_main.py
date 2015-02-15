@@ -3,7 +3,7 @@ component_main.py
 This module contains Component class which extends
 the ComponentAbstract class. It is the core of a component.
 
-@author: Bruno Grande
+@author: bgrande
 """
 
 from pipeline_factory.utils import ComponentAbstract

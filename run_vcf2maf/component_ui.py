@@ -1,7 +1,7 @@
 """
 component_ui.py
 
-@author: Bruno Grande
+@author: bgrande
 """
 
 import argparse
