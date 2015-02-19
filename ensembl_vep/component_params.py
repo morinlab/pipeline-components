@@ -12,7 +12,7 @@ output_files = {"output_file": "__REQUIRED__"}
 input_params = {"dir": "__REQUIRED__",
                 "fasta": "__REQUIRED__",
                 "assembly": "GRCh37",
-                "fork": "1",
+                "fork": "__OPTIONAL__",
                 "quiet": True,
                 "offline": True,
                 "no_stats": True,
