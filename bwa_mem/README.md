@@ -15,7 +15,7 @@ Seed Used    : bwa
 
 ### Dependencies
 
-- bwa (>0.7.10)
+- BWA (tested with v0.7.10)
 
 ### Known Issues
 
