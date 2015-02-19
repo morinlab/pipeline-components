@@ -1,7 +1,8 @@
 # bwa_mem
 
 ```
-Development information
+Development Information
+=======================
 
 Date Created : Feb 18 2015
 Last Update  : Feb 18 2015
