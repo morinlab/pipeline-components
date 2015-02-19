@@ -43,7 +43,7 @@ class TestComponentStructure(unittest.TestCase):
         for var in min_vars:
             var_value = getattr(component_params, var, None)
             self.assertIsNotNone(var_value, "Required variable not set in "
-                                 "component_reqs: {}".format(var))
+                                 "component_params: {}".format(var))
 
 
 class Arguments(object):
