@@ -4,12 +4,12 @@
 Development information
 
 Date Created : Feb 18 2015
-last update  : Feb 18 2015
+Last Update  : Feb 18 2015
 Developer    : Bruno Grande (bgrande@sfu.ca)
-Input        : FASTQ files, Reference genome FASTA file
+Input        : FASTQ files, reference genome FASTA file
 Output       : BAM file 
 Parameters   : num_threads
-Seed used    : bwa
+Seed Used    : bwa
 ```
 
 ### Dependencies
