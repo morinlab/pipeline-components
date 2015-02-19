@@ -19,13 +19,13 @@ parser = argparse.ArgumentParser(prog='picard_samtofastq',
                                  description = "This tool takes in a bam file and generates fastq file(s) from it")
 
 ## TODO: create the list of input options here. Add as many as desired.
-parser.add_argument(
-                    "-x", "--xparam", 
-                    default = None, 
-                    help= """
-                    help message goes here.
-                    """)
-                    
+parser.add_argument("--input.file", required=True,help="Bam file to be converted to fastq")
+parser.add_argument("--fastq.output.file1", required=True,help="Output fasta file 1")
+parser.add_argument("--fastq.output.file2",default=null, help="Output fasta file 2 (if paired bam)")
+parser.add_argument("--javamem",default=4G,help="memory allocation to java")
+parser.add_argument("--fastq.unpaired.output",default=null,help="Output unpaired fasta file (if paired bam)")
+parser.add_argument("--out.dir",default=null,help="Output directory (if processing by read groups)")
+
 
 ## parse the argument parser.
 args, unknown = parser.parse_known_args()
