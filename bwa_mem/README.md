@@ -19,7 +19,7 @@ Seed Used    : bwa
 
 ### Known Issues
 
-- None
+- Currently output SAM file. Considering using samtools to directly output BAM file.
 
 ### Last Updates
 
