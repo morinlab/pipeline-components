@@ -29,36 +29,36 @@ class Component(ComponentAbstract):
 	path = os.path.join(self.requirements['picardtools'], 'SamToFastq.jar')
         cmd = self.requirements['java'] + ' -Xmx' +self.args.javamem + ' -jar ' + path
 	if self.args.output_per_rg():
-		cmd_args = ['INPUT='+self.args.input.file,
+		cmd_args = ['INPUT='+self.args.input_file,
 				'OUTPUT_PER_RG=true',
-				'RG_TAG='+self.args.rg.tag,
-				'OUTPUT_DIR='+self.args.out.dir
+				'RG_TAG='+self.args.rg_tag,
+				'OUTPUT_DIR='+self.args.out_dir
 			]
 	else:
-		cmd_args = ['INPUT='+self.args.input.file,
+		cmd_args = ['INPUT='+self.args.input_file,
 			'FASTQ='+self.args.fastq.output.file1,
-			'SECOND_END_FASTQ='+self.args.fastq.output.file2,
-			'UNPAIRED_FASTQ='+self.args.fastq.unpaired.output
+			'SECOND_END_FASTQ='+self.args.fastq_output_file2,
+			'UNPAIRED_FASTQ='+self.args.fastq_unpaired_output
 			]
 
 	cmd_args.extend((
-			'RE_REVERSE='+self.args.rereverse.bases,
+			'RE_REVERSE='+self.args.rereverse_bases,
                         'INTERLEAVE='+self.args.interleave,
-                        'INCLUDE_NON_PF_READS='+self.args.include.non.pf.reads,
-                        'CLIPPING_ATTRIBUTE='+self.args.clipping.attribute,
-                        'CLIPPING_ACTION='+self.args.clipping.action,
-                        'READ1_TRIM='+self.args.read1.trim,
-                        'READ1_MAX_BASES_TO_WRITE='+self.args.read1.maxbases,
-                        'READ2_TRIM='+self.args.read2.trim,
-                        'READ2_MAX_BASES_TO_WRITE='+self.args.read2.maxbases,
-                        'INCLUDE_NON_PRIMARY_ALIGNMENTS='+self.args.include.nonprimary
+                        'INCLUDE_NON_PF_READS='+self.args.include_non_pf_reads,
+                        'CLIPPING_ATTRIBUTE='+self.args.clipping_attribute,
+                        'CLIPPING_ACTION='+self.args.clipping_action,
+                        'READ1_TRIM='+self.args.read1_trim,
+                        'READ1_MAX_BASES_TO_WRITE='+self.args.read1_maxbases,
+                        'READ2_TRIM='+self.args.read2_trim,
+                        'READ2_MAX_BASES_TO_WRITE='+self.args.read2_maxbases,
+                        'INCLUDE_NON_PRIMARY_ALIGNMENTS='+self.args.include_nonprimary
 			))
 
 	cmd_args.extend((
 			'VERBOSITY='+self.args.verbosity,
 			'QUIET='+self.args.quiet,
-			'VALIDATION_STRINGENCY='+self.args.val.stringency,
-			'TMP_DIR='+self.tmp.dir
+			'VALIDATION_STRINGENCY='+self.args.val_stringency,
+			'TMP_DIR='+self.tmp_dir
 			))
         return cmd, cmd_args
 	
