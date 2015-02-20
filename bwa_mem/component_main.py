@@ -32,31 +32,34 @@ class Component(ComponentAbstract):
     def make_cmd(self, chunk=None):
         # Program or interpreter
         cmd = self.requirements["bwa"]
-        cmd_args = []
+        cmd_args = ["mem"]
         args_dict = vars(self.args)
         # Optional arguments
         opt_args = {"num_threads": "-t"}
-        cmd_args.append(["{} {}".format(opt_args[k], v) for k, v in args_dict
+        cmd_args.extend(["{} {}".format(opt_args[k], v) for k, v in args_dict.items()
                         if k in opt_args and v is not True])
-        cmd_args.append(["{}".format(opt_args[k], v) for k, v in args_dict
+        cmd_args.extend(["{}".format(opt_args[k], v) for k, v in args_dict.items()
                         if k in opt_args and v is True])
         # Positional arguments
         pos_args = ["reference", "fastq_1", "fastq_2"]
-        cmd_args.append([args_dict[arg] for arg in pos_args if arg in args_dict])
+        cmd_args.extend([args_dict[arg] for arg in pos_args if arg in args_dict])
+        # Output argument using shell redirection
+        cmd_args.extend([">", args_dict["output_bam"]])
         # Return cmd and cmg_args
         return cmd, cmd_args
 
     def test(self):
-        component_test.run()
+        component_test.run_tests()
 
 
 # To run as stand alone
 def _main():
-    m = Component()
-    m.args = component_ui.args
-    m.run()
+    comp = Component()
+    # comp.args = component_ui.args
+    # comp.run()
+    comp.test()
 
 
 if __name__ == '__main__':
-    import component_ui
+    # import component_ui
     _main()

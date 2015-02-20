@@ -19,8 +19,7 @@ Seed Used    : bwa
 
 ### Known Issues
 
-- Test data isn't included yet. 
-- Output BAM file isn't captured yet, since bwa outputs SAM to stdout.
+- None
 
 ### Last Updates
 

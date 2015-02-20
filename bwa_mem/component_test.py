@@ -6,6 +6,9 @@ component_test.py
 
 import unittest
 import shlex
+import random
+import os
+import filecmp
 import subprocess
 import component_main
 import component_reqs
@@ -63,6 +66,19 @@ class TestSeed(unittest.TestCase):
     The functions in component_main are tested as well.
     """
 
+    def setUp(self):
+        """
+        Set a few common variables.
+        """
+        # Obtain component_test directory
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        self.test_dir = current_dir + "/component_test/"
+        # Create a tmp directory
+        comp = component_main.Component()
+        random_num = int(random.random() * 1000)
+        self.tmp_dir = "/tmp/test_{}_{}/".format(comp.component_name, random_num)
+        os.mkdir(self.tmp_dir)
+
     def setup_component(self, args):
         """
         Create uniform Component instances.
@@ -80,30 +96,82 @@ class TestSeed(unittest.TestCase):
         cmd_split = shlex.split(cmd)
         cmd_args_split = []
         for arg in cmd_args:
-            cmd_args_split.append(shlex.split(arg))
+            cmd_args_split.extend(shlex.split(arg))
         all_args = cmd_split + cmd_args_split
-        returncode = subprocess.call(all_args)
+        returncode = subprocess.call(subprocess.list2cmdline(all_args), shell=True,
+                                     stderr=subprocess.PIPE)
         self.assertEqual(returncode, 0, "Unsucessful command: {}".format(" ".join(all_args)))
 
+    def compare_files(self, comp, expectations={}):
+        """
+        Given a set of expectations, this method raises
+        an exception when an actual output file doesn't
+        match the expected output file.
+        The expectations dictionary is a set of key-value
+        pairs, where the key is the component argument of
+        the output file and the value is the expected
+        output file (such as one in component_test)
+        """
+        for arg, expected_filename in expectations.items():
+            actual_filename = getattr(comp.args, arg)
+            # Remove header line with BWA command
+            # Because it prevents two files from being identical otherwise
+            actual_filename_fixed = self.fix_bam_file(actual_filename)
+            is_equal = filecmp.cmp(actual_filename_fixed, expected_filename)
+            self.assertTrue(is_equal, "Actual output file differs from expected output file."
+                            "\nActual: {}\nExpected: {}".format(actual_filename_fixed,
+                                                                expected_filename))
+
+    def fix_bam_file(self, bam_file):
+        """
+        Remove the @PG header line from BAM file
+        and return resulting file.
+        """
+        prefix, ext = os.path.splitext(bam_file)
+        output_bam = prefix + ".fixed." + ext
+        with open(bam_file) as inbam, open(output_bam, "w") as outbam:
+            for line in inbam:
+                if line.startswith("@PG"):
+                    continue
+                outbam.write(line)
+        return output_bam
+
     def test_with_one_fastq_file(self):
-        """
-        Run bwa_mem with one input FASTQ file.
-        """
-        args = Arguments(fastq_1="/sample/path/to/fastq_1",
-                         reference="/sample/path/to/reference",
-                         output_bam="/sample/path/to/output_bam",
-                         num_threads="2")
+        """Run bwa_mem with one input FASTQ file."""
+        args = Arguments(
+            fastq_1="{}/phix_reads_R1.fastq.gz".format(self.test_dir),
+            reference="{}/bwa_index/phix_genome.fasta".format(self.test_dir),
+            output_bam="{}/phix_alignment_with_one_fastq_file.sam".format(self.tmp_dir),
+            num_threads="2")
         comp = self.setup_component(args)
         cmd, cmd_args = comp.make_cmd()
+        self.run_cmd(cmd, cmd_args)
+        expectations = {
+            "output_bam": "{}/phix_alignment_with_one_fastq_file.sam".format(self.test_dir)}
+        self.compare_files(comp, expectations)
 
     def test_with_two_fastq_files(self):
-        """
-        Run bwa_mem with two input FASTQ files.
-        """
-        args = Arguments(fastq_1="/sample/path/to/fastq_1",
-                         fastq_2="/sample/path/to/fastq_2",
-                         reference="/sample/path/to/reference",
-                         output_bam="/sample/path/to/output_bam",
-                         num_threads="2")
+        """Run bwa_mem with two input FASTQ files."""
+        args = Arguments(
+            fastq_1="{}/phix_reads_R1.fastq.gz".format(self.test_dir),
+            fastq_2="{}/phix_reads_R2.fastq.gz".format(self.test_dir),
+            reference="{}/bwa_index/phix_genome.fasta".format(self.test_dir),
+            output_bam="{}/phix_alignment_with_two_fastq_files.sam".format(self.tmp_dir),
+            num_threads="2")
         comp = self.setup_component(args)
         cmd, cmd_args = comp.make_cmd()
+        self.run_cmd(cmd, cmd_args)
+        expectations = {
+            "output_bam": "{}/phix_alignment_with_two_fastq_files.sam".format(self.test_dir)}
+        self.compare_files(comp, expectations)
+
+
+def run_tests():
+    """
+    Run all tests.
+    """
+    suite1 = unittest.TestLoader().loadTestsFromTestCase(TestComponentStructure)
+    suite2 = unittest.TestLoader().loadTestsFromTestCase(TestSeed)
+    alltests_suite = unittest.TestSuite([suite1, suite2])
+    runner = unittest.TextTestRunner(verbosity=2)
+    runner.run(alltests_suite)
