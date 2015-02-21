@@ -141,8 +141,9 @@ class TestSeed(unittest.TestCase):
     def test_with_pairedread_bam_file(self):
         """Run SamToFastq with one input bam file, that has paired reads."""
         args = Arguments(
+		input_file= "{}/exampleBAM.paired.mapped.bam".format(self.test_dir),
 		#input_file= "{}/examples/exampleBAM.bam".format(self.test_dir),
-                input_file = "{}/phix_alignment_with_two_fastq_files.sam".format(self.test_dir),
+            #    input_file = "{}/phix_alignment_with_two_fastq_files.sam".format(self.test_dir),
                 fastq_output_file1="{}/picard_phix_R1.fastq".format(self.test_dir),
                 fastq_output_file2="{}/picard_phix_R2.fastq".format(self.test_dir),
                 output_per_rg=0,
