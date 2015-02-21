@@ -141,7 +141,7 @@ class TestSeed(unittest.TestCase):
     def test_with_pairedread_bam_file(self):
         """Run SamToFastq with one input bam file, that has paired reads."""
         args = Arguments(
-		#input_file= "/projects/bgrande/jgrewalprj/examples/exampleBAM.bam",
+		#input_file= "{}/examples/exampleBAM.bam".format(self.test_dir),
                 input_file = "{}/phix_alignment_with_two_fastq_files.sam".format(self.test_dir),
                 fastq_output_file1="{}/picard_phix_R1.fastq".format(self.test_dir),
                 fastq_output_file2="{}/picard_phix_R2.fastq".format(self.test_dir),
@@ -149,8 +149,7 @@ class TestSeed(unittest.TestCase):
 		val_stringency= 'SILENT',
 		include_non_pf_reads=True,
 	        test=1
-	 # out.dir="{}/picard_output/phix_genome.fasta".format(self.test_dir),
-                         )
+                    )
         comp = self.setup_component(args)
         cmd, cmd_args = comp.make_cmd()
         self.run_cmd(cmd, cmd_args)
