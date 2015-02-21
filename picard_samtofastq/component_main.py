@@ -15,20 +15,26 @@ import os
 class Component(ComponentAbstract):
     
     """
-    TODO: add component doc here. 
+   This PicardTools component forms FASTQ files from ani nput bam file.
+
+   Input:
+	- input BAM file
+	- (optional) names for output FASTQ files
+
+   Outputs:
+	- One (single-end) or two (paired-end) FASTQ files 
     """
 
-	#add seed_dir (~~/picard-tools-v.vv/)
     def __init__(self, component_name="picard_samtofastq", 
                  component_parent_dir=None, seed_dir=None):
-	self.version = "v0.99.0"
+	self.version = "v1.0.5"
         ## initialize ComponentAbstract
         super(Component, self).__init__(component_name, component_parent_dir, seed_dir)
 
     def make_cmd(self, chunk=None):
 	path = os.path.join(self.requirements['picardtools'], 'SamToFastq.jar')
-        cmd = self.requirements['java'] + ' -Xmx' +self.args.javamem + ' -jar ' + path
-	if self.args.output_per_rg():
+        cmd = self.requirements['java'] + 'java -Xmx4G' + ' -jar ' + path
+	if self.args.output_per_rg:
 		cmd_args = ['INPUT='+self.args.input_file,
 				'OUTPUT_PER_RG=true',
 				'RG_TAG='+self.args.rg_tag,
@@ -36,12 +42,19 @@ class Component(ComponentAbstract):
 			]
 	else:
 		cmd_args = ['INPUT='+self.args.input_file,
-			'FASTQ='+self.args.fastq.output.file1,
+			'FASTQ='+self.args.fastq_output_file1,
 			'SECOND_END_FASTQ='+self.args.fastq_output_file2,
-			'UNPAIRED_FASTQ='+self.args.fastq_unpaired_output
+			#'UNPAIRED_FASTQ='+self.args.fastq_unpaired_output
 			]
-
-	cmd_args.extend((
+	if hasattr(self.args,'test'):
+		[
+		cmd_args.extend((
+			'VALIDATION_STRINGENCY=SILENT',
+			'INCLUDE_NON_PF_READS=True'
+		))
+		]
+	else:
+		cmd_args.extend((
 			'RE_REVERSE='+self.args.rereverse_bases,
                         'INTERLEAVE='+self.args.interleave,
                         'INCLUDE_NON_PF_READS='+self.args.include_non_pf_reads,
@@ -54,7 +67,7 @@ class Component(ComponentAbstract):
                         'INCLUDE_NON_PRIMARY_ALIGNMENTS='+self.args.include_nonprimary
 			))
 
-	cmd_args.extend((
+		cmd_args.extend((
 			'VERBOSITY='+self.args.verbosity,
 			'QUIET='+self.args.quiet,
 			'VALIDATION_STRINGENCY='+self.args.val_stringency,

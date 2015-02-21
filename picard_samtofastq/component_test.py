@@ -141,16 +141,21 @@ class TestSeed(unittest.TestCase):
     def test_with_pairedread_bam_file(self):
         """Run SamToFastq with one input bam file, that has paired reads."""
         args = Arguments(
-                input_file = "{}/phix_alignment_with_one_fastq_file.sam".format(self.test_dir),
+		#input_file= "/projects/bgrande/jgrewalprj/examples/exampleBAM.bam",
+                input_file = "{}/phix_alignment_with_two_fastq_files.sam".format(self.test_dir),
                 fastq_output_file1="{}/picard_phix_R1.fastq".format(self.test_dir),
-                fastq_output_file2="{}/picard_phix.fastq".format(self.test_dir),
-                         # out.dir="{}/picard_output/phix_genome.fasta".format(self.test_dir),
+                fastq_output_file2="{}/picard_phix_R2.fastq".format(self.test_dir),
+                output_per_rg=0,
+		val_stringency= 'SILENT',
+		include_non_pf_reads=True,
+	        test=1
+	 # out.dir="{}/picard_output/phix_genome.fasta".format(self.test_dir),
                          )
         comp = self.setup_component(args)
         cmd, cmd_args = comp.make_cmd()
         self.run_cmd(cmd, cmd_args)
-            # expectations = {
-            #"output_bam": "{}/phix_alignment_with_one_fastq_file.sam".format(self.test_dir)}
+            #expectations = {
+            #"output_fa1": "/projects/bgrande/jgrewalprj/examples/exampleFasta.fasta.gz"}
 #self.compare_files(comp, expectations)
 
 def run_tests():
@@ -162,3 +167,10 @@ def run_tests():
     alltests_suite = unittest.TestSuite([suite1, suite2])
     runner = unittest.TextTestRunner(verbosity=2)
     runner.run(alltests_suite)
+
+suite1 = unittest.TestLoader().loadTestsFromTestCase(TestComponentStructure)
+suite2 = unittest.TestLoader().loadTestsFromTestCase(TestSeed)
+alltests_suite = unittest.TestSuite([suite1, suite2])
+runner = unittest.TextTestRunner(verbosity=2)
+runner.run(alltests_suite)
+

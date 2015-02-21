@@ -13,10 +13,12 @@ Parameters	: input.file, fastq.output.file1
 Seed used	: picardtools
 ```
 ###Dependencies
--picardtools
+-picardtools (Tested using v1.71)
 -java
 
 ###Known issues
-
+- Picard SamToFastq doesnt work if there are unpaired reads in the bam file.
+- Need to update component_test.fq to compare output file(s) against expected file(s).
 ###Last updates
+
 
