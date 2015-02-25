@@ -5,14 +5,14 @@ Note the places you need to change to make it work for you.
 They are marked with keyword 'TODO'.
 """
 
-## TODO: here goes the list of the input files. Use flags: 
+## here goes the list of the input files. Use flags: 
 ## '__REQUIRED__' to make it required
 ## '__FLAG__' to make it a flag or switch.
 input_files  = {
                  'input_file' : '__REQUIRED__',
                 }
 
-## TODO: here goes the list of the output files.
+## here goes the list of the output files.
 output_files = {
                  'fastq_output_file1' : '__REQUIRED__',
                  'fastq_output_file2' : 'null' ,
@@ -21,16 +21,16 @@ output_files = {
 		'log_file': 'samToFastq_run.log'
 		}
 
-## TODO: here goes the list of the input parameters excluding input/output files.
+## here goes the list of the input parameters excluding input/output files.
 input_params = {
 		'javamem' : '4G',
 		 'output_per_rg' : 'false',
 		 'rg_tag' : 'PU',
-         'rereverse_bases' : 'false', #'__FLAG__',
+		 'rereverse_bases' : 'false', #'__FLAG__',
 		 'interleave' : 'false',
-         'include_non_pf_reads' : 'false', #'__FLAG__',
+         	 'include_non_pf_reads' : 'false', #'__FLAG__',
 		 'clipping_attribute' : 'null', #'__OPTIONAL__',
-         'clipping_action' : 'null', #'__OPTIONAL__',
+         	 'clipping_action' : 'null', #'__OPTIONAL__',
 		 'read1_trim' : '0',
 		 'read1_maxbases' : 'null',
 		 'read2_trim' : '0',
@@ -42,7 +42,7 @@ input_params = {
 		 'tmp_dir' : 'null'
 		}
 
-## TODO: here goes the return value of the component_seed. 
+## here goes the return value of the component_seed. 
 ## DO NOT USE, Not implemented yet!
 return_value = []
 

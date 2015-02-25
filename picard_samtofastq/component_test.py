@@ -116,10 +116,7 @@ class TestSeed(unittest.TestCase):
         """
         for arg, expected_filename in expectations.items():
             actual_filename = getattr(comp.args, arg)
-            # Remove header line with BWA command
-            # Because it prevents two files from being identical otherwise
-            actual_filename_fixed = self.fix_bam_file(actual_filename)
-            is_equal = filecmp.cmp(actual_filename_fixed, expected_filename)
+            is_equal = filecmp.cmp(actual_filename, expected_filename)
             self.assertTrue(is_equal, "Actual output file differs from expected output file."
                             "\nActual: {}\nExpected: {}".format(actual_filename_fixed,
                                                                 expected_filename))

@@ -4,8 +4,6 @@ This module contains Component class which extends
 the ComponentAbstract class. It is the core of a component.
 
 @author: jgrewal
-Note the places you need to change to make it work for you. 
-They are marked with keyword 'TODO'.
 """
 
 from pipeline_factory.utils import ComponentAbstract
@@ -15,7 +13,7 @@ import os
 class Component(ComponentAbstract):
     
     """
-   This PicardTools component forms FASTQ files from ani nput bam file.
+   This PicardTools component forms FASTQ files from an input bam file.
 
    Input:
 	- input BAM file
