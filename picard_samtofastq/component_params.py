@@ -14,32 +14,31 @@ input_files  = {
 
 ## here goes the list of the output files.
 output_files = {
-                 'fastq_output_file1' : '__REQUIRED__',
-                 'fastq_output_file2' : 'null' ,
-		 'fastq_unpaired_output' : 'null',
-                 'out_dir' : 'null',
-		'log_file': 'samToFastq_run.log'
+                 'outfile' : '__OPTIONAL__',
+                 'outfile2' : '__OPTIONAL__' ,
+		 'unpaired_outfile' : '__OPTIONAL__',
+		 'log_file': 'samToFastq_run.log'
 		}
 
 ## here goes the list of the input parameters excluding input/output files.
-input_params = {
+input_params = {'pairedbam' : '__REQUIRED__', #FLAG
 		'javamem' : '4G',
-		 'output_per_rg' : 'false',
-		 'rg_tag' : 'PU',
-		 'rereverse_bases' : 'false', #'__FLAG__',
-		 'interleave' : 'false',
-         	 'include_non_pf_reads' : 'false', #'__FLAG__',
-		 'clipping_attribute' : 'null', #'__OPTIONAL__',
-         	 'clipping_action' : 'null', #'__OPTIONAL__',
-		 'read1_trim' : '0',
-		 'read1_maxbases' : 'null',
-		 'read2_trim' : '0',
-		 'read2_maxbases' : 'null',
-		 'include_nonprimary' : 'false',
-         'val_stringency' : 'SILENT', #'__REQUIRED__',
-		 'verbosity' : 'INFO',
-		 'quiet' : 'false',
-		 'tmp_dir' : 'null'
+		'output_per_rg' : 'false',
+		'rg_tag' : 'PU',
+		'rereverse_bases' : 'false', #'__FLAG__',
+		'interleave' : 'false',
+         	'include_non_pf_reads' : 'false', #'__FLAG__',
+		'clipping_attribute' : 'null', #'__OPTIONAL__',
+         	'clipping_action' : 'null', #'__OPTIONAL__',
+		'read1_trim' : '0',
+		'read1_maxbases' : 'null',
+		'read2_trim' : '0',
+		'read2_maxbases' : 'null',
+		'include_nonprimary' : 'false',
+	        'val_stringency' : 'SILENT', #'__REQUIRED__',
+		'verbosity' : 'INFO',
+		'quiet' : 'false',
+		'tmp_dir' : 'null'
 		}
 
 ## here goes the return value of the component_seed. 

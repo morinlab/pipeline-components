@@ -121,31 +121,15 @@ class TestSeed(unittest.TestCase):
                             "\nActual: {}\nExpected: {}".format(actual_filename_fixed,
                                                                 expected_filename))
 
-    def fix_bam_file(self, bam_file):
-        """
-        Remove the @PG header line from BAM file
-        and return resulting file.
-        """
-        prefix, ext = os.path.splitext(bam_file)
-        output_bam = prefix + ".fixed." + ext
-        with open(bam_file) as inbam, open(output_bam, "w") as outbam:
-            for line in inbam:
-                if line.startswith("@PG"):
-                    continue
-                outbam.write(line)
-        return output_bam
-
     def test_with_pairedread_bam_file(self):
         """Run SamToFastq with one input bam file, that has paired reads."""
         args = Arguments(
-		input_file= "{}/exampleBAM.paired.mapped.bam".format(self.test_dir),
-		#input_file= "{}/examples/exampleBAM.bam".format(self.test_dir),
-            #    input_file = "{}/phix_alignment_with_two_fastq_files.sam".format(self.test_dir),
-                fastq_output_file1="{}/picard_phix_R1.fastq".format(self.test_dir),
-                fastq_output_file2="{}/picard_phix_R2.fastq".format(self.test_dir),
-                output_per_rg=0,
+		pairedbam="true",
+		input_file= "{}/examples/exampleBAM.bam".format(self.test_dir),
+                outfile="{}/run_exampleBAM_R1.fastq".format(self.test_dir),
+                outfile2="{}/run_exampleBAM_R2.fastq".format(self.test_dir),
+		unpaired_outfile="{}/run_exampleBAM_unpaired.fastq".format(self.test_dir),
 		val_stringency= 'SILENT',
-		include_non_pf_reads=True,
 	        test=1
                     )
         comp = self.setup_component(args)

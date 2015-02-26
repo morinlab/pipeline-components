@@ -25,30 +25,23 @@ class Component(ComponentAbstract):
 
     def __init__(self, component_name="picard_samtofastq", 
                  component_parent_dir=None, seed_dir=None):
-	self.version = "v1.0.5"
+	self.version = "v1.1"
         ## initialize ComponentAbstract
         super(Component, self).__init__(component_name, component_parent_dir, seed_dir)
 
     def make_cmd(self, chunk=None):
 	path = os.path.join(self.requirements['picardtools'], 'SamToFastq.jar')
         cmd = self.requirements['java'] + 'java -Xmx4G' + ' -jar ' + path
-	if self.args.output_per_rg:
-		cmd_args = ['INPUT='+self.args.input_file,
-				'OUTPUT_PER_RG=true',
-				'RG_TAG='+self.args.rg_tag,
-				'OUTPUT_DIR='+self.args.out_dir
-			]
+	cmd_args = ['INPUT='+self.args.input_file]
+	#	intrim = re.sub('.bam$', '', self.args.input_file)
+	if (self.args.pairedbam  == 'true'):
+		cmd_args = cmd_args + ['FASTQ='+self.args.outfile] + ['SECOND_END_FASTQ='+self.args.outfile2] + ['UNPAIRED_FASTQ='+self.args.unpaired_outfile]
 	else:
-		cmd_args = ['INPUT='+self.args.input_file,
-			'FASTQ='+self.args.fastq_output_file1,
-			'SECOND_END_FASTQ='+self.args.fastq_output_file2,
-			#'UNPAIRED_FASTQ='+self.args.fastq_unpaired_output
-			]
+		cmd_args = cmd_args + ['OUTPUT_PER_RG=true'] + ['OUTPUT_DIR='+self.args.outfile]
 	if hasattr(self.args,'test'):
 		[
 		cmd_args.extend((
 			'VALIDATION_STRINGENCY=SILENT',
-			'INCLUDE_NON_PF_READS=True'
 		))
 		]
 	else:
