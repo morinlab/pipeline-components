@@ -32,9 +32,10 @@ class Component(ComponentAbstract):
 	if(self.args.splitbam=='True'):	#Set samflag 'intervals' when splitbam is True
 		if(chunk== 'f4'):
 			prefix=".paired"
-		else:
+		if(chunk== 'F4'):
 			prefix=".unpaired"
-        	cmd_args=cmd_args + ['-' + str(chunk)] + ['-o ' + self.args.input_file+prefix+'.bam']#chunk is either f4 or F4
+		outfile=re.sub('.bam$','',self.args.input_file)
+        	cmd_args=cmd_args + ['-' + str(chunk)] + ['-o ' + outfile+prefix+'.bam']#chunk is either f4 or F4
 		return cmd, cmd_args
 
     def make_cmd(self, chunk=None):
