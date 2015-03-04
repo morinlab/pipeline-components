@@ -1,6 +1,5 @@
 """
 component_reqs.py
-
 @author: jgrewal
 """
 
@@ -12,22 +11,20 @@ env_vars = {
 			}
 
 ## here goes the max amount of the memory required. 
-memory = '4G'
+memory = '5G'
 
 ## set this to True if the component is parallelizable.
 parallel = False
- 
+
 ## here goes the list of the required software/apps
 ## called by the component.  
 requirements = {
-#		'picardtools' : 'path to picard',
-#		'java' : 'path to java'
-		'picardtools': '/home/jgrewal/software/picard/picard-tools-1.119/',
-                'java': '/gsc/software/linux-x86_64-centos5/java-1.7.0-u13/bin/',				
-}
+		'bamutils': '/home/jgrewal/software/bamutil/bamUtil/bin/', #path to bamUtil 'bam'
+#		'python': '/path/python/bin/python',
+				}
 
 ## here goes the version of the component seed.
-seed_version = 'version 1.119'
+seed_version = '2.16'
 
 ## here goes the version of the component itself. 
-version = 'v1.1'
+version = '1.0.0'

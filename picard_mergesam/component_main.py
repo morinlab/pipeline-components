@@ -44,7 +44,7 @@ class Component(ComponentAbstract):
     def make_cmd(self, chunk=None):
         path=os.path.join(self.requirements['picardtools'], 'MergeSamFiles.jar')
         cmd = self.requirements['java'] + 'java -Xmx4G' + ' -jar ' + path
-	infiles= ' I= '.join(glob.glob(self.args.input_dir+"/*.bam"))#[fn for fn in os.listdir(self.args.input_file) if re.match(r'*.bam',fn)])
+	infiles= ' I= '.join(glob.glob(self.args.input_dir+"/"+self.args.input_regex))#[fn for fn in os.listdir(self.args.input_file) if re.match(r'*.bam',fn)])
 	cmd_args =  ['INPUT='+infiles, 'OUTPUT='+self.args.output_file,'SORT_ORDER='+self.args.sort_order,'USE_THREADING='+self.args.use_threading]
 	return cmd, cmd_args
 

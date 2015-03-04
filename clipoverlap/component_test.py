@@ -3,7 +3,7 @@ component_test.py
 
 @author: bgrande
 @modified by: jgrewal
-@Date modified: 27 February 2015
+@Date modified: 3 March 2015
 """
 
 import unittest
@@ -16,12 +16,10 @@ import component_main
 import component_reqs
 import component_params
 
-
 class TestComponentStructure(unittest.TestCase):
     """
     Test whether all the requirements are present.
     """
-
     def setUp(self):
         self.component = component_main.Component()
 
@@ -122,13 +120,11 @@ class TestSeed(unittest.TestCase):
                                                                 expected_filename))
 
     def test_with_coordinatesorted_bam_file(self):
-        """Run SamToFastq with one input bam file, that is coordinate sorted."""
+        """Run MergeSamFiles with two input bam files"""
         args = Arguments(
-		pairedbam="true",
-		input_file= "{}/examples/exampleBAM.bam".format(self.test_dir),
-                output_file="{}/run_exampleBAM.markdup.fastq".format(self.test_dir),
-		metrics_file="{}/run_exampleBAM.markdup.metrics".format(self.test_dir)
-                    )
+		input_file="{}/examples/exampleBAM.bam".format(self.test_dir),
+                output_file="{}/test_exampleBAM.clipOverlap.bam".format(self.test_dir),
+		)
         comp = self.setup_component(args)
         cmd, cmd_args = comp.make_cmd()
         self.run_cmd(cmd, cmd_args)

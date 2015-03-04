@@ -126,6 +126,7 @@ class TestSeed(unittest.TestCase):
                 output_file="{}/run_exampleBAM.merged.bam".format(self.test_dir),
                 sort_order="coordinate",
 		use_threading="true",    
+		input_regex="*.bam",
 		)
         comp = self.setup_component(args)
         cmd, cmd_args = comp.make_cmd()
