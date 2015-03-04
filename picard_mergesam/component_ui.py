@@ -16,6 +16,7 @@ parser = argparse.ArgumentParser(prog='picard_mergesam',
 ## create the list of input options here. Add as many as desired.
 parser.add_argument("--input_dir",required=True,help="Directory where all BAM files to be merged are located.")
 parser.add_argument("--output_file",required=True,help="Name of output BAM file")
+parser.add_argument("--input_regex",required=False,default='*.bam',help="Pattern to match for batch of input files")
 parser.add_argument("--sort_order",required=False,default="coordinate",help="Sort order of output file. Choose from {unsorted, queryname, coordinate}")
 parser.add_argument("--use_threading",required=False,default="true",help="Use threading to speed up merging. Choose from {true, false}")
 
