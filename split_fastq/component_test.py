@@ -8,6 +8,7 @@ import unittest
 import shlex
 import random
 import os
+import glob
 import filecmp
 import subprocess
 import component_main
@@ -98,7 +99,8 @@ class TestSeed(unittest.TestCase):
         for arg in cmd_args:
             cmd_args_split.extend(shlex.split(arg))
         all_args = cmd_split + cmd_args_split
-        returncode = subprocess.call(subprocess.list2cmdline(all_args), shell=True,
+        complete_cmd = subprocess.list2cmdline(all_args)
+        returncode = subprocess.call(complete_cmd, shell=True,
                                      stderr=subprocess.PIPE)
         self.assertEqual(returncode, 0, "Unsucessful command: {}".format(" ".join(all_args)))
 
@@ -114,41 +116,63 @@ class TestSeed(unittest.TestCase):
         """
         for arg, expected_filename in expectations.items():
             actual_filename = getattr(comp.args, arg)
-            # Remove header line with BWA command
-            # Because it prevents two files from being identical otherwise
-            actual_filename_fixed = self.fix_bam_file(actual_filename)
-            is_equal = filecmp.cmp(actual_filename_fixed, expected_filename)
+            # Handle cases with prefix
+            if arg.endswith("prefix"):
+                self.compare_prefixed_files(actual_filename, expected_filename)
+                continue
+            is_equal = filecmp.cmp(actual_filename, expected_filename)
             self.assertTrue(is_equal, "Actual output file differs from expected output file."
-                            "\nActual: {}\nExpected: {}".format(actual_filename_fixed,
+                            "\nActual: {}\nExpected: {}".format(actual_filename,
                                                                 expected_filename))
 
+    def compare_prefixed_files(self, actual_prefix, expected_prefix):
+        """Allows comparison of multiple files using a common prefix"""
+        actual_files = sorted(glob.glob(actual_prefix + "*"),
+                              key=lambda x: os.path.basename(x))
+        expected_files = sorted(glob.glob(expected_prefix + "*"),
+                                key=lambda x: os.path.basename(x))
+        # If the number of files differs, raise error
+        self.assertTrue(len(actual_files) == len(expected_files), "Number of output files differ "
+                        "between actual prefix and expected prefix."
+                        "\nActual prefix: {}\nExpected prefix: {}\n".format(
+                            actual_prefix, expected_prefix))
+        # If there are the same number of files, check files themselves
+        for act, exp in zip(actual_files, expected_files):
+            is_equal = filecmp.cmp(act, exp)
+            self.assertTrue(is_equal, "Actual output file differs from expected output file."
+                            "\nActual: {}\nExpected: {}".format(act, exp))
+
     def test_with_one_fastq_file(self):
-        """Run bwa_mem with one input FASTQ file."""
+        """Run split_fastq with one input FASTQ file."""
         args = Arguments(
             fastq_1="{}/phix_reads_R1.fastq.gz".format(self.test_dir),
-            reference="{}/bwa_index/phix_genome.fasta".format(self.test_dir),
-            output_bam="{}/phix_alignment_with_one_fastq_file.sam".format(self.tmp_dir),
-            num_threads="2")
+            num_reads=200,
+            interval_file="{}/intervals.txt".format(self.tmp_dir),
+            output_prefix="{}/test_with_one_fastq_file".format(self.tmp_dir),
+            no_compression=True)
         comp = self.setup_component(args)
         cmd, cmd_args = comp.make_cmd()
         self.run_cmd(cmd, cmd_args)
         expectations = {
-            "output_bam": "{}/phix_alignment_with_one_fastq_file.sam".format(self.test_dir)}
+            "output_prefix": "{}/test_with_one_fastq_file/test_with_one_fastq_file".format(
+                self.test_dir)}
         self.compare_files(comp, expectations)
 
     def test_with_two_fastq_files(self):
-        """Run bwa_mem with two input FASTQ files."""
+        """Run split_fastq with two input FASTQ files."""
         args = Arguments(
             fastq_1="{}/phix_reads_R1.fastq.gz".format(self.test_dir),
             fastq_2="{}/phix_reads_R2.fastq.gz".format(self.test_dir),
-            reference="{}/bwa_index/phix_genome.fasta".format(self.test_dir),
-            output_bam="{}/phix_alignment_with_two_fastq_files.sam".format(self.tmp_dir),
-            num_threads="2")
+            num_reads=200,
+            interval_file="{}/intervals.txt".format(self.tmp_dir),
+            output_prefix="{}/test_with_two_fastq_files".format(self.tmp_dir),
+            no_compression=True)
         comp = self.setup_component(args)
         cmd, cmd_args = comp.make_cmd()
         self.run_cmd(cmd, cmd_args)
         expectations = {
-            "output_bam": "{}/phix_alignment_with_two_fastq_files.sam".format(self.test_dir)}
+            "output_prefix": "{}/test_with_two_fastq_files/test_with_two_fastq_files".format(
+                self.test_dir)}
         self.compare_files(comp, expectations)
 
 
