@@ -37,7 +37,8 @@ class Component(ComponentAbstract):
         opt_args = {"output_prefix": "--output_prefix",
                     "interval_file": "--interval_file",
                     "num_reads": "--num_reads",
-                    "num_buffer": "--num_buffer"}
+                    "num_buffer": "--num_buffer",
+                    "no_compression": "--no_compression"}
         cmd_args.extend(["{} {}".format(opt_args[k], v) for k, v in args_dict.items()
                         if k in opt_args and v is not True])
         cmd_args.extend(["{}".format(opt_args[k], v) for k, v in args_dict.items()
