@@ -118,7 +118,7 @@ class TestSeed(unittest.TestCase):
             actual_filename = getattr(comp.args, arg)
             is_equal = filecmp.cmp(actual_filename, expected_filename)
             self.assertTrue(is_equal, "Actual output file differs from expected output file."
-                            "\nActual: {}\nExpected: {}".format(actual_filename_fixed,
+                            "\nActual: {}\nExpected: {}".format(actual_filename,
                                                                 expected_filename))
 
     def test_with_coordinatesorted_bam_file(self):

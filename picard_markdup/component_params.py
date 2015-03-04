@@ -10,19 +10,17 @@ input_files  = {
                  'input_file' : '__REQUIRED__', 
                 }
 
-## TODO: here goes the list of the output files.
+## here goes the list of the output files.
 output_files = {
                  'output_file' : '__REQUIRED__',
                 }
 
-## TODO: here goes the list of the input parameters excluding input/output files.
+## here goes the list of the input parameters excluding input/output files.
 input_params = {
                  'metrics_file' : '__REQUIRED__',
-#                 'input_param2' : '__FLAG__',
-#                 'input_param3' : None
                 }
 
-## TODO: here goes the return value of the component_seed. 
+## here goes the return value of the component_seed. 
 ## DO NOT USE, Not implemented yet!
 return_value = []
 
