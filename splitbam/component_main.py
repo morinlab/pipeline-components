@@ -45,11 +45,11 @@ class Component(ComponentAbstract):
 	cmd = os.path.join(self.requirements['samtools'], 'samtools view -bh')
 	mysamcommand=cmd
 	intrim=re.search(r"[^/]*$",self.args.input_file).group()
+	intrim=re.sub("\.bam$","",intrim)
 	myoutprefix = "".join([self.args.output_dir,"/",intrim])
 	cmd_args=['-F'+self.args.samflag]
 	cmd_args=cmd_args + ['-o '+myoutprefix  +".paired.bam"] + [self.args.input_file]
 	cmd_args=cmd_args + ['; '+mysamcommand] + ['-f' + self.args.samflag] + ['-o ' + myoutprefix + ".unpaired.bam"] + [self.args.input_file]
-	#cmd_args=['-F'+self.args.samflag, '-o '+ self.args.output_dir +"/"+self.args.input_file+'.paired.bam', self.args.input_file, '; '+mysamcommand,'-f'+self.args.samflag,'-o '+ self.args.output_dir + "/" + self.args.input_file+'.unpaired.bam',self.args.input_file]
 	return cmd, cmd_args
 
 ## To run as stand alone
