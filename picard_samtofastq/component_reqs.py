@@ -15,7 +15,7 @@ env_vars = {
 memory = '4G'
 
 ## set this to True if the component is parallelizable.
-parallel = False
+parallel = True
  
 ## here goes the list of the required software/apps
 ## called by the component.  
@@ -30,4 +30,4 @@ requirements = {
 seed_version = 'version 1.119'
 
 ## here goes the version of the component itself. 
-version = 'v1.1'
+version = 'v2.1'

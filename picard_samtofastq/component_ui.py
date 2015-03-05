@@ -2,11 +2,7 @@
 component_ui.py
 
 @author: jgrewal
-Note the places you need to change to make it work for you. 
-They are marked with keyword 'TODO'.
 """
-#24/02/2015 when did I add this?
-#java -Xmx4G -jar /s
 
 import argparse
 
@@ -16,18 +12,17 @@ import argparse
 ## pass the name of the component to the 'prog' parameter and a
 ## brief description of your component to the 'description' parameter.
 parser = argparse.ArgumentParser(prog='picard_samtofastq', 
-                                 description = "This tool takes in a bam file and generates fastq file(s) from it")
+                                 description = "This tool takes in a directory containing two BAM files (*.paired.bam, *.unpaired.bam) and generates 3 different fastq files from them (2 paired, 1 single-end)")
 
 ## create the list of input options here. Add as many as desired.
-parser.add_argument("--input.file", required=True,help="Bam file to be converted to fastq")
-parser.add_argument("--outfile1", required=True,help="Output fasta file 1")
-parser.add_argument("--outfile2",default='null', help="Output fasta file 2 (if paired bam)")
-parser.add_argument("--pairedbam",default='true',help="Flag for paired bam input")
-parser.add_argument("--unpaired_outfile",default='null', help="Output fasta file for unpaired reads in bam")
+parser.add_argument("--input_dir", required=True,help="Directory with BAM files")
+parser.add_argument("--output_dir", required=False,default="./",help="Output directory")
+parser.add_argument("--verbosity", required=False,default="INFO",help="Verbosity of logging")
+parser.add_argument("--quiet",required=False,default="false",help="Suppress job-summary info on System.err?")
+parser.add_argument("--val_stringency",required=False,default="SILENT",help="Validation stringency for all SAM files read by this program. Possible values: {STRICT,LENIENT,SILENT}")
 #parser.add_argument("--javamem",default='4G',help="memory allocation to java")
 #parser.add_argument("--fastq.unpaired.output",default='null',help="Output unpaired fasta file (if paired bam)")
 #parser.add_argument("--out.dir",default='null',help="Output directory (if processing by read groups)")
-
 
 ## parse the argument parser.
 args, unknown = parser.parse_known_args()

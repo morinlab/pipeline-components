@@ -4,11 +4,14 @@ This module contains Component class which extends
 the ComponentAbstract class. It is the core of a component.
 
 @author: jgrewal
+@Date Created: 18 February 2015
+@Date Modified: 4 March 2015
 """
 
 from pipeline_factory.utils import ComponentAbstract
 import os
-
+import glob
+import re
 
 class Component(ComponentAbstract):
     
@@ -16,8 +19,8 @@ class Component(ComponentAbstract):
    This PicardTools component forms FASTQ files from an input bam file.
 
    Input:
-	- input BAM file
-	- (optional) names for output FASTQ files
+	- input BAM directory (must have one .paired.bam, one .unpaired.bam)
+	- (optional) output fastq directory
 
    Outputs:
 	- One (single-end) or two (paired-end) FASTQ files 
@@ -25,47 +28,40 @@ class Component(ComponentAbstract):
 
     def __init__(self, component_name="picard_samtofastq", 
                  component_parent_dir=None, seed_dir=None):
-	self.version = "v1.1"
+	self.version = "v2.1"
         ## initialize ComponentAbstract
         super(Component, self).__init__(component_name, component_parent_dir, seed_dir)
 
-    def make_cmd(self, chunk=None):
+    def focus(self, cmd, cmd_args,chunk):
+	if (chunk==1): #First do paired bam
+		infile = "".join(glob.glob(self.args.input_dir+"/"+"*.paired.bam"))#Get full address of paired bam file
+		infile_prefix = re.search(r"[^/]*$",infile).group() #Get name of paired bam file
+		infile_prefix = re.sub("\.paired\.bam$","",infile_prefix)  #remove the .bam from the end
+		out1 = "".join([self.args.output_dir,"/",infile_prefix,".R1.fq"])
+		out2 = "".join([self.args.output_dir,"/",infile_prefix,".R2.fq"])
+		cmd_args = cmd_args + ['INPUT='+infile] + ['FASTQ='+out1] + ['SECOND_END_FASTQ='+out2]
+	if (chunk==2): #Then do unpaired bam
+		infile= "".join(glob.glob(self.args.input_dir+"/"+"*.unpaired.bam"))
+		infile_prefix= re.search(r"[^/]*$",infile).group()
+		infile_prefix = re.sub("\.unpaired\.bam$","",infile_prefix) 
+		out_unpaired = "".join([self.args.output_dir,"/",infile_prefix,".unpaired.fq"])
+		cmd_args = cmd_args + ['INPUT='+infile] + ['FASTQ='+out_unpaired]
+	return cmd, cmd_args
+
+    def make_cmd(self, chunk=1):
 	path = os.path.join(self.requirements['picardtools'], 'SamToFastq.jar')
         cmd = self.requirements['java'] + 'java -Xmx4G' + ' -jar ' + path
-	cmd_args = ['INPUT='+self.args.input_file]
-	#	intrim = re.sub('.bam$', '', self.args.input_file)
-	if (self.args.pairedbam  == 'true'):
-		cmd_args = cmd_args + ['FASTQ='+self.args.outfile] + ['SECOND_END_FASTQ='+self.args.outfile2] + ['UNPAIRED_FASTQ='+self.args.unpaired_outfile]
-	else:
-		cmd_args = cmd_args + ['OUTPUT_PER_RG=true'] + ['OUTPUT_DIR='+self.args.outfile]
-	if hasattr(self.args,'test'):
-		[
-		cmd_args.extend((
-			'VALIDATION_STRINGENCY=SILENT',
-		))
-		]
-	else:
-		cmd_args.extend((
-			'RE_REVERSE='+self.args.rereverse_bases,
-                        'INTERLEAVE='+self.args.interleave,
-                        'INCLUDE_NON_PF_READS='+self.args.include_non_pf_reads,
-                        'CLIPPING_ATTRIBUTE='+self.args.clipping_attribute,
-                        'CLIPPING_ACTION='+self.args.clipping_action,
-                        'READ1_TRIM='+self.args.read1_trim,
-                        'READ1_MAX_BASES_TO_WRITE='+self.args.read1_maxbases,
-                        'READ2_TRIM='+self.args.read2_trim,
-                        'READ2_MAX_BASES_TO_WRITE='+self.args.read2_maxbases,
-                        'INCLUDE_NON_PRIMARY_ALIGNMENTS='+self.args.include_nonprimary
-			))
-
-		cmd_args.extend((
+	cmd_args = [
 			'VERBOSITY='+self.args.verbosity,
 			'QUIET='+self.args.quiet,
 			'VALIDATION_STRINGENCY='+self.args.val_stringency,
-			'TMP_DIR='+self.tmp_dir
-			))
-        return cmd, cmd_args
+	]
 	
+	if chunk is not None:
+		cmd, cmd_args = self.focus(cmd, cmd_args,chunk)
+
+        return cmd, cmd_args	
+
     def test(self):
 	import component_test
 	component_test.run()
