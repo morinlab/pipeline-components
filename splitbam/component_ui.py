@@ -16,7 +16,7 @@ parser = argparse.ArgumentParser(prog='splitbam',
 ## create the list of input options here. Add as many as desired.
 parser.add_argument("--input_file",required=True,help="Bam file to be split")
 parser.add_argument("--output_dir",required=False,default="./", help="Output directory for results. Default is current directory")
-parser.add_argument("--samflag",required=False,default="8",help="Samflag to split bams on. Default is 8 (unmapped mate)") 
+parser.add_argument("--samflag",required=False,default="2",help="Samflag to split bams on. Default is 2 (read mapped in proper pair)") 
 
 ## parse the argument parser.
 args, unknown = parser.parse_known_args()

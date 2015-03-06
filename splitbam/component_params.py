@@ -17,7 +17,7 @@ output_files = {
 
 ## here goes the list of the input parameters excluding input/output files.
 input_params = {
-                 'samflag' : '8',
+                 'samflag' : '2',
 #                 'input_param2' : '__FLAG__',
 #                 'input_param3' : None
                 }
