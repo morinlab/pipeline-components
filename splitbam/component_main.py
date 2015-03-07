@@ -26,7 +26,7 @@ class Component(ComponentAbstract):
                  component_parent_dir=None, seed_dir=None):
         
         ## pass the version of the component here.
-        self.version = "v1.00.0"
+        self.version = "v2.0"
 
         ## initialize ComponentAbstract
         super(Component, self).__init__(component_name, 
@@ -44,12 +44,18 @@ class Component(ComponentAbstract):
     def make_cmd(self, chunk=None):
 	cmd = os.path.join(self.requirements['samtools'], 'samtools view -bh')
 	mysamcommand=cmd
-	intrim=re.search(r"[^/]*$",self.args.input_file).group()
-	intrim=re.sub("\.bam$","",intrim)
-	myoutprefix = "".join([self.args.output_dir,"/",intrim])
-	cmd_args=['-F'+self.args.samflag]
-	cmd_args=cmd_args + ['-o '+myoutprefix  +".paired.bam"] + [self.args.input_file]
-	cmd_args=cmd_args + ['; '+mysamcommand] + ['-f' + self.args.samflag] + ['-o ' + myoutprefix + ".unpaired.bam"] + [self.args.input_file]
+	if (self.args.output_file1 is not None) & (self.args.output_file2 is not None): #Output is output_dir/output_filex
+		cmd_args=['-f'+self.args.samflag]
+		cmd_args=cmd_args + ['-o ' + "".join([self.args.output_dir,"/",self.args.output_file1])] + [self.args.input_file] 
+		cmd_args=cmd_args + ['; '+ mysamcommand] + ['-F' + self.args.samflag]
+		cmd_args=cmd_args + ['-o ' + "".join([self.args.output_dir,"/",self.args.output_file2])] + [self.args.input_file]
+	else:
+		intrim=re.search(r"[^/]*$",self.args.input_file).group()
+		intrim=re.sub("\.bam$","",intrim)
+		myoutprefix = "".join([self.args.output_dir,"/",intrim])
+		cmd_args=['-F'+self.args.samflag]
+		cmd_args=cmd_args + ['-o '+myoutprefix  +".F" + self.args.samflag+".bam"] + [self.args.input_file]
+		cmd_args=cmd_args + ['; '+mysamcommand] + ['-f' + self.args.samflag] + ['-o ' + myoutprefix + ".f"+self.args.samflag+".bam"] + [self.args.input_file]
 	return cmd, cmd_args
 
 ## To run as stand alone

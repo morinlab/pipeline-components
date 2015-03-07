@@ -13,6 +13,8 @@ input_files  = {
 ## here goes the list of the output files.
 output_files = {
                  'output_dir' : './',
+		 'output_file1': '__OPTIONAL__',
+		 'output_file2': '__OPTIONAL__',
                 }
 
 ## here goes the list of the input parameters excluding input/output files.
