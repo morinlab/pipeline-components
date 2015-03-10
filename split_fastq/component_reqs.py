@@ -11,7 +11,7 @@ memory = '6G'
 parallel = False
 
 requirements = {"python": "python",
-                "split_fastq": "/Users/bgrande/Repos/lab_scripts/split_fastq/split_fastq.py"}
+                "split_fastq": "__REQUIRED__"}
 
 seed_version = 'v1.1.2'
 
