@@ -4,6 +4,10 @@ component_main.py
 @author: bgrande
 """
 
+import glob
+import os.path
+import re
+import logging
 from pipeline_factory.utils import ComponentAbstract
 import component_test
 
@@ -26,8 +30,27 @@ class Component(ComponentAbstract):
         self.version = "v1.0.0"
         super(Component, self).__init__(component_name, component_parent_dir, seed_dir)
 
-    def focus(self, cmd, cmd_args, chunk):
-        pass
+    def focus(self, cmd, cmd_args, chunk, args_dict):
+        # Check if input_dir and output_dir are specified
+        if "input_dir" not in args_dict or "output_dir" not in args_dict:
+            raise Exception("When interval file specified, you must give an input_dir and an "
+                            "output_dir.")
+        # Retrieve FASTQ files based on chunks
+        glob_pattern = os.path.join(args_dict["input_dir"], "*{}*fastq*".format(chunk))
+        fastq_files = sorted(glob.glob(glob_pattern), key=lambda x: os.path.basename(x))
+        args_dict["fastq_1"] = fastq_files[0]
+        if len(fastq_files) == 2:
+            args_dict["fastq_2"] = fastq_files[1]
+        elif len(fastq_files) > 2:
+            raise Exception("There are more than two FASTQ files matching this pattern: "
+                            "{}".format(glob_pattern))
+        # Create output_bam file name
+        if "output_bam" in args_dict:
+            logging.warning("Overwritting output_bam according to input file and output_dir.")
+        fastq_1_filename = os.path.basename(fastq_files[0])
+        fastq_1_prefix = re.match(r".*{}".format(chunk), fastq_1_filename).group(0)
+        args_dict["output_bam"] = os.path.join(args_dict["output_dir"], fastq_1_prefix + ".bam")
+        return cmd, cmd_args, args_dict
 
     def make_cmd(self, chunk=None):
         # Program or interpreter
@@ -42,9 +65,15 @@ class Component(ComponentAbstract):
                         if k in opt_args and v is True])
         # Positional arguments
         pos_args = ["reference", "fastq_1", "fastq_2"]
+        if chunk is not None:
+            cmd, cmd_args, args_dict = self.focus(cmd, cmd_args, chunk, args_dict)
+        elif chunk is None and ("input_dir" in args_dict or "output_dir" in args_dict):
+            logging.warning("input_dir and output_dir only used when given an interval file "
+                            "listing chunks.")
         cmd_args.extend([args_dict[arg] for arg in pos_args if arg in args_dict])
-        # Output argument using shell redirection
-        cmd_args.extend([">", args_dict["output_bam"]])
+        # Pipe output (SAM format) to samtools to convert to BAM format
+        cmd_args.extend([" | ", self.requirements["samtools"], " view -bS - > ",
+                        args_dict["output_bam"]])
         # Return cmd and cmg_args
         return cmd, cmd_args
 

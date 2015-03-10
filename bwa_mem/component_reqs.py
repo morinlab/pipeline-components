@@ -8,7 +8,7 @@ env_vars = {}
 
 memory = '10G'
 
-parallel = False
+parallel = True
 
 requirements = {"bwa": "bwa",
                 "samtools": "samtools"}
