@@ -13,6 +13,6 @@ parallel = False
 requirements = {"python": "python",
                 "split_fastq": "__REQUIRED__"}
 
-seed_version = 'v1.1.2'
+seed_version = 'v1.1.3'
 
 version = 'v1.0.0'

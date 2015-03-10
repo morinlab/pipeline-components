@@ -8,7 +8,7 @@ component_params.py
 input_files = {"fastq_1": "__REQUIRED__",
                "fastq_2": "__OPTIONAL__"}
 
-output_files = {"output_prefix": "__REQUIRED__",
+output_files = {"output_dir": "__REQUIRED__",
                 "interval_file": "__OPTIONAL__"}
 
 input_params = {"num_reads": "__OPTIONAL__",

@@ -25,16 +25,13 @@ class Component(ComponentAbstract):
         self.version = "v1.0.0"
         super(Component, self).__init__(component_name, component_parent_dir, seed_dir)
 
-    def focus(self, cmd, cmd_args, chunk):
-        pass
-
     def make_cmd(self, chunk=None):
         # Program or interpreter
         cmd = self.requirements["python"]
         cmd_args = [self.requirements["split_fastq"]]
         args_dict = vars(self.args)
         # Optional arguments
-        opt_args = {"output_prefix": "--output_prefix",
+        opt_args = {"output_dir": "--output_dir",
                     "interval_file": "--interval_file",
                     "num_reads": "--num_reads",
                     "num_buffer": "--num_buffer",
