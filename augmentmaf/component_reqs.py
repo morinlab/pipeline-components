@@ -18,7 +18,8 @@ parallel = False
 ## here goes the list of the required software/apps
 ## called by the component.  
 requirements = {
- 				'python': '/path/python/bin/python',
+		'python': '/home/jgrewal/software/anaconda/bin/python'
+# 				'python': '/path/python/bin/python',
 				}
 
 ## here goes the version of the component seed.
