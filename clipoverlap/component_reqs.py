@@ -19,7 +19,7 @@ parallel = False
 ## here goes the list of the required software/apps
 ## called by the component.  
 requirements = {
-		'bamutils': '/home/jgrewal/software/bamutil/bamUtil/bin/', #path to bamUtil 'bam'
+		'bamutils': '/path/to/bamutils/bam',
 #		'python': '/path/python/bin/python',
 				}
 
