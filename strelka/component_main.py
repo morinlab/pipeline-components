@@ -45,7 +45,7 @@ class Component(ComponentAbstract):
                     "tumour_bam": "--tumor",
                     "reference": "--ref",
                     "config": "--config",
-                    "output_dir": "--output_dir"}
+                    "output_dir": "--output-dir"}
         cmd_args.extend(["{} {}".format(opt_args[k], v) for k, v in args_dict.items()
                         if k in opt_args and v is not True])
         cmd_args.extend(["{}".format(opt_args[k], v) for k, v in args_dict.items()
