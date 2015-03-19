@@ -11,7 +11,7 @@ env_vars = {
 			}
 
 ## here goes the max amount of the memory required.
-memory = '5G'
+memory = '3G'
 
 ## set this to True if the component is parallelizable.
 parallel = False

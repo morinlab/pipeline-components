@@ -6,7 +6,7 @@ component_reqs.py
 
 env_vars = {}
 
-memory = '3G'
+memory = '1G'
 
 parallel = False
 

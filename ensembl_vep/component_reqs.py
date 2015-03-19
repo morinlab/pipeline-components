@@ -6,12 +6,12 @@ component_reqs.py
 
 env_vars = {}
 
-memory = '1G'
+memory = '4G'
 
 parallel = False
 
 requirements = {"perl": "perl",
-                "variant_effect_predictor": None}
+                "variant_effect_predictor.pl": None}
 
 ## TODO: here goes the version of the component seed.
 seed_version = 'v76'

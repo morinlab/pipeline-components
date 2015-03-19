@@ -36,7 +36,7 @@ class Component(ComponentAbstract):
         pass
 
     def make_cmd(self, chunk=None):
-        cmd = self.requirements["perl"] + " " + self.requirements["variant_effect_predictor"]
+        cmd = self.requirements["perl"] + " " + self.requirements["variant_effect_predictor.pl"]
         cmd_args = ["--{} {}".format(k, v) for k, v in vars(self.args).items() if v is not True]
         cmd_args.extend(["--{}".format(k) for k, v in vars(self.args).items() if v is True])
         return cmd, cmd_args

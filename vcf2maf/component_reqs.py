@@ -11,7 +11,7 @@ memory = '1G'
 parallel = False
 
 requirements = {"perl": None,
-                "vcf2maf": None}
+                "vcf2maf.pl": None}
 
 seed_version = 'v1.5.0'
 

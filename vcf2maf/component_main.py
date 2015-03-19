@@ -35,7 +35,7 @@ class Component(ComponentAbstract):
         pass
 
     def make_cmd(self, chunk=None):
-        cmd = self.requirements["perl"] + " " + self.requirements["vcf2maf"]
+        cmd = self.requirements["perl"] + " " + self.requirements["vcf2maf.pl"]
         cmd_args = ["--input-vep", self.args.input_vep,
                     "--output-maf", self.args.output_maf]
         if "tumour_id" in vars(self.args):
