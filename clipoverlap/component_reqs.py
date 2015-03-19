@@ -18,7 +18,7 @@ parallel = False
 
 ## here goes the list of the required software/apps
 ## called by the component.
-requirements = {'bamutils_bam_bin': '/path/to/bamutils/bin/bam'}
+requirements = {'bamutils_bam': '/path/to/bamutils/bin/bam'}
 
 ## here goes the version of the component seed.
 seed_version = '2.16'
