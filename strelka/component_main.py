@@ -40,6 +40,12 @@ class Component(ComponentAbstract):
         else:
             config = os.path.join(component_extra_dir, "strelka_config_bwa_nongenome.ini")
         args_dict["config"] = config
+        # Ensure that file paths are absolute to avoid
+        # "Can't resolve directory path..." error
+        args_dict["normal_bam"] = os.path.abspath(args_dict["normal_bam"])
+        args_dict["tumour_bam"] = os.path.abspath(args_dict["tumour_bam"])
+        args_dict["reference"] = os.path.abspath(args_dict["reference"])
+        args_dict["config"] = os.path.abspath(args_dict["config"])
         # Optional arguments
         opt_args = {"normal_bam": "--normal",
                     "tumour_bam": "--tumor",
