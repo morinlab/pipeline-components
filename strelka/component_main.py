@@ -40,6 +40,17 @@ class Component(ComponentAbstract):
         else:
             config = os.path.join(component_extra_dir, "strelka_config_bwa_nongenome.ini")
         args_dict["config"] = config
+        # Ensure that there is a directory in the file path
+        # If not, prepend file path with "./"
+        # This prevents "Can't resolve directory path..." errors
+        if os.path.dirname(args_dict["normal_bam"]) == "":
+            args_dict["normal_bam"] = os.path.join(".", args_dict["normal_bam"])
+        if os.path.dirname(args_dict["tumour_bam"]) == "":
+            args_dict["tumour_bam"] = os.path.join(".", args_dict["tumour_bam"])
+        if os.path.dirname(args_dict["reference"]) == "":
+            args_dict["reference"] = os.path.join(".", args_dict["reference"])
+        if os.path.dirname(args_dict["config"]) == "":
+            args_dict["config"] = os.path.join(".", args_dict["config"])
         # Optional arguments
         opt_args = {"normal_bam": "--normal",
                     "tumour_bam": "--tumor",
