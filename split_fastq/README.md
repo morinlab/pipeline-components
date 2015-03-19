@@ -1,4 +1,4 @@
-# bwa_mem
+# split_fastq
 
 ```
 Development Information
@@ -10,12 +10,12 @@ Developer    : Bruno Grande (bgrande@sfu.ca)
 Input        : FASTQ files
 Output       : FASTQ files
 Parameters   : num_reads
-Seed Used    : bwa
+Seed Used    : split_fastq.py
 ```
 
 ### Dependencies
 
-- BWA (tested with v0.7.10)
+- split_fastq.py >= v1.1.3
 
 ### Known Issues
 
