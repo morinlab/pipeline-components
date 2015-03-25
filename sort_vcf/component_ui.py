@@ -15,7 +15,8 @@ parser = argparse.ArgumentParser(prog='sort_vcf',
 
 ## create the list of input options here. Add as many as desired.
 parser.add_argument("--input_file",required=True,help="Input vcf file.")
-parser.add_argument("--output_file",required=False,help="Name of output file (optional). Otherwise outputs infile.karo.vcf")
-
+parser.add_argument("--output_file",required=True,help="Output file.")
+parser.add_argument("--ref_fai",required=True,help=".fai file with contigs in desired sorting order")
+#                 'input_param3' : None
 ## parse the argument parser.
 args, unknown = parser.parse_known_args()

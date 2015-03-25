@@ -5,7 +5,7 @@ the ComponentAbstract class. It is the core of a component.
 
 @author: jgrewal
 @Date Created: 06 March 2015
-@Date Modified: 06 March 2015
+@Date Modified: 25 March 2015
 """
 
 from pipeline_factory.utils import ComponentAbstract
@@ -24,7 +24,7 @@ class Component(ComponentAbstract):
                  component_parent_dir=None, seed_dir=None):
         
         ## pass the version of the component here.
-        self.version = "v1.00.0"
+        self.version = "v2.00.0"
 
         ## initialize ComponentAbstract
         super(Component, self).__init__(component_name, 
@@ -40,12 +40,10 @@ class Component(ComponentAbstract):
     ## used to run the component_seed via the command line. Note that 
     ## it should return cmd, cmd_args. 
     def make_cmd(self, chunk=None):
-	path=os.path.join(self.seed_dir,'vcfsort.sh')
-	cmd='bash ' + path
-	cmd_args = [self.args.input_file]
-	outfile = "".join([self.args.input_file,".karo.vcf"])
-	if self.args.output_file is not None:
-		cmd_args = cmd_args + ["; mv "+ outfile +" "+self.args.output_file]
+	path=os.path.join(self.seed_dir,'sortByRef.pl')
+	cmd='cat '+ self.args.input_file + '| grep \'^#\' - > ' + self.args.output_file +' &&'
+	cmd=cmd + ' cat ' + self.args.input_file + '| grep -v \'^#\' - | ' + self.requirements['perl'] + ' ' + path
+	cmd_args=[ ' - ', self.args.ref_fai, ' >> '+ self.args.output_file]
 
 	return cmd, cmd_args
 ## To run as stand alone

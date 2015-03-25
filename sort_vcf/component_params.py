@@ -12,16 +12,14 @@ input_files  = {
 
 ## here goes the list of the output files.
 output_files = {
-                 'output_file' : '__OPTIONAL__',
+                 'output_file' : '__REQUIRED__',
 #                 'output_file1' : None
                 }
 
 ## here goes the list of the input parameters excluding input/output files.
 input_params = {
-#                'input_param1' : '__REQUIRED__',
-#                 'input_param2' : '__FLAG__',
-#                 'input_param3' : None
-                }
+                'ref_fai'  : '__REQUIRED__',
+		}
 
 ## here goes the return value of the component_seed. 
 ## DO NOT USE, Not implemented yet!

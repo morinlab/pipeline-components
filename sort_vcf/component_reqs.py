@@ -19,11 +19,12 @@ parallel = False
 ## here goes the list of the required software/apps
 ## called by the component.  
 requirements = {
+			'perl': 'perl'
 # 				'python': '/path/python/bin/python',
 				}
 
 ## here goes the version of the component seed.
-seed_version = '1.00.0'
+seed_version = '2.00.0'
 
 ## here goes the version of the component itself. 
-version = '1.00.0'
+version = '2.00.0'
