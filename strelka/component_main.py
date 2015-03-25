@@ -71,7 +71,7 @@ class Component(ComponentAbstract):
             cmd_args.extend(["-j", args_dict["num_threads"]])
         cmd_args.append("&&")
         # Move final output files to destinations
-        results_dir = os.path.abspath("results")
+        results_dir = os.path.abspath(os.path.join(args_dict["output_dir"], "results"))
         cmd_args.extend(["ln", "-s", os.path.join(results_dir, "passed.somatic.snvs.vcf"),
                         os.path.join("..", args_dict["passed_snvs_vcf"])])
         cmd_args.append("&&")
