@@ -44,6 +44,24 @@ class Component(ComponentAbstract):
             cmd_args.extend(["--normal-id", self.args.normal_id])
         return cmd, cmd_args
 
+        # Program or interpreter
+        cmd = self.requirements["perl"]
+        cmd_args = [self.requirements["vcf2maf.pl"]]
+        args_dict = vars(self.args)
+        # Optional arguments
+        opt_args = {"input_vep": "--input-vep",
+                    "output_maf": "--output-maf",
+                    "tumour_id": "--tumor-id",
+                    "normal_id": "--normal-id",
+                    "vcf_tumour_id": "--vcf-tumor-id",
+                    "vcf_normal_id": "--vcf-normal-id"}
+        cmd_args.extend(["{} {}".format(opt_args[k], v) for k, v in args_dict.items()
+                        if k in opt_args and v is not True])
+        cmd_args.extend(["{}".format(opt_args[k], v) for k, v in args_dict.items()
+                        if k in opt_args and v is True])
+        # Return cmd and cmg_args
+        return cmd, cmd_args
+
 
 # To run as stand alone
 def _main():
