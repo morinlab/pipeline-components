@@ -28,8 +28,9 @@ class Component(ComponentAbstract):
     def make_cmd(self, chunk=None):
         # Program or interpreter
         cmd = self.requirements["python"]
-        cmd_args = [self.requirements["split_fastq"]]
+        cmd_args = [self.requirements["split_fastq.py"]]
         args_dict = vars(self.args)
+        print args_dict
         # Optional arguments
         opt_args = {"output_dir": "--output_dir",
                     "interval_file": "--interval_file",
@@ -37,12 +38,12 @@ class Component(ComponentAbstract):
                     "num_buffer": "--num_buffer",
                     "no_compression": "--no_compression"}
         cmd_args.extend(["{} {}".format(opt_args[k], v) for k, v in args_dict.items()
-                        if k in opt_args and v is not True])
+                        if k in opt_args and (v is not True and v is not False)])
         cmd_args.extend(["{}".format(opt_args[k], v) for k, v in args_dict.items()
-                        if k in opt_args and v is True])
+                        if k in opt_args and (v is True or v is False)])
         # Positional arguments
-        pos_args = ["fastq_1", "fastq_2"]
-        cmd_args.extend([args_dict[arg] for arg in pos_args if arg in args_dict])
+        pos_args = ["fastq_files"]
+        cmd_args.extend([" ".join(list(args_dict[arg])) for arg in pos_args if arg in args_dict])
         # Return cmd and cmg_args
         return cmd, cmd_args
 
