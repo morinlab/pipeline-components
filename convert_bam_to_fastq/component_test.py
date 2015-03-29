@@ -1,14 +1,13 @@
 """
 component_test.py
 
-@author: bgrande
+@author: autogen_component.py
 """
 
 import unittest
 import shlex
 import random
 import os
-import glob
 import filecmp
 import subprocess
 import component_main
@@ -17,6 +16,7 @@ import component_params
 
 
 class TestComponentStructure(unittest.TestCase):
+
     """
     Test whether all the requirements are present.
     """
@@ -27,15 +27,18 @@ class TestComponentStructure(unittest.TestCase):
     def test_version(self):
         """Test that the versions are specified and consistent."""
         version_in_main = getattr(self.component, "version", None)
-        self.assertIsNotNone(version_in_main, "Version not specified in component_main")
+        self.assertIsNotNone(
+            version_in_main, "Version not specified in component_main")
         version_in_reqs = getattr(component_reqs, "version", None)
-        self.assertIsNotNone(version_in_main, "Version not specified in component_reqs")
+        self.assertIsNotNone(
+            version_in_main, "Version not specified in component_reqs")
         self.assertEqual(version_in_main, version_in_reqs, "Versions disagree between "
                          "component_main and components_reqs")
 
     def test_requirements(self):
         """Test that all the required variables in component_reqs are present."""
-        min_vars = ["env_vars", "memory", "parallel", "requirements", "seed_version", "version"]
+        min_vars = ["env_vars", "memory", "parallel",
+                    "requirements", "seed_version", "version"]
         for var in min_vars:
             var_value = getattr(component_reqs, var, None)
             self.assertIsNotNone(var_value, "Required variable not set in "
@@ -43,7 +46,8 @@ class TestComponentStructure(unittest.TestCase):
 
     def test_params(self):
         """Test that all the required variables in component_params are present."""
-        min_vars = ["input_files", "output_files", "input_params", "return_value"]
+        min_vars = [
+            "input_files", "output_files", "input_params", "return_value"]
         for var in min_vars:
             var_value = getattr(component_params, var, None)
             self.assertIsNotNone(var_value, "Required variable not set in "
@@ -51,6 +55,7 @@ class TestComponentStructure(unittest.TestCase):
 
 
 class Arguments(object):
+
     """
     Creates namespace with provided keyword arguments.
     """
@@ -61,6 +66,7 @@ class Arguments(object):
 
 
 class TestSeed(unittest.TestCase):
+
     """
     Test the seed by running it with some sample data
     and comparing the output with what's expected.
@@ -77,7 +83,8 @@ class TestSeed(unittest.TestCase):
         # Create a tmp directory
         comp = component_main.Component()
         random_num = int(random.random() * 1000)
-        self.tmp_dir = "/tmp/test_{}_{}/".format(comp.component_name, random_num)
+        self.tmp_dir = "/tmp/test_{}_{}/".format(
+            comp.component_name, random_num)
         os.mkdir(self.tmp_dir)
 
     def setup_component(self, args):
@@ -102,7 +109,8 @@ class TestSeed(unittest.TestCase):
         complete_cmd = subprocess.list2cmdline(all_args)
         returncode = subprocess.call(complete_cmd, shell=True,
                                      stderr=subprocess.PIPE)
-        self.assertEqual(returncode, 0, "Unsucessful command: {}".format(" ".join(all_args)))
+        self.assertEqual(
+            returncode, 0, "Unsucessful command: {}".format(" ".join(all_args)))
 
     def compare_files(self, comp, expectations={}):
         """
@@ -130,7 +138,8 @@ def run_tests():
     """
     Run all tests.
     """
-    suite1 = unittest.TestLoader().loadTestsFromTestCase(TestComponentStructure)
+    suite1 = unittest.TestLoader().loadTestsFromTestCase(
+        TestComponentStructure)
     suite2 = unittest.TestLoader().loadTestsFromTestCase(TestSeed)
     alltests_suite = unittest.TestSuite([suite1, suite2])
     runner = unittest.TextTestRunner(verbosity=2)

@@ -1,17 +1,17 @@
 """
 component_reqs.py
 
-@author: bgrande
+@author: autogen_component.py
 """
 
 env_vars = {}
 
-memory = '6G'
+memory = '1G'
 
 parallel = False
 
 requirements = {"python": "python",
-                "bam_to_fastq.py": "__REQUIRED__"}
+                "convert_bam_to_fastq.py": "__REQUIRED__"}
 
 seed_version = 'v1.0.0'
 
