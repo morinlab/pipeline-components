@@ -5,7 +5,7 @@ the ComponentAbstract class. It is the core of a component.
 
 @author: jgrewal
 @Date Created: 4 March 2015
-@Date Modified: 4 March 2015
+@Date Modified: 31 March 2015
 """
 
 from pipeline_factory.utils import ComponentAbstract
@@ -19,14 +19,15 @@ class Component(ComponentAbstract):
 	INPUT:
 		- input BAM file. Required.
 		- output directory (optional). Default is current directory (./).
-		- samflag (optional). Default is 8.
+		- names of output files (outfile1 is f*, outfile 2 is F*)
+		- samflag (optional). Default is 2.
     """
 
     def __init__(self, component_name="splitbam", 
                  component_parent_dir=None, seed_dir=None):
         
         ## pass the version of the component here.
-        self.version = "v2.0"
+        self.version = "v2.5"
 
         ## initialize ComponentAbstract
         super(Component, self).__init__(component_name, 
