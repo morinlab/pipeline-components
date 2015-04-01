@@ -30,4 +30,4 @@ requirements = {
 seed_version = 'version 1.119'
 
 ## here goes the version of the component itself. 
-version = 'v2.1'
+version = 'v3.0'

@@ -9,17 +9,15 @@ They are marked with keyword 'TODO'.
 ## '__REQUIRED__' to make it required
 ## '__FLAG__' to make it a flag or switch.
 input_files  = {
-		'input_dir': '__REQUIRED__', #Input directory. Assume we have a .paired.bam and a .unpaired.bam there
-#                 'input_file' : '__REQUIRED__',
+		'input_bam': '__REQUIRED__',
                 }
 
 ## here goes the list of the output files.
 output_files = {
 		'output_dir': './',
-#                 'outfile' : '__OPTIONAL__',
-#                 'outfile2' : '__OPTIONAL__' ,
-#		 'unpaired_outfile' : '__OPTIONAL__',
-		 'log_file': 'samToFastq_run.log'
+                'outfile1' : '__OPTIONAL__',
+                'outfile2' : '__OPTIONAL__' ,
+		'log_file': 'samToFastq_run.log'
 		}
 
 ## here goes the list of the input parameters excluding input/output files.
