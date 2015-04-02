@@ -39,7 +39,7 @@ class Component(ComponentAbstract):
     ## it should return cmd, cmd_args. 
     def make_cmd(self, chunk=None):
 	cmd=self.requirements['bedtools'] + ' ' + "bamtofastq"
-	cmd_args=["-i" + self.args.input_bam, "-fq" + self.args.output_fastq]
+	cmd_args=["-i " + self.args.input_bam, "-fq " + self.args.output_fastq]
 	return cmd, cmd_args
 
 ## To run as stand alone
