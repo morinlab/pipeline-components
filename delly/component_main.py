@@ -25,6 +25,9 @@ class Component(ComponentAbstract):
         cmd = self.requirements["delly"]
         cmd_args = []
         args_dict = vars(self.args)
+        # Catch if multi-threaded
+        if 'num_threads' in args_dict:
+            cmd = 'export OMP_NUM_THREADS={}; {}'.format(args_dict['num_threads'], cmd)
         # Optional arguments
         opt_args = {'vcf_file': '--outfile',
                     'sv_type': '--type',
