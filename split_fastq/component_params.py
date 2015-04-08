@@ -5,7 +5,7 @@ component_params.py
 """
 
 
-input_files = {'fastq': '__REQUIRED__'}
+input_files = {'fastq_files': '__REQUIRED__'}
 
 output_files = {'interval_file': '__OPTIONAL__', 'output_dir': '__OPTIONAL__'}
 
