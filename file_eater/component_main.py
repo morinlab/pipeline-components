@@ -37,8 +37,9 @@ class Component(ComponentAbstract):
     ## used to run the component_seed via the command line. Note that 
     ## it should return cmd, cmd_args. 
     def make_cmd(self, chunk=None):
-        cmd = "rm"
-	cmd_args= " ".join(str(item) for item in self.args.input_files)
+        cmd = "echo "
+	myinput=self.args.input_files
+	cmd_args= " ".join(myinput)
 	return cmd, cmd_args
 
 ## To run as stand alone
