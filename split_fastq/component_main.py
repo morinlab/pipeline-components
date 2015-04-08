@@ -1,7 +1,7 @@
 """
 component_main.py
 
-@author: bgrande
+@author: autogen_component.py
 """
 
 from pipeline_factory.utils import ComponentAbstract
@@ -11,18 +11,12 @@ import component_test
 class Component(ComponentAbstract):
 
     """
-    This split_fastq component partitions large FASTQ files
-    into smaller ones, mainly for parallelization.
-
-    Inputs:
-    - One (single-end) or two (paired-end) FASTQ files
-
-    Outputs:
-    - One or more FASTQ files
+    Split FASTQ files into smaller ones.
     """
 
-    def __init__(self, component_name="split_fastq", component_parent_dir=None, seed_dir=None):
-        self.version = "v1.0.0"
+    def __init__(self, component_name="split_fastq", component_parent_dir=None,
+                 seed_dir=None):
+        self.version = "v1.1.4"
         super(Component, self).__init__(component_name, component_parent_dir, seed_dir)
 
     def make_cmd(self, chunk=None):
@@ -30,20 +24,18 @@ class Component(ComponentAbstract):
         cmd = self.requirements["python"]
         cmd_args = [self.requirements["split_fastq.py"]]
         args_dict = vars(self.args)
-        print args_dict
         # Optional arguments
-        opt_args = {"output_dir": "--output_dir",
-                    "interval_file": "--interval_file",
-                    "num_reads": "--num_reads",
-                    "num_buffer": "--num_buffer",
-                    "no_compression": "--no_compression"}
+        opt_args = {'no_compression': '--no_compression', 'interval_file': '--interval_file', 'num_buffer': '--num_buffer', 'output_dir': '--output_dir', 'num_reads': '--num_reads'}
         cmd_args.extend(["{} {}".format(opt_args[k], v) for k, v in args_dict.items()
-                        if k in opt_args and (v is not True and v is not False)])
+                         if k in opt_args and not isinstance(v, bool) and v is not None])
         cmd_args.extend(["{}".format(opt_args[k], v) for k, v in args_dict.items()
-                        if k in opt_args and (v is True or v is False)])
+                         if k in opt_args and isinstance(v, bool)])
         # Positional arguments
-        pos_args = ["fastq_files"]
-        cmd_args.extend([" ".join(list(args_dict[arg])) for arg in pos_args if arg in args_dict])
+        pos_args = ['fastq']
+        cmd_args.extend([args_dict[arg] for arg in pos_args if arg in args_dict and
+                        not isinstance(args_dict[arg], list)])
+        cmd_args.extend([" ".join(args_dict[arg]) for arg in pos_args if arg in args_dict and
+                        isinstance(args_dict[arg], list)])
         # Return cmd and cmg_args
         return cmd, cmd_args
 
@@ -54,11 +46,10 @@ class Component(ComponentAbstract):
 # To run as stand alone
 def _main():
     comp = Component()
-    # comp.args = component_ui.args
-    # comp.run()
-    comp.test()
+    comp.args = component_ui.args
+    comp.run()
 
 
 if __name__ == '__main__':
-    # import component_ui
+    import component_ui
     _main()
