@@ -31,6 +31,7 @@ class Component(ComponentAbstract):
         super(Component, self).__init__(component_name, component_parent_dir, seed_dir)
 
     def focus(self, cmd, cmd_args, chunk, args_dict):
+        print args_dict
         # Check if input_dir and output_dir are specified
         if "input_dir" not in args_dict or "output_dir" not in args_dict:
             raise Exception("When interval file specified, you must give an input_dir and an "
@@ -50,6 +51,7 @@ class Component(ComponentAbstract):
         fastq_1_filename = os.path.basename(fastq_files[0])
         fastq_1_prefix = re.match(r".*{}".format(chunk), fastq_1_filename).group(0)
         args_dict["output_bam"] = os.path.join(args_dict["output_dir"], fastq_1_prefix + ".bam")
+        print args_dict
         return cmd, cmd_args, args_dict
 
     def make_cmd(self, chunk=None):
@@ -66,6 +68,7 @@ class Component(ComponentAbstract):
         # Positional arguments
         pos_args = ["reference", "fastq_1", "fastq_2"]
         if chunk is not None:
+            print "CHUNK IS NOT NONE"
             cmd, cmd_args, args_dict = self.focus(cmd, cmd_args, chunk, args_dict)
         elif chunk is None and ("input_dir" in args_dict or "output_dir" in args_dict):
             logging.warning("input_dir and output_dir only used when given an interval file "
