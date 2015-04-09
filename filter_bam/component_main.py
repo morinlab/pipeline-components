@@ -44,8 +44,8 @@ class Component(ComponentAbstract):
     ## used to run the component_seed via the command line. Note that 
     ## it should return cmd, cmd_args. 
     def make_cmd(self, chunk=None):
-	cmd = os.path.join(self.requirements['samtools'], ' sort -no ')
-	cmd_view = os.path.join(self.requirements['samtools'], ' view - | ')
+	cmd = self.requirements['samtools'] + ' sort -no '
+	cmd_view = self.requirements['samtools'] +  ' view - | '
 	cmd_trim = "cut -f 1 | uniq -c | grep -P '^\s+2' | sed -r 's/^\s+2\s+//'"
 
 	picard_path=os.path.join(self.requirements['picardtools'], 'FilterSamReads.jar')

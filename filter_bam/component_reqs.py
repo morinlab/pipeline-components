@@ -21,8 +21,8 @@ parallel = False
 requirements = {
 			'samtools': '/path/to/samtools/',
 			'picardtools': '/path/to/picardtools/',
-# 				'python': '/path/python/bin/python',
-				}
+			'java': 'java'		
+		}
 
 ## here goes the version of the component seed.
 seed_version = '1.1'
