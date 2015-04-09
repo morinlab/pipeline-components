@@ -43,7 +43,7 @@ class Component(ComponentAbstract):
     ## used to run the component_seed via the command line. Note that 
     ## it should return cmd, cmd_args. 
     def make_cmd(self, chunk=None):
-	cmd = os.path.join(self.requirements['samtools'], 'samtools view -bh')
+	cmd = os.path.join(self.requirements['samtools'], ' view -bh')
 	mysamcommand=cmd
 	if (self.args.output_file1 is not None) & (self.args.output_file2 is not None): #Output is output_dir/output_filex
 		cmd_args=['-f'+self.args.samflag]
