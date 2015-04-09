@@ -20,6 +20,7 @@ input_params = {
 		'sort_order': 'coordinate',
 		'use_threading': 'true',
                 'input_regex': '*.bam', #regex to identify the batch of input files with
+		'delete_input' : 'true'
 		}
 
 ## here goes the return value of the component_seed. 

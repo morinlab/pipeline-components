@@ -20,6 +20,7 @@ class Component(ComponentAbstract):
 		- name of output BAM file. Required.
 		- sort order for output file. Default is Coordinate. Possible values {unsorted, queryname, coordinate}.
 		- use threading (Flag). Default is true. Possible values {true, false}.
+		- Delete input files after merge (Flag). Default is true.
     """
 
     def __init__(self, component_name="picard_mergesam", 
@@ -46,6 +47,8 @@ class Component(ComponentAbstract):
         cmd = self.requirements['java'] + 'java -Xmx4G' + ' -jar ' + path
 	infiles= ' I= '.join(glob.glob(self.args.input_dir+"/"+self.args.input_regex))#[fn for fn in os.listdir(self.args.input_file) if re.match(r'*.bam',fn)])
 	cmd_args =  ['INPUT='+infiles, 'OUTPUT='+self.args.output_file,'SORT_ORDER='+self.args.sort_order,'USE_THREADING='+self.args.use_threading]
+	if(self.args.delete_input=="true"):
+		cmd_args = cmd_args + ["; echo "+infiles]
 	return cmd, cmd_args
 
     def test(self):
