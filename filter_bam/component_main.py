@@ -19,6 +19,7 @@ class Component(ComponentAbstract):
 	 - output_unpaired (Name of output bam file, with unpaired reads). Required.
 	 - output_readnames (Name of output text file, with list of paired readnames). Required.
 	 - sort_order (Sort order of ouptut bams. Can be one of : coordinate, unsorted, queryname). Required.
+	 - delete_input (Flag to remove input files once they have been filtered out). Optional.
 	Requirements:
 	 - Samtools
 	 - NGSUtils' Bamutils
@@ -53,6 +54,10 @@ class Component(ComponentAbstract):
 	cmd_args = [self.args.input_bam + " tempfile | ", cmd_view , cmd_trim, " > " + self.args.output_readnames + " ;"]
 	cmd_args = cmd_args + [cmd_filtreads, 'INPUT='+self.args.input_bam, 'FILTER=includeReadList', 'RLF='+self.args.output_readnames,'SO='+self.args.sort_order,'OUTPUT='+self.args.output_paired, ' ;']
 	cmd_args = cmd_args + [cmd_filtreads, 'INPUT='+self.args.input_bam, 'FILTER=excludeReadList', 'RLF='+self.args.output_readnames,'SO='+self.args.sort_order,'OUTPUT='+self.args.output_unpaired, ' ;']
+	if(self.args.delete_input=="true"):
+		infiles_rm = 
+		cmd_args = cmd_args + ["; rm "+self.args.input_bam]
+	cmd_args = cmd_args + ["; rm *.reads"]
 	return cmd, cmd_args
 
 ## To run as stand alone
