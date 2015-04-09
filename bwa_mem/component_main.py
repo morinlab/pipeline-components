@@ -38,7 +38,9 @@ class Component(ComponentAbstract):
                             "output_dir.")
         # Retrieve FASTQ files based on chunks
         glob_pattern = os.path.join(args_dict["input_dir"], "*{}*fastq*".format(chunk))
+        print "glob_pattern:", glob_pattern
         fastq_files = sorted(glob.glob(glob_pattern), key=lambda x: os.path.basename(x))
+        print "fastq_files:", fastq_files
         args_dict["fastq_1"] = fastq_files[0]
         if len(fastq_files) == 2:
             args_dict["fastq_2"] = fastq_files[1]
@@ -55,6 +57,7 @@ class Component(ComponentAbstract):
         return cmd, cmd_args, args_dict
 
     def make_cmd(self, chunk=None):
+        print "args:", self.args
         # Program or interpreter
         cmd = self.requirements["bwa"]
         cmd_args = ["mem"]
