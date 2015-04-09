@@ -19,8 +19,10 @@ parallel = False
 ## here goes the list of the required software/apps
 ## called by the component.  
 requirements = {
-                'python': "/home/bgrande/software/xhost09/bin/",#'python',
-                'samtools': "/home/bgrande/software/xhost09/bin/"#'samtools'    
+		'python': 'python',
+		'samtools': 'samtools',
+#                'python': "/home/bgrande/software/xhost09/bin/",#'python',
+#                'samtools': "/home/bgrande/software/xhost09/bin/"#'samtools'    
 				}
 
 ## here goes the version of the component seed.
