@@ -37,9 +37,14 @@ class Component(ComponentAbstract):
     ## used to run the component_seed via the command line. Note that 
     ## it should return cmd, cmd_args. 
     def make_cmd(self, chunk=None):
-        cmd = "echo "
-	myinput=self.args.input_files
-	cmd_args= " ".join(myinput)
+        cmd = "rm "
+	args_dict = vars(self.args)
+	pos_args = ['input_files']
+	cmd_args = [" "]
+	cmd_args.extend([args_dict[arg] for arg in pos_args if arg in args_dict and
+                        not isinstance(args_dict[arg], list)])
+        cmd_args.extend([" ".join(args_dict[arg]) for arg in pos_args if arg in args_dict and
+                        isinstance(args_dict[arg], list)])
 	return cmd, cmd_args
 
 ## To run as stand alone
