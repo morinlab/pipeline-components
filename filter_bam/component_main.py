@@ -55,7 +55,7 @@ class Component(ComponentAbstract):
 	cmd_args = cmd_args + [cmd_filtreads, 'INPUT='+self.args.input_bam, 'FILTER=includeReadList', 'RLF='+self.args.output_readnames,'SO='+self.args.sort_order,'OUTPUT='+self.args.output_paired, ' ;']
 	cmd_args = cmd_args + [cmd_filtreads, 'INPUT='+self.args.input_bam, 'FILTER=excludeReadList', 'RLF='+self.args.output_readnames,'SO='+self.args.sort_order,'OUTPUT='+self.args.output_unpaired, ' ;']
 	if(self.args.delete_input=="true"):
-		cmd_args = cmd_args + ["; rm "+self.args.input_bam]
+		cmd_args = cmd_args + [" rm "+self.args.input_bam]
 	cmd_args = cmd_args + ["; rm *.reads"]
 	return cmd, cmd_args
 
