@@ -51,7 +51,7 @@ class Component(ComponentAbstract):
 	cmd_args =  ['INPUT='+infiles, 'OUTPUT='+self.args.output_file,'SORT_ORDER='+self.args.sort_order,'USE_THREADING='+self.args.use_threading]
 	if(self.args.delete_input=="true"):
 		infiles_rm = ' rm '.join(glob.glob(self.args.input_dir+"/"+self.args.input_regex))
-		cmd_args = cmd_args + ["; rm "+infiles_rm] +
+		cmd_args = cmd_args + ["; rm "+infiles_rm]
 	return cmd, cmd_args
 
     def test(self):
