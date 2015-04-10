@@ -65,9 +65,9 @@ class Component(ComponentAbstract):
         # Optional arguments
         opt_args = {"num_threads": "-t"}
         cmd_args.extend(["{} {}".format(opt_args[k], v) for k, v in args_dict.items()
-                        if k in opt_args and v is not True])
+                         if k in opt_args and not isinstance(v, bool) and v is not None])
         cmd_args.extend(["{}".format(opt_args[k], v) for k, v in args_dict.items()
-                        if k in opt_args and v is True])
+                         if k in opt_args and isinstance(v, bool)])
         # Positional arguments
         pos_args = ["reference", "fastq_1", "fastq_2"]
         if chunk is not None:
@@ -76,7 +76,10 @@ class Component(ComponentAbstract):
         elif chunk is None and ("input_dir" in args_dict or "output_dir" in args_dict):
             logging.warning("input_dir and output_dir only used when given an interval file "
                             "listing chunks.")
-        cmd_args.extend([args_dict[arg] for arg in pos_args if arg in args_dict])
+        cmd_args.extend([args_dict[arg] for arg in pos_args if arg in args_dict and
+                        not isinstance(args_dict[arg], list) and args_dict[arg] is not None])
+        cmd_args.extend([" ".join(args_dict[arg]) for arg in pos_args if arg in args_dict and
+                        isinstance(args_dict[arg], list) and args_dict[arg] is not None])
         # Pipe output (SAM format) to samtools to convert to BAM format
         cmd_args.extend([" | ", self.requirements["samtools"], " view -bS - > ",
                         args_dict["output_bam"]])
