@@ -17,6 +17,8 @@ parser = argparse.ArgumentParser(prog='file_eater',
 
 ## TODO: create the list of input options here. Add as many as desired.
 parser.add_argument("--input_files", required=True,help="List of files to delete") 
-
+parser.add_argument("--out_files", required=True, help="List of output files to compare to first")
+parser.add_argument("--filetype_in", required=True, help= "One of bam or fastq")
+parser.add_argument("--filetype_out", required=True, help= "One of bam or fastq")
 ## parse the argument parser.
 args, unknown = parser.parse_known_args()

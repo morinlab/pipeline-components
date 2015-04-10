@@ -19,11 +19,14 @@ parallel = False
 ## TODO: here goes the list of the required software/apps
 ## called by the component.  
 requirements = {
-# 				'python': '/path/python/bin/python',
-				}
+			'python' : 'python',
+			'samtools' : 'samtools',
+			'cmd_maker' : '/home/jgrewal/projects/lab_pipeline/pipeline-components/file_eater/component_seed/count_comparefiles.py',
+			'file_remover' : '/home/jgrewal/projects/lab_pipeline/pipeline-components/file_eater/component_seed/compare_deleteinput.py'		
+		}
 
 ## TODO: here goes the version of the component seed.
 seed_version = '1.00.0'
 
 ## TODO: here goes the version of the component itself. 
-version = '1.00.0'
+version = '1.5.0'

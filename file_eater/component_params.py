@@ -7,7 +7,8 @@ component_params.py
 ## '__REQUIRED__' to make it required
 ## '__FLAG__' to make it a flag or switch.
 input_files  = {
-                 'input_files' : '__REQUIRED__', 
+                 'input_filenames' : '__REQUIRED__', 
+		 'out_files' : '__REQUIRED__',
                 }
 
 ## TODO: here goes the list of the output files.
@@ -18,6 +19,8 @@ output_files = {
 
 ## TODO: here goes the list of the input parameters excluding input/output files.
 input_params = {
+		'filetype_in' : '__REQUIRED__', #Can be bam or fastq
+		'filetype_out' : '__REQUIRED__',
 #                 'input_param1' : '__REQUIRED__',
 #                 'input_param2' : '__FLAG__',
 #                 'input_param3' : None

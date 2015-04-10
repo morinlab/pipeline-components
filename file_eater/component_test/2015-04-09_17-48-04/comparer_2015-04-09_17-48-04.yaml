@@ -1,0 +1,49 @@
+
+__PIPELINE_INFO__: 
+    name: 
+    version: 
+    author: 
+    data_type: 
+    input_type: 
+    output_type: 
+    host_cluster: 
+    date_created: 
+    date_last_updated: 
+    factory_version: '1.10.2'
+__GENERAL__: 
+    python:  '/extscratch/morinlab/projects/MCL_realignment/software/python'
+    samtools: '/extscratch/morinlab/projects/MCL_realignment/software/samtools/samtools'
+__SHARED__: 
+__SAMPLES__: 
+    PT004:
+       orig_bam: '/extscratch/morinlab/projects/MCL_realignment/data/PT004_tumour_sub0.01.bam'
+       paired_bam: '/extscratch/morinlab/projects/MCL_realignment/results/mytestdir/20150409104727/PT004_Tumor_bam_to_fastq_dev/outputs/TASK_MERGE_PAIRED_BAM_PT004_Tumor.pairedreads.bam'
+       unpaired_bam: '/extscratch/morinlab/projects/MCL_realignment/results/mytestdir/20150409104727/PT004_Tumor_bam_to_fastq_dev/outputs/TASK_FILTER_UNPAIRED_BAM_PT004_Tumor.unpaired.clean.bam' 
+__TASK_1__: 
+    reserved: 
+        # do not change this section.
+        component_name: 'file_eater'
+        component_version: '1.5.0'
+        seed_version: '1.00.0'
+    run: 
+        # NOTE: component cannot run in parallel mode.
+        use_cluster: False
+        memory: '1G'
+        num_cpus: 1
+        forced_dependencies: []
+        add_breakpoint: False
+        env_vars: 
+        boilerplate: 
+    component: 
+        input_files: 
+            out_files:
+                 ("__SAMPLES__","orig_bam"),
+                 ("__SAMPLES__","paired_bam"),
+            input_filenames: 
+               ("__SAMPLES__","paired_bam")
+               ("__SAMPLES__","unpaired_bam")
+               ("__SAMPLES__","paired_bam")
+        output_files: 
+        parameters: 
+            filetype_in: 'bam'
+            filetype_out: 'bam'
