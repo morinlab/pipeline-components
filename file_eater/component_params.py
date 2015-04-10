@@ -19,6 +19,8 @@ output_files = {
 
 ## TODO: here goes the list of the input parameters excluding input/output files.
 input_params = {
+		'out_dir': './',
+		'in_dir' : './',
 		'filetype_in' : '__REQUIRED__', #Can be bam or fastq
 		'filetype_out' : '__REQUIRED__',
 #                 'input_param1' : '__REQUIRED__',

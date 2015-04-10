@@ -63,11 +63,13 @@ class Component(ComponentAbstract):
         outfile_list.extend([args_dict[arg] for arg in pos_args if arg in args_dict and not isinstance(args_dict[arg], list)])
         outfile_list.extend([" ".join(args_dict[arg]) for arg in pos_args if arg in args_dict and isinstance(args_dict[arg], list)])
 
-	cmd_args_in = mycmd + " -i " + " ".join(infile_list) + " -t " + self.args.filetype_in + " -o " + inputcounterfile + " --samtools " + self.requirements['samtools']
-	cmd_args_out = mycmd + " -i " + " ".join(outfile_list) + " -t " + self.args.filetype_out + " -o " + outputcounterfile + " --samtools " + self.requirements['samtools']
+	indir = self.args.in_dir
+	outdir = self.args.out_dir
+	cmd_args_in = mycmd + " -i " + indir.join(infile_list) + " -t " + self.args.filetype_in + " -o " + inputcounterfile + " --samtools " + self.requirements['samtools']
+	cmd_args_out = mycmd + " -i " + outdir.join(outfile_list) + " -t " + self.args.filetype_out + " -o " + outputcounterfile + " --samtools " + self.requirements['samtools']
         cmd = " && ".join(["touch "+inputcounterfile, "touch "+outputcounterfile, cmd_args_in, cmd_args_out])
 	cmd_args = ["&& awk '{ sum += $1 } END { print sum }' " + inputcounterfile + " > " + inputsumfile + " && ", "awk '{ sum += $1 } END { print sum }' " + outputcounterfile + " > " + outputsumfile + " && ", " rm " + inputcounterfile + " " + outputcounterfile]
-	cmd_args = cmd_args + [ " && " + self.requirements['python'] + " " + self.requirements['file_remover'] + " -c1 " + inputsumfile + " -c2 " + outputsumfile + " -ri " + " ".join(infile_list)] 
+	cmd_args = cmd_args + [ " && " + self.requirements['python'] + " " + self.requirements['file_remover'] + " -c1 " + inputsumfile + " -c2 " + outputsumfile + " -ri " + indir.join(infile_list)] 
 
 	#args_dict = vars(self.args)
 	#pos_args = ['input_files']
