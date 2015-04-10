@@ -7,13 +7,6 @@ import re
 import argparse
 import difflib
 
-def cmd_readcount(infile, filetype, outfile, whichsam):
-	if filetype == "fastq":
-        	mycmd = "cat " + infile + " | wc -l | xargs -n 1 bash -c 'echo $(($1/4))' args "
-	elif filetype == "bam":
-		mycmd = whichsam + " view -c " + infile + " >> " + outfile
-	return mycmd
-
 def main():
 	"""Run count_comparefiles.py
 	"""
