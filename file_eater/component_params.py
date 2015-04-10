@@ -23,6 +23,7 @@ input_params = {
 		'in_dir' : './',
 		'filetype_in' : '__REQUIRED__', #Can be bam or fastq
 		'filetype_out' : '__REQUIRED__',
+		'delete_input' : 'True',
 #                 'input_param1' : '__REQUIRED__',
 #                 'input_param2' : '__FLAG__',
 #                 'input_param3' : None

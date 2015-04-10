@@ -69,7 +69,8 @@ class Component(ComponentAbstract):
 	cmd_args_out = mycmd + " -i " + outdir.join(outfile_list) + " -t " + self.args.filetype_out + " -o " + outputcounterfile + " --samtools " + self.requirements['samtools']
         cmd = " && ".join(["touch "+inputcounterfile, "touch "+outputcounterfile, cmd_args_in, cmd_args_out])
 	cmd_args = ["&& awk '{ sum += $1 } END { print sum }' " + inputcounterfile + " > " + inputsumfile + " && ", "awk '{ sum += $1 } END { print sum }' " + outputcounterfile + " > " + outputsumfile + " && ", " rm " + inputcounterfile + " " + outputcounterfile]
-	cmd_args = cmd_args + [ " && " + self.requirements['python'] + " " + self.requirements['file_remover'] + " -c1 " + inputsumfile + " -c2 " + outputsumfile + " -ri " + indir.join(infile_list)] 
+	if((self.args.delete_input=="True")|(self.args.delete_input=="true")):
+		cmd_args = cmd_args + [ " && " + self.requirements['python'] + " " + self.requirements['file_remover'] + " -c1 " + inputsumfile + " -c2 " + outputsumfile + " -ri " + indir.join(infile_list)] 
 
 	#args_dict = vars(self.args)
 	#pos_args = ['input_files']
