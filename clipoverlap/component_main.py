@@ -40,7 +40,7 @@ class Component(ComponentAbstract):
     ## used to run the component_seed via the command line. Note that
     ## it should return cmd, cmd_args.
     def make_cmd(self, chunk=None):
-	path = self.requirements['bamutils_bam']
+	path = self.requirements['bamutils']
 	cmd = path + ' clipOverlap '
 	cmd_args = ['--in '+self.args.input_file, '--out '+self.args.output_file]
 	return cmd, cmd_args
