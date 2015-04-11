@@ -11,6 +11,7 @@ the ComponentAbstract class. It is the core of a component.
 from pipeline_factory.utils import ComponentAbstract
 import os
 import re
+import ntpath
 
 class Component(ComponentAbstract):
     
@@ -56,8 +57,14 @@ class Component(ComponentAbstract):
         outfile_list.extend([args_dict[arg] for arg in pos_args if arg in args_dict and not isinstance(args_dict[arg], list)])
         outfile_list.extend([" ".join(args_dict[arg]) for arg in pos_args if arg in args_dict and isinstance(args_dict[arg], list)])
 
-	myinregex = re.search('(?<=TASK_).*(?=\.)',re.split('\s+',infile_list[1])[0]).group(0)
-        myoutregex = re.search('(?<=TASK_).*(?=\.)',re.split('\s+',outfile_list[1])[0]).group(0)
+	print infile_list[1]
+	print outfile_list[1]
+	myinregex = re.sub('\..*','',ntpath.basename(re.split('\s+',infile_list[1])[0]))
+	myoutregex = re.sub('\..*','',ntpath.basename(re.split('\s+',outfile_list[1])[0]))
+	#myinregex = re.search('(?<=TASK_).*(?=\.)',ntpath.basename(re.split('\s+',infile_list[1])[0])).group(0)
+        #myoutregex = re.search('(?<=TASK_).*(?=\.)',re.split('\s+',outfile_list[1])[0]).group(0)
+	print "MY IN REGEX: " + myinregex
+	print "MY OUT REGEX: " + myoutregex
         inputcounterfile = "results/in_"+myinregex+"_out_"+myoutregex+"_counterin.txt"
         outputcounterfile = "results/in_"+myinregex+"_out_"+myoutregex+"_counterout.txt"
         inputsumfile = "results/in_"+myinregex+"_out_"+myoutregex+"_sumin.txt"
