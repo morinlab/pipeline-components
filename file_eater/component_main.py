@@ -52,16 +52,14 @@ class Component(ComponentAbstract):
 	infile_list = [" "]
 	infile_list.extend([args_dict[arg] for arg in pos_args if arg in args_dict and not isinstance(args_dict[arg], list)])
 	infile_list.extend([" ".join(args_dict[arg]) for arg in pos_args if arg in args_dict and isinstance(args_dict[arg], list)])
-	if("*" in infile_list[1]) : infile_list[1] = ' '.join(ntpath.basename(x) for x in (glob.glob(self.args.in_dir+"/"+infile_list[1])))
+	if("*" in self.args.input_filenames) : infile_list[1] = ' '.join(ntpath.basename(x) for x in (glob.glob(self.args.in_dir+"/"+self.args.input_filenames)))
 
 	pos_args = ['out_files']
 	outfile_list = [" "]
         outfile_list.extend([args_dict[arg] for arg in pos_args if arg in args_dict and not isinstance(args_dict[arg], list)])
         outfile_list.extend([" ".join(args_dict[arg]) for arg in pos_args if arg in args_dict and isinstance(args_dict[arg], list)])
-	if("*" in outfile_list[1]) : outfile_list[1] = ' '.join(ntpath.basename(x) for x in (glob.glob(self.args.out_dir+"/"+outfile_list[1])))
+	if("*" in self.args.out_files) : outfile_list[1] = ' '.join(ntpath.basename(x) for x in (glob.glob(self.args.out_dir+"/"+self.args.out_files)))
 
-	print infile_list[1]
-	print outfile_list[1]
 	myinregex = re.sub('\..*','',ntpath.basename(re.split('\s+',infile_list[1])[0]))
 	myoutregex = re.sub('\..*','',ntpath.basename(re.split('\s+',outfile_list[1])[0]))
 	#myinregex = re.search('(?<=TASK_).*(?=\.)',ntpath.basename(re.split('\s+',infile_list[1])[0])).group(0)
