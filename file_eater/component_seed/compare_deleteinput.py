@@ -25,7 +25,7 @@ def main():
 	checkmatch = os.system("diff "+ countfile1 + " " + countfile2)
 	if checkmatch == 0 : 
 		os.system("rm "+ " ".join(args.input_list))
-		os.system("rm "+ countfile1 + " " + countfile2)
+		#os.system("rm "+ countfile1 + " " + countfile2)
 		print "SUCCESSFULLY REMOVED INPUT FILES"
 	else:
 		print "ERROR! OUTPUT FILE READ COUNTS ARE DIFFERENT FROM INPUT!"
