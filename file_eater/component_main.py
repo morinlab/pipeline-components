@@ -12,6 +12,7 @@ from pipeline_factory.utils import ComponentAbstract
 import os
 import re
 import ntpath
+import glob
 
 class Component(ComponentAbstract):
     
