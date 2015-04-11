@@ -5,7 +5,7 @@ import commands
 import os
 import re
 import argparse
-import difflib
+import sys
 
 def main():
 	"""Run count_comparefiles.py
@@ -29,5 +29,9 @@ def main():
 		print "SUCCESSFULLY REMOVED INPUT FILES"
 	else:
 		print "ERROR! OUTPUT FILE READ COUNTS ARE DIFFERENT FROM INPUT!"
+		sys.stderr.write(str('ERROR': 'Output file read counts are different from input!'))
+		sys.stderr.write(str('Input counts are in': args.countfile1[0])
+		sys.stderr.write(str('Output counts are in': args.countfile2[0])
+
 if __name__ == '__main__':
 	main()

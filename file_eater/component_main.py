@@ -10,6 +10,7 @@ the ComponentAbstract class. It is the core of a component.
 
 from pipeline_factory.utils import ComponentAbstract
 import os
+import re
 
 class Component(ComponentAbstract):
     
@@ -42,10 +43,6 @@ class Component(ComponentAbstract):
     def make_cmd(self, chunk=None):
 	#Process input files
 	mycmd = self.requirements['python'] + " " + self.requirements['cmd_maker']
-	inputcounterfile = "tempcounterin.txt"
-	outputcounterfile = "tempcounterout.txt"
-	inputsumfile = "tempsumin.txt"
-	outputsumfile = "tempsumout.txt"
 
 	args_dict = vars(self.args)
 
@@ -54,15 +51,20 @@ class Component(ComponentAbstract):
 	infile_list.extend([args_dict[arg] for arg in pos_args if arg in args_dict and not isinstance(args_dict[arg], list)])
 	infile_list.extend([" ".join(args_dict[arg]) for arg in pos_args if arg in args_dict and isinstance(args_dict[arg], list)])
 
-	print "ACTUAL IN LIST: "
-	print self.args
-	print "IN LIST: "
-	print infile_list
 	pos_args = ['out_files']
 	outfile_list = [" "]
         outfile_list.extend([args_dict[arg] for arg in pos_args if arg in args_dict and not isinstance(args_dict[arg], list)])
         outfile_list.extend([" ".join(args_dict[arg]) for arg in pos_args if arg in args_dict and isinstance(args_dict[arg], list)])
 
+	myinregex = re.search('(?<=TASK_).*(?=\.)',re.split('\s+',infile_list[1])[0]).group(0)
+        myoutregex = re.search('(?<=TASK_).*(?=\.)',re.split('\s+',outfile_list[1])[0]).group(0)
+        inputcounterfile = "results/in_"+myinregex+"_out_"+myoutregex+"_counterin.txt"
+        outputcounterfile = "results/in_"+myinregex+"_out_"+myoutregex+"_counterout.txt"
+        inputsumfile = "results/in_"+myinregex+"_out_"+myoutregex+"_sumin.txt"
+        outputsumfile = "results/in_"+myinregex+"_out_"+myoutregex+"_sumout.txt"
+
+	print "MY IN COUNTER AND SUM FILES" + inputcounterfile + " AND " + inputsumfile
+	print "MY OUT COUNTER AND SUM FILES" + outputcounterfile + " AND " + outputsumfile
 	indir = self.args.in_dir
 	outdir = self.args.out_dir
 	cmd_args_in = mycmd + " -i " + indir.join(infile_list) + " -t " + self.args.filetype_in + " -o " + inputcounterfile + " --samtools " + self.requirements['samtools']

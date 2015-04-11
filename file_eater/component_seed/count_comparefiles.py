@@ -9,7 +9,7 @@ import subprocess
 
 def cmd_readcount(infile, filetype, outfile, whichsam):
 	if filetype == "fastq":
-        	mycmd = "cat " + infile + " | wc -l | xargs -n 1 bash -c 'echo $(($1/4))' args "
+        	mycmd = "cat " + infile + " | wc -l | xargs -n 1 bash -c 'echo $(($1/4))' args " + " >> " + outfile
 	elif filetype == "bam":
 		mycmd = whichsam + " view -F 2048 -c " + infile + " >> " + outfile
 	return mycmd
