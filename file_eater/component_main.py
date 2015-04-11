@@ -51,11 +51,13 @@ class Component(ComponentAbstract):
 	infile_list = [" "]
 	infile_list.extend([args_dict[arg] for arg in pos_args if arg in args_dict and not isinstance(args_dict[arg], list)])
 	infile_list.extend([" ".join(args_dict[arg]) for arg in pos_args if arg in args_dict and isinstance(args_dict[arg], list)])
+	if("*" in infile_list[1]) : infile_list[1] = ' '.join(ntpath.basename(x) for x in (glob.glob(self.args.in_dir+"/"+infile_list[1])))
 
 	pos_args = ['out_files']
 	outfile_list = [" "]
         outfile_list.extend([args_dict[arg] for arg in pos_args if arg in args_dict and not isinstance(args_dict[arg], list)])
         outfile_list.extend([" ".join(args_dict[arg]) for arg in pos_args if arg in args_dict and isinstance(args_dict[arg], list)])
+	if("*" in outfile_list[1]) : outfile_list[1] = ' '.join(ntpath.basename(x) for x in (glob.glob(self.args.out_dir+"/"+outfile_list[1])))
 
 	print infile_list[1]
 	print outfile_list[1]
