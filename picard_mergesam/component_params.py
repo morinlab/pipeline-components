@@ -17,6 +17,9 @@ output_files = {
 
 ## here goes the list of the input parameters excluding input/output files.
 input_params = {
+                'val_stringency' : 'SILENT', #'__REQUIRED__',
+                'verbosity' : 'INFO',
+                'quiet' : 'false',
 		'sort_order': 'coordinate',
 		'use_threading': 'true',
                 'input_regex': '*.bam', #regex to identify the batch of input files with

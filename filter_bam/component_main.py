@@ -52,8 +52,12 @@ class Component(ComponentAbstract):
 	picard_path=os.path.join(self.requirements['picardtools'], 'FilterSamReads.jar')
 	cmd_filtreads = self.requirements['java'] + 'java -Xmx4G' + ' -jar ' + picard_path
 	cmd_args = [self.args.input_bam + " tempfile | ", cmd_view , cmd_trim, " > " + self.args.output_readnames + " ;"]
-	cmd_args = cmd_args + [cmd_filtreads, 'INPUT='+self.args.input_bam, 'FILTER=includeReadList', 'RLF='+self.args.output_readnames,'SO='+self.args.sort_order,'OUTPUT='+self.args.output_paired, ' ;']
-	cmd_args = cmd_args + [cmd_filtreads, 'INPUT='+self.args.input_bam, 'FILTER=excludeReadList', 'RLF='+self.args.output_readnames,'SO='+self.args.sort_order,'OUTPUT='+self.args.output_unpaired]
+	cmd_args = cmd_args + [cmd_filtreads, 'VERBOSITY='+self.args.verbosity,
+			'QUIET='+self.args.quiet,
+			'VALIDATION_STRINGENCY='+self.args.val_stringency,'INPUT='+self.args.input_bam, 'FILTER=includeReadList', 'RLF='+self.args.output_readnames,'SO='+self.args.sort_order,'OUTPUT='+self.args.output_paired, ' ;']
+	cmd_args = cmd_args + [cmd_filtreads, 'VERBOSITY='+self.args.verbosity,
+			'QUIET='+self.args.quiet,
+			'VALIDATION_STRINGENCY='+self.args.val_stringency,'INPUT='+self.args.input_bam, 'FILTER=excludeReadList', 'RLF='+self.args.output_readnames,'SO='+self.args.sort_order,'OUTPUT='+self.args.output_unpaired]
 	if(self.args.delete_input=="true"):
 		cmd_args = cmd_args + ["; rm "+self.args.input_bam]
 	cmd_args = cmd_args + ["; rm *.reads ; rm *_reads.txt"]

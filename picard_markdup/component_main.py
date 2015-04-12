@@ -44,7 +44,9 @@ class Component(ComponentAbstract):
     def make_cmd(self, chunk=None):
 	path=os.path.join(self.requirements['picardtools'], 'MarkDuplicates.jar')
 	cmd = self.requirements['java'] + 'java -Xmx4G' + ' -jar ' + path
-	cmd_args = ['INPUT='+self.args.input_file, 'OUTPUT='+self.args.output_file, 'METRICS_FILE='+self.args.metrics_file]
+	cmd_args = ['INPUT='+self.args.input_file,'VERBOSITY='+self.args.verbosity,
+			'QUIET='+self.args.quiet,
+			'VALIDATION_STRINGENCY='+self.args.val_stringency, 'OUTPUT='+self.args.output_file, 'METRICS_FILE='+self.args.metrics_file]
 	return cmd, cmd_args
 
     def test(self):

@@ -19,6 +19,9 @@ output_files = {
 
 ## here goes the list of the input parameters excluding input/output files.
 input_params = {
+		'verbosity': 'INFO',
+		'quiet': 'false',
+		'val_stringency': 'STRICT',
 		'sort_order' : 'coordinate',
 		'delete_input' : 'false',
 #                 'input_param2' : '__FLAG__',
