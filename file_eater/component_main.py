@@ -49,16 +49,16 @@ class Component(ComponentAbstract):
 	args_dict = vars(self.args)
 
 	pos_args = ['input_filenames']	
-	infile_list = [" "]
+	infile_list = [" "]; myindirtemp = " " + self.args.in_dir + "/"
 	infile_list.extend([args_dict[arg] for arg in pos_args if arg in args_dict and not isinstance(args_dict[arg], list)])
 	infile_list.extend([" ".join(args_dict[arg]) for arg in pos_args if arg in args_dict and isinstance(args_dict[arg], list)])
-	if("*" in self.args.input_filenames) : infile_list[1] = ' '.join(ntpath.basename(x) for x in (glob.glob(self.args.in_dir+"/"+self.args.input_filenames)))
+	if("*" in self.args.input_filenames) : infile_list[1] = myindirtemp.join(ntpath.basename(x) for x in (glob.glob(self.args.in_dir+"/"+self.args.input_filenames)))
 
 	pos_args = ['out_files']
-	outfile_list = [" "]
+	outfile_list = [" "]; myoutdirtemp = " " + self.args.out_dir + "/"
         outfile_list.extend([args_dict[arg] for arg in pos_args if arg in args_dict and not isinstance(args_dict[arg], list)])
         outfile_list.extend([" ".join(args_dict[arg]) for arg in pos_args if arg in args_dict and isinstance(args_dict[arg], list)])
-	if("*" in self.args.out_files) : outfile_list[1] = ' '.join(ntpath.basename(x) for x in (glob.glob(self.args.out_dir+"/"+self.args.out_files)))
+	if("*" in self.args.out_files) : outfile_list[1] = myoutdirtemp.join(ntpath.basename(x) for x in (glob.glob(self.args.out_dir+"/"+self.args.out_files)))
 
 	myinregex = re.sub('\..*','',ntpath.basename(re.split('\s+',infile_list[1])[0]))
 	myoutregex = re.sub('\..*','',ntpath.basename(re.split('\s+',outfile_list[1])[0]))
@@ -73,8 +73,8 @@ class Component(ComponentAbstract):
 
 	print "MY IN COUNTER AND SUM FILES" + inputcounterfile + " AND " + inputsumfile
 	print "MY OUT COUNTER AND SUM FILES" + outputcounterfile + " AND " + outputsumfile
-	indir = self.args.in_dir
-	outdir = self.args.out_dir
+	indir = self.args.in_dir + "/"
+	outdir = self.args.out_dir + "/"
 	cmd_args_in = mycmd + " -i " + indir.join(infile_list) + " -t " + self.args.filetype_in + " -o " + inputcounterfile + " --samtools " + self.requirements['samtools']
 	cmd_args_out = mycmd + " -i " + outdir.join(outfile_list) + " -t " + self.args.filetype_out + " -o " + outputcounterfile + " --samtools " + self.requirements['samtools']
         cmd = " && ".join(["touch "+inputcounterfile, "touch "+outputcounterfile, cmd_args_in, cmd_args_out])
