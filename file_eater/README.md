@@ -29,8 +29,8 @@ Seed Used    : count_comparefiles.py, compare_deleteinput.py
 
 - No new updates
 
-```
 ### Parameter definitions
+```
 input_filenames: List of files (alternatively, a regex - currently identified if including '*' in 
 			input_filenames) which were input to a component (or to multiple components)
 out_files      : List of files output by a component (or output by multiple components)
@@ -49,4 +49,10 @@ filetype_out   : Either of 'bam' or 'fastq'. Filetype of out_files.
  
 delete_input   : Either of 'True' or 'False'. Default is 'True'. Deletes the input files if the number 
 		 	of reads in the input equal the number of reads in the output.
+```
+
+###Output Description
+```
+*_sumin.txt	: The sum of reads in the input files
+*_sumout.txt	: The sum of reads in the output files
 ```
