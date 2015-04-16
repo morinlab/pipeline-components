@@ -31,20 +31,22 @@ Seed Used    : count_comparefiles.py, compare_deleteinput.py
 
 ```
 ### Parameter definitions
-input_filenames: List of files (alternatively, a regex - currently identified if including '*' in input_filenames)
-		 which were input to a component (or to multiple components)
+input_filenames: List of files (alternatively, a regex - currently identified if including '*' in 
+			input_filenames) which were input to a component (or to multiple components)
 out_files      : List of files output by a component (or output by multiple components)
 
-It is assumed that by passing in the input_filenames and out_files, the user wishes to compare the total number of reads in the input versus the output.
+It is assumed that by passing in the input_filenames and out_files, the user wishes to compare the 
+total number of reads in the input versus the output.
 
-in_dir         : Define if the input_filenames are located in a different location than the current working directory. 
-out_dir        : Define if the out_files are located in a different location than the current working directory.
+in_dir         : Define if the input_filenames are located in a different location than the CWD. 
+out_dir        : Define if the out_files are located in a different location than the CWD.
 
-If in_dir or out_dir are passed, any pathnames in input_filenames or out_files (respectively) are discarded and the file basename retained from the input_filenames, out_files (respectively)
+If in_dir or out_dir are passed, any pathnames in input_filenames or out_files (respectively) are 
+discarded and the file basename retained from the input_filenames, out_files (respectively)
 
 filetype_in    : Either of 'bam' or 'fastq'. Filetype of input_filenames.
 filetype_out   : Either of 'bam' or 'fastq'. Filetype of out_files.
  
-delete_input   : Either of 'True' or 'False'. Default is 'True'. Deletes the input files if the number of reads in 
-		 the input equal the number of reads in the output.
+delete_input   : Either of 'True' or 'False'. Default is 'True'. Deletes the input files if the number 
+		 	of reads in the input equal the number of reads in the output.
 ```
