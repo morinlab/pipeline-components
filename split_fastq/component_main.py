@@ -25,7 +25,10 @@ class Component(ComponentAbstract):
         cmd_args = [self.requirements["split_fastq.py"]]
         args_dict = vars(self.args)
         # Optional arguments
-        opt_args = {'no_compression': '--no_compression', 'interval_file': '--interval_file', 'num_buffer': '--num_buffer', 'output_dir': '--output_dir', 'num_reads': '--num_reads'}
+        opt_args = {
+            'no_compression': '--no_compression', 'interval_file': '--interval_file',
+            'num_buffer': '--num_buffer', 'output_dir': '--output_dir',
+            'num_reads': '--num_reads', 'no_symlink': '--no_symlink'}
         cmd_args.extend(["{} {}".format(opt_args[k], v) for k, v in args_dict.items()
                          if k in opt_args and not isinstance(v, bool) and v is not None])
         cmd_args.extend(["{}".format(opt_args[k], v) for k, v in args_dict.items()
