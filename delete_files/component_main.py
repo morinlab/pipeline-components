@@ -5,7 +5,6 @@ component_main.py
 """
 
 from pipeline_factory.utils import ComponentAbstract
-import component_test
 
 
 class Component(ComponentAbstract):
@@ -38,9 +37,6 @@ class Component(ComponentAbstract):
                         isinstance(args_dict[arg], list)])
         # Return cmd and cmg_args
         return cmd, cmd_args
-
-    def test(self):
-        component_test.run_tests()
 
 
 # To run as stand alone
