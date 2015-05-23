@@ -29,7 +29,7 @@ class Component(ComponentAbstract):
         cmd_args.extend(["{} {}".format(opt_args[k], v) for k, v in args_dict.items()
                          if k in opt_args and not isinstance(v, bool) and v is not None])
         cmd_args.extend(["{}".format(opt_args[k], v) for k, v in args_dict.items()
-                         if k in opt_args and isinstance(v, bool)])
+                         if k in opt_args and isinstance(v, bool) and v])
         # Positional arguments
         pos_args = []
         cmd_args.extend([args_dict[arg] for arg in pos_args if arg in args_dict and
