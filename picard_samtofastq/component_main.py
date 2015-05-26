@@ -5,7 +5,7 @@ the ComponentAbstract class. It is the core of a component.
 
 @author: jgrewal
 @Date Created: 18 February 2015
-@Date Modified: 31 March 2015
+@Date Modified: 26 May 2015
 """
 
 from pipeline_factory.utils import ComponentAbstract
@@ -37,7 +37,7 @@ class Component(ComponentAbstract):
 
     def make_cmd(self, chunk=None):
 	path = os.path.join(self.requirements['picardtools'], 'SamToFastq.jar')
-        cmd = self.requirements['java'] + 'java -Xmx4G' + ' -jar ' + path
+        cmd = self.requirements['java'] + 'java -Xmx4G' + ' -jar ' + path + ' -XX:-UseGCOverheadLimit -XX:-UseParallelGC '
 	cmd_args = [
 			'VERBOSITY='+self.args.verbosity,
 			'QUIET='+self.args.quiet,
