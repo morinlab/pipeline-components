@@ -37,7 +37,7 @@ class Component(ComponentAbstract):
 
     def make_cmd(self, chunk=None):
 	path = os.path.join(self.requirements['picardtools'], 'SamToFastq.jar')
-        cmd = self.requirements['java'] + 'java -Xmx4G' + ' -jar ' + path + ' -XX:-UseGCOverheadLimit -XX:-UseParallelGC '
+        cmd = self.requirements['java'] + 'java -Xmx6G -XX:-UseGCOverheadLimit -XX:-UseParallelGC ' + ' -jar ' + path
 	cmd_args = [
 			'VERBOSITY='+self.args.verbosity,
 			'QUIET='+self.args.quiet,
