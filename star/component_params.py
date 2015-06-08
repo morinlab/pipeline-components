@@ -5,8 +5,7 @@ component_params.py
 """
 
 
-input_files = {'genomeFastaFiles': '__OPTIONAL__',
-               'readFilesIn': '__OPTIONAL__',
+input_files = {'readFilesIn': '__OPTIONAL__',
                'genomeDir': '__OPTIONAL__',
                'sjdbFileChrStartEnd': '__OPTIONAL__'}
 
