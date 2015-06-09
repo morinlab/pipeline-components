@@ -36,11 +36,6 @@ class Component(ComponentAbstract):
                     'outSAMtype': '--outSAMtype',
                     'readFilesCommand': '--readFilesCommand',
                     'outSAMmode': '--outSAMmode'}
-        print args_dict
-        print args_dict['outSAMtype']
-        print not isinstance(args_dict['outSAMtype'], bool)
-        print args_dict['outSAMtype'] is not None
-        print not isinstance(args_dict['outSAMtype'], list)
         cmd_args.extend(["{} {}".format(opt_args[k], v) for k, v in args_dict.items()
                          if k in opt_args and not isinstance(v, bool) and v is not None and
                          not isinstance(v, list)])
