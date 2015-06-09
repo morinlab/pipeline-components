@@ -6,7 +6,6 @@ component_main.py
 
 from pipeline_factory.utils import ComponentAbstract
 import component_test
-import
 
 
 class Component(ComponentAbstract):
