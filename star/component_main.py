@@ -20,12 +20,10 @@ class Component(ComponentAbstract):
         super(Component, self).__init__(component_name, component_parent_dir, seed_dir)
 
     def make_cmd(self, chunk=None):
-        # For STAR, create and enter output directory first
-        args_dict = vars(self.args)
-        cmd = 'mkdir'
-        cmd_args = ['-p', args_dict['outputDir'], '&&', 'cd', args_dict['outputDir'], '&&']
         # Program or interpreter
-        cmd_args.append(self.requirements["star_binary"])
+        args_dict = vars(self.args)
+        cmd = self.requirements["star_binary"]
+        cmd_args = []
         # Optional arguments
         opt_args = {'runMode': '--runMode',
                     'genomeDir': '--genomeDir',
@@ -33,7 +31,9 @@ class Component(ComponentAbstract):
                     'runThreadN': '--runThreadN',
                     'readFilesIn': '--readFilesIn',
                     'sjdbFileChrStartEnd': '--sjdbFileChrStartEnd',
-                    'sjdbOverhang': '--sjdbOverhang'}
+                    'sjdbOverhang': '--sjdbOverhang',
+                    'outFileNamePrefix': '--outFileNamePrefix',
+                    'outSAMtype': '--outSAMtype'}
         cmd_args.extend(["{} {}".format(opt_args[k], v) for k, v in args_dict.items()
                          if k in opt_args and not isinstance(v, bool) and v is not None])
         cmd_args.extend(["{}".format(opt_args[k], v) for k, v in args_dict.items()
