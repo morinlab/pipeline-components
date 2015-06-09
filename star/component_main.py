@@ -33,7 +33,8 @@ class Component(ComponentAbstract):
                     'sjdbFileChrStartEnd': '--sjdbFileChrStartEnd',
                     'sjdbOverhang': '--sjdbOverhang',
                     'outFileNamePrefix': '--outFileNamePrefix',
-                    'outSAMtype': '--outSAMtype'}
+                    'outSAMtype': '--outSAMtype',
+                    'readFilesCommand': '--readFilesCommand'}
         cmd_args.extend(["{} {}".format(opt_args[k], v) for k, v in args_dict.items()
                          if k in opt_args and not isinstance(v, bool) and v is not None])
         cmd_args.extend(["{}".format(opt_args[k], v) for k, v in args_dict.items()
