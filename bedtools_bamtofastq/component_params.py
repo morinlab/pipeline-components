@@ -17,6 +17,7 @@ output_files = {
 
 ## TODO: here goes the list of the input parameters excluding input/output files.
 input_params = {
+                   'no_compression' : False,
 #                 'input_param1' : '__REQUIRED__',
 #                 'input_param2' : '__FLAG__',
 #                 'input_param3' : None
