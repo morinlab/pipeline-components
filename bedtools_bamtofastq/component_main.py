@@ -40,6 +40,8 @@ class Component(ComponentAbstract):
     def make_cmd(self, chunk=None):
 	cmd=self.requirements['bedtools'] + ' ' + "bamtofastq"
 	cmd_args=["-i " + self.args.input_bam, "-fq " + self.args.output_fastq]
+	if(!(self.args.no_compression)):
+		cmd_args = cmd_args + [' & gzip ' + self.args.output_fastq]
 	return cmd, cmd_args
 
 ## To run as stand alone
