@@ -23,6 +23,7 @@ output_files = {
 ## here goes the list of the input parameters excluding input/output files.
 input_params = {
 		'javamem' : '4G',
+		'no_compression': False,
 		'output_per_rg' : 'false',
 		'rg_tag' : 'PU',
 		'rereverse_bases' : 'false', #'__FLAG__',
