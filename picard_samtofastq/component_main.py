@@ -54,7 +54,7 @@ class Component(ComponentAbstract):
 		out2 = "".join([self.args.output_dir,"/",infile_prefix,".R2.fq"])
 
 	cmd_args = cmd_args + ['INPUT='+infile] + ['FASTQ='+out1] + ['SECOND_END_FASTQ='+out2]
-	if(!(self.args.no_compression)):
+	if not(self.args.no_compression):
 		cmd_args = cmd_args + [' & gzip ' + out1 + ' & gzip ' + out2]
         return cmd, cmd_args	
 
