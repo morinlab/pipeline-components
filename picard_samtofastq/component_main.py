@@ -55,7 +55,7 @@ class Component(ComponentAbstract):
 
 	cmd_args = cmd_args + ['INPUT='+infile] + ['FASTQ='+out1] + ['SECOND_END_FASTQ='+out2]
 	if not(self.args.no_compression):
-		cmd_args = cmd_args + [' & gzip ' + out1 + ' & gzip ' + out2]
+		cmd_args = cmd_args + [' & gzip ' + out1 + ' & mv ' + out1 + '.gz ' + out1 + ' & gzip ' + out2 + ' & mv ' + out2 +'.gz ' + out2 ]
         return cmd, cmd_args	
 
     def test(self):
