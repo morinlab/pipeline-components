@@ -41,8 +41,8 @@ class Component(ComponentAbstract):
 	cmd=self.requirements['bedtools'] + ' ' + "bamtofastq"
 	cmd_args=["-i " + self.args.input_bam, "-fq " + self.args.output_fastq]
 	if not (self.args.no_compression):
-		cmd_args = cmd_args + [' & gzip ' + self.args.output_fastq]
-	return cmd, cmd_args
+		cmd_args = cmd_args + [' ; gzip ' + self.args.output_fastq ]
+ 	return cmd, cmd_args
 
 ## To run as stand alone
 def _main():
