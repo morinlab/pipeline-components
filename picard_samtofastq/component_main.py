@@ -52,9 +52,13 @@ class Component(ComponentAbstract):
 	else:
 		out1 = "".join([self.args.output_dir,"/",infile_prefix,".R1.fq"])
 		out2 = "".join([self.args.output_dir,"/",infile_prefix,".R2.fq"])
+	#Remove gz from outfile end, if there is one appended
+	out1 = re.sub("\.gz$","",out1)
+	out2 = re.sub("\.gz$","",out2)
 
 	cmd_args = cmd_args + ['INPUT='+infile] + ['FASTQ='+out1] + ['SECOND_END_FASTQ='+out2]
 	if not(self.args.no_compression):
+		
 		cmd_args = cmd_args + [' ; gzip ' + out1 + ' & gzip ' + out2 ]
         return cmd, cmd_args	
 
