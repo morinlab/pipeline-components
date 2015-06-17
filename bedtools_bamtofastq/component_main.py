@@ -10,6 +10,7 @@ the ComponentAbstract class. It is the core of a component.
 
 from pipeline_factory.utils import ComponentAbstract
 import os
+import re
 
 class Component(ComponentAbstract):
     
@@ -38,10 +39,12 @@ class Component(ComponentAbstract):
     ## used to run the component_seed via the command line. Note that 
     ## it should return cmd, cmd_args. 
     def make_cmd(self, chunk=None):
+	out1 = self.args.output_fastq
 	cmd=self.requirements['bedtools'] + ' ' + "bamtofastq"
-	cmd_args=["-i " + self.args.input_bam, "-fq " + self.args.output_fastq]
+	out1 = re.sub("\.gz$","",out1)
+	cmd_args=["-i " + self.args.input_bam, "-fq " + out1]
 	if not (self.args.no_compression):
-		cmd_args = cmd_args + [' ; gzip ' + self.args.output_fastq ]
+		cmd_args = cmd_args + [' ; gzip ' + out1 ]
  	return cmd, cmd_args
 
 ## To run as stand alone
