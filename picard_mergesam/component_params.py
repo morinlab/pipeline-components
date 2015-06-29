@@ -17,6 +17,7 @@ output_files = {
 
 ## here goes the list of the input parameters excluding input/output files.
 input_params = {
+		'java_mem' : '4G',
                 'val_stringency' : 'SILENT', #'__REQUIRED__',
                 'verbosity' : 'INFO',
                 'quiet' : 'false',
