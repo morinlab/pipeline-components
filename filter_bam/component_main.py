@@ -53,7 +53,7 @@ class Component(ComponentAbstract):
 	cmd_trim = "cut -f 1 | uniq -c | grep -P '^\s+2' | sed -r 's/^\s+2\s+//'"
 
 	picard_path=os.path.join(self.requirements['picardtools'], 'FilterSamReads.jar')
-	cmd_filtreads = self.requirements['java'] + 'java -Xmx' + self.args.java_mem + ' -jar ' + picard_path
+	cmd_filtreads = self.requirements['java'] + 'java -Xmx' + self.args.java_mem + ' -XX:-UseGCOverheadLimit -XX:-UseParallelGC ' + ' -jar ' + picard_path
 	cmd_args = [self.args.input_bam + " tempfile | ", cmd_view , cmd_trim, " > " + self.args.output_readnames + " ;"]
 	cmd_args = cmd_args + [cmd_filtreads, 'VERBOSITY='+self.args.verbosity,
 			'QUIET='+self.args.quiet,
