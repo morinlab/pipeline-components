@@ -49,7 +49,7 @@ class Component(ComponentAbstract):
 	infiles= ' I= '.join(glob.glob(self.args.input_dir+"/"+self.args.input_regex))#[fn for fn in os.listdir(self.args.input_file) if re.match(r'*.bam',fn)])
 	print infiles
 	cmd_args =  ['VERBOSITY='+self.args.verbosity,
-			'QUIET='+self.args.quiet,
+			'QUIET='+self.args.quiet,'MAX_RECORDS_IN_RAM='+self.args.max_ram_records,
 			'VALIDATION_STRINGENCY='+self.args.val_stringency,'INPUT='+infiles, 'OUTPUT='+self.args.output_file,'SORT_ORDER='+self.args.sort_order,'USE_THREADING='+self.args.use_threading]
         if(self.args.delete_input=="true"):
                 infiles_rm = ' ; rm '.join(glob.glob(self.args.input_dir+"/"+self.args.input_regex))
