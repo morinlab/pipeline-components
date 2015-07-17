@@ -15,6 +15,7 @@ input_files = {"input_file": "__OPTIONAL__",
 output_files = {"log_to_file": "__OPTIONAL__"}
 
 input_params = {"analysis_type": "__REQUIRED__",
+                "memory": "__OPTIONAL__",
                 "arg_file": "__OPTIONAL__",
                 "showFullBamList": "__FLAG__",
                 "read_buffer_size": "__OPTIONAL__",

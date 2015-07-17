@@ -4,12 +4,12 @@
 Development Information
 =======================
 
-Date Created : Jul 9 2015
-Last Update  : Jul 9 2015
+Date Created : Jul 17 2015
+Last Update  : Jul 17 2015
 Developer    : bgrande
-Input        : 
-Output       : 
-Parameters   : 
+Input        : BAM
+Output       : BAM
+Parameters   : Many
 Seed Used    : GATK 3.4-0
 ```
 

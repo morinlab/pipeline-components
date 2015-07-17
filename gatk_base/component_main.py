@@ -23,8 +23,12 @@ class Component(ComponentAbstract):
         # Program or interpreter
         args_dict = vars(self.args)
         cmd = self.requirements["java_binary"]
-        cmd_args = ['-jar', self.requirements["gatk_binary"]]
+        cmd_args = []
+        # Add memory, if specified
+        if "memory" in args_dict:
+            cmd_args.extend(["-Xmx", args_dict["memory"]])
         # Optional arguments (i.e., all arguments for GATK)
+        cmd_args.extend(["-jar", self.requirements["gatk_binary"]])
         cmd_args.extend(["--{} {}".format(k, v) for k, v in args_dict.items()
                          if not isinstance(v, bool) and not isinstance(v, list)])
         cmd_args.extend(["--{} {}".format(k, " ".join(v)) for k, v in args_dict.items()
