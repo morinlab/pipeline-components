@@ -1,0 +1,65 @@
+__PIPELINE_INFO__: 
+    name: 
+    version: 
+    author: 
+    data_type: 
+    input_type: 
+    output_type: 
+    host_cluster: 
+    date_created: 
+    date_last_updated: 
+    factory_version: '1.11.2'
+__GENERAL__: 
+    picard_binary: '__REQUIRED__'
+    java_binary: '__REQUIRED__'
+__SHARED__: 
+__SAMPLES__: 
+    # sample_id:
+    #    param1: value1
+    #    param2: value2
+
+__TASK_1__: 
+    reserved: 
+        # do not change this section.
+        component_name: 'picard_add_or_replace_read_groups'
+        component_version: 'v1.0.0'
+        seed_version: '1.136'
+    run: 
+        # NOTE: component cannot run in parallel mode.
+        use_cluster: False
+        memory: '3G'
+        num_cpus: 1
+        forced_dependencies: []
+        add_breakpoint: False
+        env_vars: 
+        boilerplate: 
+    component: 
+        input_files: 
+            INPUT: '__REQUIRED__'
+            REFERENCE_SEQUENCE: '__OPTIONAL__'
+        output_files: 
+            OUTPUT: '__REQUIRED__'
+            TMP_DIR: '__OPTIONAL__'
+        parameters: 
+            RGPM: '__OPTIONAL__'
+            RGPL: '__REQUIRED__'
+            RGPI: '__OPTIONAL__'
+            VERBOSITY: '__OPTIONAL__'
+            QUIET: '__FLAG__'
+            RGID: '__OPTIONAL__'
+            RGPU: '__REQUIRED__'
+            MAX_RECORDS_IN_RAM: '__OPTIONAL__'
+            picard_command: 'AddOrReplaceReadGroups'
+            CREATE_MD5_FILE: '__FLAG__'
+            RGPG: '__OPTIONAL__'
+            CREATE_INDEX: '__FLAG__'
+            RGSM: '__REQUIRED__'
+            RGDS: '__OPTIONAL__'
+            RGDT: '__OPTIONAL__'
+            VALIDATION_STRINGENCY: '__OPTIONAL__'
+            java_memory: '__OPTIONAL__'
+            RGLB: '__REQUIRED__'
+            SORT_ORDER: '__OPTIONAL__'
+            COMPRESSION_LEVEL: '__OPTIONAL__'
+            RGCN: '__OPTIONAL__'
+            GA4GH_CLIENT_SECRETS: '__OPTIONAL__'

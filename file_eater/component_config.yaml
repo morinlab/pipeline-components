@@ -1,0 +1,48 @@
+__PIPELINE_INFO__: 
+    name: 
+    version: 
+    author: 
+    data_type: 
+    input_type: 
+    output_type: 
+    host_cluster: 
+    date_created: 
+    date_last_updated: 
+    factory_version: '1.11.2'
+__GENERAL__: 
+    python: 'python'
+    file_remover: '/home/jgrewal/projects/lab_pipeline/pipeline-components/file_eater/component_seed/compare_deleteinput.py'
+    samtools: 'samtools'
+    cmd_maker: '/home/jgrewal/projects/lab_pipeline/pipeline-components/file_eater/component_seed/count_comparefiles.py'
+__SHARED__: 
+__SAMPLES__: 
+    # sample_id:
+    #    param1: value1
+    #    param2: value2
+
+__TASK_1__: 
+    reserved: 
+        # do not change this section.
+        component_name: 'file_eater'
+        component_version: '1.5.0'
+        seed_version: '1.00.0'
+    run: 
+        # NOTE: component cannot run in parallel mode.
+        use_cluster: False
+        memory: '1G'
+        num_cpus: 1
+        forced_dependencies: []
+        add_breakpoint: False
+        env_vars: 
+        boilerplate: 
+    component: 
+        input_files: 
+            input_filenames: '__REQUIRED__'
+            out_files: '__REQUIRED__'
+        output_files: 
+        parameters: 
+            filetype_in: '__REQUIRED__'
+            in_dir: './'
+            delete_input: 'True'
+            filetype_out: '__REQUIRED__'
+            out_dir: './'
