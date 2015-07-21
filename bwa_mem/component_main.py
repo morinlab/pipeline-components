@@ -37,7 +37,7 @@ class Component(ComponentAbstract):
             raise Exception("When interval file specified, you must give an input_dir and an "
                             "output_dir.")
         # Retrieve FASTQ files based on chunks
-        glob_pattern = os.path.join(args_dict["input_dir"], "*{}*fastq*".format(chunk))
+        glob_pattern = os.path.join(args_dict["input_dir"], "*_chunk{}.fastq*".format(chunk))
         print "glob_pattern:", glob_pattern
         fastq_files = sorted(glob.glob(glob_pattern), key=lambda x: os.path.basename(x))
         print "fastq_files:", fastq_files
