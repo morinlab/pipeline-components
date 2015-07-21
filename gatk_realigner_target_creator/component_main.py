@@ -25,7 +25,7 @@ class Component(ComponentAbstract):
         cmd = self.requirements["java_binary"]
         cmd_args = []
         # Add memory to command
-        memory = args_dict.pop("memory", "1G")
+        memory = args_dict.pop("java_memory", "1G")
         cmd_args.extend(["-Xmx{}".format(memory)])
         # Optional arguments (i.e., all arguments for GATK)
         cmd_args.extend(["-jar", self.requirements["gatk_binary"]])

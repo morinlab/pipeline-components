@@ -16,7 +16,7 @@ output_files = {"out": "__OPTIONAL__",
                 "log_to_file": "__OPTIONAL__"}
 
 input_params = {"analysis_type": "SplitNCigarReads",
-                "memory": "__OPTIONAL__",
+                "java_memory": "5G",
                 "doNotFixOverhangs": "__FLAG__",
                 "maxBasesInOverhang": "__OPTIONAL__",
                 "maxMismatchesInOverhang": "__OPTIONAL__",

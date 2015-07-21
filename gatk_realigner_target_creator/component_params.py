@@ -17,7 +17,7 @@ output_files = {"out": "__OPTIONAL__",
                 "log_to_file": "__OPTIONAL__"}
 
 input_params = {"analysis_type": "RealignerTargetCreator",
-                "memory": "__OPTIONAL__",
+                "java_memory": "5G",
                 "maxIntervalSize": "__OPTIONAL__",
                 "minReadsAtLocus": "__OPTIONAL__",
                 "mismatchFraction": "__OPTIONAL__",

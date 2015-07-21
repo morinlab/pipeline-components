@@ -18,7 +18,7 @@ output_files = {"out": "__OPTIONAL__",
                 "log_to_file": "__OPTIONAL__"}
 
 input_params = {"analysis_type": "IndelRealigner",
-                "memory": "__OPTIONAL__",
+                "java_memory": "5G",
                 "consensusDeterminationModel": "__OPTIONAL__",
                 "LODThresholdForCleaning": "__OPTIONAL__",
                 "nWayOut": "__OPTIONAL__",
