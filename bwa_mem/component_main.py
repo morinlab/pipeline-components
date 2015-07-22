@@ -38,7 +38,8 @@ class Component(ComponentAbstract):
                             "output_dir.")
         # Retrieve FASTQ files based on chunks
         glob_pattern = os.path.join(args_dict["input_dir"], "*_chunk{}.fastq*".format(chunk))
-        print "glob_pattern:", glob_pattern
+        glob_pattern = re.sub("chunkchunk","chunk",glob_pattern)
+	print "glob_pattern:", glob_pattern
         fastq_files = sorted(glob.glob(glob_pattern), key=lambda x: os.path.basename(x))
         print "fastq_files:", fastq_files
         args_dict["fastq_1"] = fastq_files[0]
