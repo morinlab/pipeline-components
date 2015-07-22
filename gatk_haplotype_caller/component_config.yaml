@@ -21,7 +21,7 @@ __SAMPLES__:
 __TASK_1__: 
     reserved: 
         # do not change this section.
-        component_name: 'gatk_base_haplotype_caller'
+        component_name: 'gatk_haplotype_caller'
         component_version: 'v1.0.0'
         seed_version: '3.4-0'
     run: 
