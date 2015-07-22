@@ -45,7 +45,7 @@ __TASK_1__:
             reference_sequence: '__OPTIONAL__'
         output_files: 
             log_to_file: '__OPTIONAL__'
-            out: '__OPTIONAL__'
+            out: '__REQUIRED__'
         parameters: 
             monitorThreadEfficiency: '__FLAG__'
             useOriginalQualities: '__FLAG__'

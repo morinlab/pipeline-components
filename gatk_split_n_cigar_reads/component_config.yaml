@@ -35,7 +35,7 @@ __TASK_1__:
         boilerplate: 
     component: 
         input_files: 
-            input_file: '__OPTIONAL__'
+            input_file: '__REQUIRED__'
             intervals: '__OPTIONAL__'
             BQSR: '__OPTIONAL__'
             read_group_black_list: '__OPTIONAL__'
@@ -43,7 +43,7 @@ __TASK_1__:
             reference_sequence: '__OPTIONAL__'
         output_files: 
             log_to_file: '__OPTIONAL__'
-            out: '__OPTIONAL__'
+            out: '__REQUIRED__'
         parameters: 
             monitorThreadEfficiency: '__FLAG__'
             useOriginalQualities: '__FLAG__'

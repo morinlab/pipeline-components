@@ -5,14 +5,14 @@ component_params.py
 """
 
 
-input_files = {"input_file": "__OPTIONAL__",
+input_files = {"input_file": "__REQUIRED__",
                "intervals": "__OPTIONAL__",
                "excludeIntervals": "__OPTIONAL__",
                "reference_sequence": "__OPTIONAL__",
                "BQSR": "__OPTIONAL__",
                "read_group_black_list": "__OPTIONAL__"}
 
-output_files = {"out": "__OPTIONAL__",
+output_files = {"out": "__REQUIRED__",
                 "log_to_file": "__OPTIONAL__"}
 
 input_params = {"analysis_type": "SplitNCigarReads",
