@@ -1,0 +1,119 @@
+__PIPELINE_INFO__: 
+    name: 
+    version: 
+    author: 
+    data_type: 
+    input_type: 
+    output_type: 
+    host_cluster: 
+    date_created: 
+    date_last_updated: 
+    factory_version: '1.11.2'
+__GENERAL__: 
+    gatk_binary: '__REQUIRED__'
+    java_binary: '__REQUIRED__'
+__SHARED__: 
+__SAMPLES__: 
+    # sample_id:
+    #    param1: value1
+    #    param2: value2
+
+__TASK_1__: 
+    reserved: 
+        # do not change this section.
+        component_name: 'gatk_base_recalibrator_pre'
+        component_version: 'v1.0.0'
+        seed_version: '3.4-0'
+    run: 
+        # NOTE: component cannot run in parallel mode.
+        use_cluster: False
+        memory: '6G'
+        num_cpus: 1
+        forced_dependencies: []
+        add_breakpoint: False
+        env_vars: 
+        boilerplate: 
+    component: 
+        input_files: 
+            knownSites: '__OPTIONAL__'
+            input_file: '__OPTIONAL__'
+            intervals: '__OPTIONAL__'
+            BQSR: '__OPTIONAL__'
+            read_group_black_list: '__OPTIONAL__'
+            excludeIntervals: '__OPTIONAL__'
+            reference_sequence: '__OPTIONAL__'
+        output_files: 
+            log_to_file: '__OPTIONAL__'
+            out: '__OPTIONAL__'
+        parameters: 
+            monitorThreadEfficiency: '__FLAG__'
+            useOriginalQualities: '__FLAG__'
+            deletions_default_quality: '__OPTIONAL__'
+            num_bam_file_handles: '__OPTIONAL__'
+            binary_tag_name: '__OPTIONAL__'
+            simplifyBAM: '__FLAG__'
+            no_standard_covs: '__FLAG__'
+            solid_nocall_strategy: '__OPTIONAL__'
+            sites_only: '__FLAG__'
+            maxRuntimeUnits: '__OPTIONAL__'
+            low_quality_tail: '__OPTIONAL__'
+            baqGapOpenPenalty: '__OPTIONAL__'
+            downsample_to_fraction: '__OPTIONAL__'
+            pedigreeValidationType: '__OPTIONAL__'
+            tag: '__OPTIONAL__'
+            emit_original_quals: '__FLAG__'
+            sample_rename_mapping_file: '__OPTIONAL__'
+            downsample_to_coverage: '__OPTIONAL__'
+            analysis_type: 'BaseRecalibrator'
+            performanceLog: '__OPTIONAL__'
+            gatk_key: '__OPTIONAL__'
+            bam_compression: '__OPTIONAL__'
+            pedigree: '__OPTIONAL__'
+            maxRuntime: '__OPTIONAL__'
+            fix_misencoded_quality_scores: '__FLAG__'
+            pedigreeString: '__OPTIONAL__'
+            disable_bam_indexing: '__FLAG__'
+            interval_merging: '__OPTIONAL__'
+            generate_md5: '__FLAG__'
+            interval_set_rule: '__OPTIONAL__'
+            quantizing_levels: '__OPTIONAL__'
+            num_cpu_threads_per_data_thread: '__OPTIONAL__'
+            bqsrBAQGapOpenPenalty: '__OPTIONAL__'
+            baq: '__OPTIONAL__'
+            logging_level: '__OPTIONAL__'
+            nonDeterministicRandomSeed: '__FLAG__'
+            mismatches_context_size: '__OPTIONAL__'
+            defaultBaseQualities: '__OPTIONAL__'
+            maximum_cycle_value: '__OPTIONAL__'
+            quantize_quals: '__OPTIONAL__'
+            allow_potentially_misencoded_quality_scores: '__FLAG__'
+            preserve_qscores_less_than: '__OPTIONAL__'
+            arg_file: '__OPTIONAL__'
+            run_without_dbsnp_potentially_ruining_quality: '__FLAG__'
+            refactor_NDN_cigar_string: '__FLAG__'
+            variant_index_type: '__OPTIONAL__'
+            read_buffer_size: '__OPTIONAL__'
+            phone_home: '__OPTIONAL__'
+            variant_index_parameter: '__OPTIONAL__'
+            unsafe: '__OPTIONAL__'
+            java_memory: '5G'
+            globalQScorePrior: '__OPTIONAL__'
+            never_trim_vcf_format_field: '__FLAG__'
+            downsampling_type: '__OPTIONAL__'
+            num_threads: '__OPTIONAL__'
+            lowMemoryMode: '__FLAG__'
+            solid_recal_mode: '__OPTIONAL__'
+            disable_read_filter: '__OPTIONAL__'
+            insertions_default_quality: '__OPTIONAL__'
+            sort_by_all_columns: '__FLAG__'
+            list: '__FLAG__'
+            disable_indel_quals: '__FLAG__'
+            indels_context_size: '__OPTIONAL__'
+            showFullBamList: '__FLAG__'
+            keep_program_records: '__FLAG__'
+            mismatches_default_quality: '__OPTIONAL__'
+            validation_strictness: '__OPTIONAL__'
+            interval_padding: '__OPTIONAL__'
+            read_filter: '__OPTIONAL__'
+            covariate: '__OPTIONAL__'
+            remove_program_records: '__FLAG__'
