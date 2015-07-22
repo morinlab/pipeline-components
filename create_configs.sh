@@ -20,3 +20,6 @@ do
 	$1 $2 -w . make_config -c component_config $COMP
 	cd "$CWD"
 done
+
+# Cleanup *.pyc files
+find "$CWD" -name "*.pyc" -delete
