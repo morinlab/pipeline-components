@@ -51,7 +51,7 @@ __TASK_1__:
             OPTICAL_DUPLICATE_PIXEL_DISTANCE: '__OPTIONAL__'
             MAX_RECORDS_IN_RAM: '__OPTIONAL__'
             COMMENT: '__OPTIONAL__'
-            picard_command: '__REQUIRED__'
+            picard_command: 'MarkDuplicates'
             PROGRAM_GROUP_COMMAND_LINE: '__OPTIONAL__'
             PROGRAM_GROUP_NAME: '__OPTIONAL__'
             CREATE_MD5_FILE: '__FLAG__'
