@@ -17,6 +17,7 @@ output_files = {
 
 ## here goes the list of the input parameters excluding input/output files.
 input_params = {
+		'max_perm_size': '4G',
 		'max_ram_records' : '500000000',
 		'java_mem' : '4G',
                 'val_stringency' : 'SILENT', #'__REQUIRED__',
