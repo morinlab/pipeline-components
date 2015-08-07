@@ -40,6 +40,7 @@ __TASK_1__:
         output_files: 
             output_file: '__REQUIRED__'
         parameters: 
+            max_perm_size: '4G'
             val_stringency: 'SILENT'
             max_ram_records: '500000000'
             input_regex: '*.bam'
