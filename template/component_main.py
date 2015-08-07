@@ -4,8 +4,10 @@ component_main.py
 @author: bgrande
 """
 
+import logging
 from pipeline_factory.utils import ComponentAbstract
 import component_test
+
 
 
 class Component(ComponentAbstract):
@@ -26,33 +28,37 @@ class Component(ComponentAbstract):
         arg_sep = "_"  # Separator in every argument, such as "-", "_" or "". False to disable
         val_sep = " "  # Separator in a list of them for one argument, such as " " or ","
         arg_val_sep = " "  # Separator between argument name and value, such as " " or "="
+        flag_val = ""  # Value for setting a flag argument to true, such as "" or "true"
 
         # Program or interpreter
         args_dict = vars(self.args)
         cmd = self.requirements["interpreter"]
         cmd_args = [self.requirements["script"]]
 
-        # Optional arguments
-        for raw_arg, val in args_dict.items():
+        # Command-line arguments
+        for arg, val in args_dict.items():
 
-            # Prepare argument for command line
+            # Prepare formatted argument for command line
             if arg_sep:
-                raw_arg = raw_arg.replace("_", arg_sep)
-            arg = "{}{}".format(arg_prefix, raw_arg)
+                arg = arg.replace("_", arg_sep)
+            fmtd_arg = "{}{}".format(arg_prefix, arg)
 
             # Add argument to command line arguments
             # One value
-            if not isinstance(val, bool) and not (isinstance(val, list) or isinstance(val, tuple)):
-                cmd_args.extend(["{}{}{}".format(arg, arg_val_sep, val)])
+            if not isinstance(val, bool) and not isinstance(val, (list, tuple)):
+                cmd_args.extend(["{}{}{}".format(fmtd_arg, arg_val_sep, val)])
             # List of values
-            elif not isinstance(val, bool) and (isinstance(val, list) or isinstance(val, tuple)):
-                cmd_args.extend(["{}{}{}".format(arg, arg_val_sep, val_sep.join(val))])
+            elif not isinstance(val, bool) and isinstance(val, (list, tuple)):
+                cmd_args.extend(["{}{}{}".format(fmtd_arg, arg_val_sep, val_sep.join(val))])
             # Flag
             elif isinstance(val, bool) and val:
-                cmd_args.extend(["{}".format(arg, val)])
+                if flag_val == "":
+                    cmd_args.extend(["{}".format(fmtd_arg, val)])
+                else:
+                    cmd_args.extend(["{}{}{}".format(fmtd_arg, arg_val_sep, flag_val)])
             # Everything else
             else:
-                pass
+                logging.warn("Command-line argument skipped: {}".format(arg))
 
         # Return cmd and cmg_args
         return cmd, cmd_args
