@@ -23,7 +23,7 @@ class Component(ComponentAbstract):
 
         # Component options
         arg_prefix = "--"  # What is before every argument
-        arg_sep = "_"  # Separator in every argument, such as "-", "_" or "". False to disable
+        arg_sep = "-"  # Separator in every argument, such as "-", "_" or "". False to disable
         val_sep = " "  # Separator in a list of them for one argument, such as " " or ","
         arg_val_sep = " "  # Separator between argument name and value, such as " " or "="
 
