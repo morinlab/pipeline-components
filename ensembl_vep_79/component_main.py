@@ -57,7 +57,7 @@ class Component(ComponentAbstract):
                     cmd_args.extend(["{}{}{}".format(fmtd_arg, arg_val_sep, flag_val)])
             # Everything else
             else:
-                logging.warn("Command-line argument skipped: {}".format(arg))
+                logging.warn("Command-line argument skipped: {} = {}".format(arg, val))
 
         # Return cmd and cmg_args
         return cmd, cmd_args
