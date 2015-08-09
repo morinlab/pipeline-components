@@ -6,6 +6,7 @@ component_params.py
 
 
 input_files = {"input_file": "__REQUIRED__",
+               "fasta": "__OPTIONAL__",
                "dir": "__OPTIONAL__",
                "dir_cache": "__OPTIONAL__",
                "dir_plugins": "__OPTIONAL__"}
@@ -20,7 +21,6 @@ input_params = {"config": "__OPTIONAL__",
                 "assembly": "__OPTIONAL__",
                 "format": "__OPTIONAL__",
                 "html": "__OPTIONAL__",
-                "fasta": "__OPTIONAL__",
                 "sift": "__OPTIONAL__",
                 "polyphen": "__OPTIONAL__",
                 "custom": "__OPTIONAL__",
