@@ -1,0 +1,54 @@
+__PIPELINE_INFO__: 
+    name: 
+    version: 
+    author: 
+    data_type: 
+    input_type: 
+    output_type: 
+    host_cluster: 
+    date_created: 
+    date_last_updated: 
+    factory_version: '1.12.0'
+__GENERAL__: 
+    interpreter: 'perl'
+    script: 'vcf2maf.pl'
+__SHARED__: 
+__SAMPLES__: 
+    # sample_id:
+    #    param1: value1
+    #    param2: value2
+
+__TASK_1__: 
+    reserved: 
+        # do not change this section.
+        component_name: 'vcf2maf_1_6_2'
+        component_version: 'v1.0.0'
+        seed_version: '1.6.2'
+    run: 
+        # NOTE: component cannot run in parallel mode.
+        use_cluster: False
+        memory: '1G'
+        num_cpus: 1
+        forced_dependencies: []
+        add_breakpoint: False
+        env_vars: 
+        boilerplate: 
+    component: 
+        input_files: 
+            vep_data: '__OPTIONAL__'
+            custom_enst: '__OPTIONAL__'
+            ref_fasta: '__OPTIONAL__'
+            input_vcf: '__REQUIRED__'
+            vep_path: '__OPTIONAL__'
+        output_files: 
+            output_maf: '__OPTIONAL__'
+        parameters: 
+            min_hom_vaf: '__OPTIONAL__'
+            ncbi_build: '__OPTIONAL__'
+            maf_center: '__OPTIONAL__'
+            vcf_tumor_id: '__OPTIONAL__'
+            vep_forks: '__OPTIONAL__'
+            tumor_id: '__OPTIONAL__'
+            normal_id: '__OPTIONAL__'
+            species: '__OPTIONAL__'
+            vcf_normal_id: '__OPTIONAL__'
