@@ -31,8 +31,8 @@ class Component(ComponentAbstract):
 
         # Program or interpreter
         args_dict = vars(self.args)
-        cmd = self.requirements["interpreter"]
-        cmd_args = [self.requirements["script"]]
+        cmd = self.requirements["perl"]
+        cmd_args = [self.requirements["vcf2maf.pl"]]
 
         # Command-line arguments
         for arg, val in args_dict.items():
