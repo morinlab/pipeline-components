@@ -9,7 +9,6 @@ from pipeline_factory.utils import ComponentAbstract
 import component_test
 
 
-
 class Component(ComponentAbstract):
 
     """
@@ -25,7 +24,7 @@ class Component(ComponentAbstract):
 
         # Component options
         arg_prefix = "--"  # What is before every argument
-        arg_sep = "_"  # Separator in every argument, such as "-", "_" or "". False to disable
+        arg_sep = "_"  # Separator in every argument, such as "-" or "". Set to "_" to leave as is
         val_sep = " "  # Separator in a list of them for one argument, such as " " or ","
         arg_val_sep = " "  # Separator between argument name and value, such as " " or "="
         flag_val = ""  # Value for setting a flag argument to true, such as "" or "true"
@@ -56,6 +55,9 @@ class Component(ComponentAbstract):
                     cmd_args.extend(["{}".format(fmtd_arg, val)])
                 else:
                     cmd_args.extend(["{}{}{}".format(fmtd_arg, arg_val_sep, flag_val)])
+            # Ignore flags set to false
+            elif isinstance(val, bool) and not val:
+                pass
             # Everything else
             else:
                 logging.warn("Command-line argument skipped: {}".format(arg))
