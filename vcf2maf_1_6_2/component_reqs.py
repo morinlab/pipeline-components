@@ -10,8 +10,8 @@ memory = '1G'
 
 parallel = False
 
-requirements = {"interpreter": "perl",
-                "script": "vcf2maf.pl"}
+requirements = {"perl": "perl",
+                "vcf2maf.pl": "vcf2maf.pl"}
 
 seed_version = '1.6.2'
 
