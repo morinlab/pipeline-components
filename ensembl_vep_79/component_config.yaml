@@ -8,7 +8,7 @@ __PIPELINE_INFO__:
     host_cluster: 
     date_created: 
     date_last_updated: 
-    factory_version: '1.11.2'
+    factory_version: '1.12.0'
 __GENERAL__: 
     variant_effect_predictor.pl: '__REQUIRED__'
     perl: '__REQUIRED__'
@@ -36,6 +36,7 @@ __TASK_1__:
     component: 
         input_files: 
             dir_plugins: '__OPTIONAL__'
+            fasta: '__OPTIONAL__'
             dir_cache: '__OPTIONAL__'
             dir: '__OPTIONAL__'
             input_file: '__REQUIRED__'
@@ -47,7 +48,7 @@ __TASK_1__:
             freq_pop: '__OPTIONAL__'
             pick_order: '__OPTIONAL__'
             ccds: '__FLAG__'
-            per_gene: '__FLAG__'
+            vcf_info_field: '__OPTIONAL__'
             tsl: '__FLAG__'
             cache: '__FLAG__'
             failed: '__FLAG__'
@@ -68,7 +69,6 @@ __TASK_1__:
             assembly: '__OPTIONAL__'
             registry: '__OPTIONAL__'
             stats_text: '__FLAG__'
-            protein: '__FLAG__'
             force: '__FLAG__'
             old_maf: '__FLAG__'
             no_progress: '__FLAG__'
@@ -81,7 +81,7 @@ __TASK_1__:
             check_frequency: '__FLAG__'
             vcf: '__FLAG__'
             gvf: '__FLAG__'
-            vcf_info_field: '__OPTIONAL__'
+            per_gene: '__FLAG__'
             everything: '__FLAG__'
             force_overwrite: '__FLAG__'
             phased: '__FLAG__'
@@ -128,7 +128,7 @@ __TASK_1__:
             pubmed: '__FLAG__'
             numbers: '__FLAG__'
             host: '__OPTIONAL__'
-            fasta: '__OPTIONAL__'
+            protein: '__FLAG__'
             species: '__OPTIONAL__'
             lrg: '__FLAG__'
             genomes: '__FLAG__'

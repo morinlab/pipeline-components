@@ -8,7 +8,7 @@ __PIPELINE_INFO__:
     host_cluster: 
     date_created: 
     date_last_updated: 
-    factory_version: '1.11.2'
+    factory_version: '1.12.0'
 __GENERAL__: 
     python: 'python'
     file_remover: '/home/jgrewal/projects/lab_pipeline/pipeline-components/file_eater/component_seed/compare_deleteinput.py'
