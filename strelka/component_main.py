@@ -68,9 +68,9 @@ class Component(ComponentAbstract):
             cmd_args.extend(["-j", args_dict["num_threads"]])
         cmd_args.append("&&")
         # Symlink final output files to destinations
-        cmd_args.extend(["ln", "-s", os.path.join(args_dict["output_dir"], "results", "passed.somatic.snvs.vcf"), args_dict["passed_snvs_vcf"]])
+        cmd_args.extend(["cp", os.path.join(args_dict["output_dir"], "results", "passed.somatic.snvs.vcf"), args_dict["passed_snvs_vcf"]])
         cmd_args.append("&&")
-        cmd_args.extend(["ln", "-s", os.path.join(args_dict["output_dir"], "results", "passed.somatic.indels.vcf"), args_dict["passed_indels_vcf"]])
+        cmd_args.extend(["cp", os.path.join(args_dict["output_dir"], "results", "passed.somatic.indels.vcf"), args_dict["passed_indels_vcf"]])
         # Return cmd and cmg_args
         return cmd, cmd_args
 
