@@ -21,12 +21,12 @@ __SAMPLES__:
 __TASK_1__: 
     reserved: 
         # do not change this section.
-        component_name: 'bwa_mem'
+        component_name: 'bwa_mem_parallelized'
         component_version: 'v1.0.0'
         seed_version: 'v0.7.10'
     run: 
         use_cluster: False
-        memory: '10G'
+        memory: '6G'
         num_cpus: 1
         forced_dependencies: []
         add_breakpoint: False
@@ -37,12 +37,29 @@ __TASK_1__:
         interval_file: 
     component: 
         input_files: 
-            fastq_1: '__REQUIRED__'
-            input_dir: '__OPTIONAL__'
-            fastq_2: '__OPTIONAL__'
-            reference: '__REQUIRED__'
+            input_dir: '__REQUIRED__'
+            bwa_index_prefix: '__REQUIRED__'
         output_files: 
-            output_bam: '__REQUIRED__'
-            output_dir: '__OPTIONAL__'
+            output_dir: '__REQUIRED__'
         parameters: 
-            num_threads: '__OPTIONAL__'
+            A: '__OPTIONAL__'
+            a: '__FLAG__'
+            c: '__OPTIONAL__'
+            B: '__OPTIONAL__'
+            E: '__OPTIONAL__'
+            d: '__OPTIONAL__'
+            p: '__FLAG__'
+            C: '__FLAG__'
+            H: '__FLAG__'
+            k: '__OPTIONAL__'
+            M: '__FLAG__'
+            L: '__OPTIONAL__'
+            O: '__OPTIONAL__'
+            P: '__FLAG__'
+            r: '__OPTIONAL__'
+            U: '__OPTIONAL__'
+            t: '__OPTIONAL__'
+            w: '__OPTIONAL__'
+            v: '__OPTIONAL__'
+            R: '__OPTIONAL__'
+            T: '__OPTIONAL__'
