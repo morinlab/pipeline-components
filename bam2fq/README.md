@@ -1,21 +1,21 @@
-# BWA MEM Parallelized
+# bam2fq
 
 ```
 Development Information
 =======================
 
-Date Created : Feb 18 2015
-Last Update  : Oct 18 2015
-Developer    : Bruno Grande (bgrande@sfu.ca)
-Input        : FASTQ files, reference genome FASTA file
-Output       : BAM file 
+Date Created : Oct 24 2015
+Last Update  : Oct 24 2015
+Developer    : Prasath Pararajalingam (ppararaj@sfu.ca)
+Input        : BAM file
+Output       : FASTQ files, interval file 
 Parameters   : num_threads
-Seed Used    : bwa
+Seed Used    : bam2fq.py
 ```
 
 ### Dependencies
 
-- BWA (tested with v0.7.6a)
+- samtools (tested with v1.2)
 
 ### Known Issues
 
