@@ -10,23 +10,21 @@ __PIPELINE_INFO__:
     date_last_updated: 
     factory_version: '1.12.0'
 __GENERAL__: 
-    bwa: 'bwa'
-    samtools: 'samtools'
+    bamhash_checksum_bam: 'bamhash_checksum_bam'
 __SHARED__: 
 __SAMPLES__: 
     # sample_id:
-    #    param1: value1
-    #    param2: value2
+    #    in_bam: bam1
 
 __TASK_1__: 
     reserved: 
         # do not change this section.
-        component_name: 'bwa_mem_parallelized'
+        component_name: 'bamhash_checksum_bam'
         component_version: 'v1.0.0'
-        seed_version: 'v0.7.10'
+        seed_version: 'v1.1'
     run: 
         use_cluster: False
-        memory: '6G'
+        memory: '1G'
         num_cpus: 1
         forced_dependencies: []
         add_breakpoint: False
@@ -37,29 +35,11 @@ __TASK_1__:
         interval_file: 
     component: 
         input_files: 
-            input_dir: '__REQUIRED__'
-            bwa_index_prefix: '__REQUIRED__'
+            in_bams: '__REQUIRED__'
         output_files: 
-            output_dir: '__REQUIRED__'
+            out_checksum: '__REQUIRED__'
         parameters: 
-            A: '__OPTIONAL__'
-            a: '__FLAG__'
-            c: '__OPTIONAL__'
-            B: '__OPTIONAL__'
-            E: '__OPTIONAL__'
-            d: '__OPTIONAL__'
-            p: '__FLAG__'
-            C: '__FLAG__'
-            H: '__FLAG__'
-            k: '__OPTIONAL__'
-            M: '__FLAG__'
-            L: '__OPTIONAL__'
-            O: '__OPTIONAL__'
+            d: '__FLAG__'
+            R: '__FLAG__'
+            Q: '__FLAG__'
             P: '__FLAG__'
-            r: '__OPTIONAL__'
-            U: '__OPTIONAL__'
-            t: '__OPTIONAL__'
-            w: '__OPTIONAL__'
-            v: '__OPTIONAL__'
-            R: '__OPTIONAL__'
-            T: '__OPTIONAL__'
