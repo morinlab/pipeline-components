@@ -6,8 +6,9 @@ Development Information
 Date Created : Oct 30 2015
 Last Update  : Oct 30 2015
 Developer    : Prasath Pararajalingam (ppararaj@gmail.com)
-Input        : BAM file and reference FASTA
+Input        : BAM file
 Output       : pileup format file
+parameters   : -f FILE
 Seed Used    : samtools
 ```
 
