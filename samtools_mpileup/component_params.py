@@ -9,7 +9,7 @@ input_files = {"input_bam": "__REQUIRED__"}
 
 output_files = {"output_file": "__REQUIRED__"}
 
-input_params = {"f":"__REQUIRED__",
+input_params = {"f":"__OPTIONAL__",
                 "6":"__FLAG__",
                 "A":"__FLAG__",
                 "B":"__FLAG__",

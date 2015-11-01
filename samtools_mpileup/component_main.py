@@ -32,12 +32,13 @@ class Component(ComponentAbstract):
                 input_bam = input_bam[:-len(ext)-1]
                 break
 
-        outdir = os.path.dirname(args_dict["output_file"])
-        if outdir == '':
-            outdir = './'
+        # Expecting a directory in output_file since it's a parallel run
+        outdir = args_dict["output_file"]
+        if not os.path.isdir(outdir):
+            raise ValueError("Expecting a directory when parallel_run = True.")
 
         if chunk.isdigit() and int(chunk) < 10:
-            chunk = '{0:02}'.format(chunk)
+            chunk = '%02d' % int(chunk)
 
         args_dict["output_file"] = os.path.join(outdir, "{}_{}.pileup".format(input_bam, chunk))
 
