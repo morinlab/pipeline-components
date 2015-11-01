@@ -10,7 +10,7 @@ memory = '6G'
 
 parallel = False
 
-requirements = {"python": "python"
+requirements = {"python": "python",
 	           "merge_mpileup": "merge_mpileup.py"}
 
 seed_version = 'v1.0'
