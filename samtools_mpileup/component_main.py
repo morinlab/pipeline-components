@@ -8,7 +8,7 @@ import glob
 import os.path
 import logging
 from pipeline_factory.utils import ComponentAbstract
-import component_test
+#import component_test
 
 
 class Component(ComponentAbstract):
@@ -29,12 +29,15 @@ class Component(ComponentAbstract):
         exts = ["bam"]
         for ext in exts:
             if input_bam.endswith(ext):
-                input_bam = input_bam[:-len(ext)]
+                input_bam = input_bam[:-len(ext)-1]
                 break
 
         outdir = os.path.dirname(args_dict["output_file"])
         if outdir == '':
             outdir = './'
+
+        if chunk.isdigit() and int(chunk) < 10:
+            chunk = '{0:02}'.format(chunk)
 
         args_dict["output_file"] = os.path.join(outdir, "{}_{}.pileup".format(input_bam, chunk))
 
@@ -107,7 +110,7 @@ class Component(ComponentAbstract):
         cmd_args.extend([pos_args_dict[arg] for arg in pos_args if arg in pos_args_dict])
 
         # Handle special arguments
-        cmd_args.extend([">", spec_args_dict["output_file"])
+        cmd_args.extend([">", spec_args_dict["output_file"]])
 
         # Return cmd and cmg_args
         return cmd, cmd_args
