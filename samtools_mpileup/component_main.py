@@ -37,9 +37,6 @@ class Component(ComponentAbstract):
         if not os.path.isdir(outdir):
             raise ValueError("Expecting a directory when parallel_run = True.")
 
-        if chunk.isdigit() and int(chunk) < 10:
-            chunk = '%02d' % int(chunk)
-
         args_dict["output_file"] = os.path.join(outdir, "{}_{}.pileup".format(input_bam, chunk))
 
         return
