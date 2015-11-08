@@ -8,7 +8,7 @@ import glob
 import os.path
 import logging
 from pipeline_factory.utils import ComponentAbstract
-import component_test
+#import component_test
 
 
 class Component(ComponentAbstract):
@@ -21,10 +21,6 @@ class Component(ComponentAbstract):
                  seed_dir=None):
         self.version = "1.1"
         super(Component, self).__init__(component_name, component_parent_dir, seed_dir)
-
-    def focus(self, args_dict, chunk):
-		pass
-        return
 
     def make_cmd(self, chunk=None):
 
@@ -39,10 +35,6 @@ class Component(ComponentAbstract):
         args_dict = vars(self.args)
         cmd = self.requirements["bamhash_checksum_bam"]
         cmd_args = []
-
-        # Parallelize if given chunk
-        if chunk:
-            self.focus(args_dict, chunk)
 
         # Extract special arguments
         spec_args = ["out_checksum"]
@@ -88,7 +80,7 @@ class Component(ComponentAbstract):
         cmd_args.extend([pos_args_dict[arg] for arg in pos_args if arg in pos_args_dict])
 
         # Handle special arguments
-        cmd_args.extend(["|", "samtools", "view", "-b", "-S", "-", ">", spec_args_dict["output_bam"]])  # Convert SAM to BAM
+        cmd_args.extend(['>', spec_args_dict['out_checksum']])
 
         # Return cmd and cmg_args
         return cmd, cmd_args

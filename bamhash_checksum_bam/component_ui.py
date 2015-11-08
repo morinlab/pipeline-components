@@ -10,8 +10,9 @@ parser = argparse.ArgumentParser(prog='bamhash_checksum_bam',
                                  description="""Hash BAM and FASTQ files 
                                  to verify data integrity""")
 
-parser.add_argument('in_bams', nargs='+', required=True,  
+parser.add_argument('in_bams', required=True,  
                     help="""BAM files""")
+parser.add_argument('out_checksum', help="""output checksum file""")
 parser.add_argument('-d', '--debug', 
                     help="""Debug mode. Prints full hex for each read to stdout""")
 parser.add_argument('-R', '--no-readnames',
