@@ -8,7 +8,7 @@ import glob
 import os.path
 import logging
 from pipeline_factory.utils import ComponentAbstract
-import component_test
+#import component_test
 
 
 class Component(ComponentAbstract):
@@ -22,25 +22,62 @@ class Component(ComponentAbstract):
         self.version = "1.0.0"
         super(Component, self).__init__(component_name, component_parent_dir, seed_dir)
 
-    def focus(self, args_dict, chunk):
-		pass
-        return
-
     def make_cmd(self, chunk=None):
-        sam_path = self.requirements["samtools"]
-        py_path = self.requirements["python"]
-        seed_path = os.path.join(self.seed_dir, 'bam2fq.py')
-        
-        sam_cmd = sam_path + ' view ' + self.args.bam + ' | '
-        seed_cmd = py_path + ' ' + seed_path + ' '
-        cmd_args = ['--num_reads ' + self.args.num_reads + ' - ',
-                    self.args.outdir]
+        # Component options
+        arg_prefix = "-"  # What is before every argument
+        arg_sep = "_"  # Separator in every argument, such as "-" or "". Set to "_" to leave as is
+        val_sep = " "  # Separator in a list of them for one argument, such as " " or ","
+        arg_val_sep = " "  # Separator between argument name and value, such as " " or "="
+        flag_val = ""  # Value for setting a flag argument to true, such as "" or "true"
 
-        cmd = sam_cmd + seed_cmd
-        
-        # Parallelize if given chunk
-        if chunk:
-            self.focus(args_dict, chunk)
+        # Program or interpreter
+        args_dict = vars(self.args)
+        cmd = ' '.join([self.requirements['samtools'], 'view', args_dict['input_bam'], '|', self.requirements['python'], self.requirements['bam2fq']])
+        cmd_args = []
+
+        # Extract special arguments
+        spec_args = []
+        spec_args_dict = {k: v for k, v in args_dict.items() if k in spec_args}
+        for arg in spec_args:
+            del args_dict[arg]
+
+        # Extract positional arguments
+        pos_args = ['outdir']  # Order matters here
+        pos_args_dict = {k: v for k, v in args_dict.items() if k in pos_args}
+        for arg in pos_args:
+            del args_dict[arg]
+
+        # Command-line arguments
+        for arg, val in args_dict.items():
+
+            # Prepare formatted argument for command line
+            if arg_sep:
+                arg = arg.replace("_", arg_sep)
+            fmtd_arg = "{}{}".format(arg_prefix, arg)
+
+            # Add argument to command line arguments
+            # One value
+            if not isinstance(val, bool) and not isinstance(val, (list, tuple)):
+                cmd_args.extend(["{}{}{}".format(fmtd_arg, arg_val_sep, val)])
+            # List of values
+            elif not isinstance(val, bool) and isinstance(val, (list, tuple)):
+                cmd_args.extend(["{}{}{}".format(fmtd_arg, arg_val_sep, val_sep.join(val))])
+            # Flag
+            elif isinstance(val, bool) and val:
+                if flag_val == "":
+                    cmd_args.extend(["{}".format(fmtd_arg, val)])
+                else:
+                    cmd_args.extend(["{}{}{}".format(fmtd_arg, arg_val_sep, flag_val)])
+            # Ignore flags set to false
+            elif isinstance(val, bool) and not val:
+                pass
+            # Everything else
+            else:
+                logging.warn("Command-line argument skipped: {}".format(arg))
+
+        # Add positional arguments
+        cmd_args.extend(['-'])
+        cmd_args.extend([pos_args_dict[arg] for arg in pos_args if arg in pos_args_dict])
 
         # Return cmd and cmg_args
         return cmd, cmd_args
