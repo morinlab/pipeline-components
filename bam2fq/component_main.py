@@ -33,6 +33,7 @@ class Component(ComponentAbstract):
         # Program or interpreter
         args_dict = vars(self.args)
         cmd = ' '.join([self.requirements['samtools'], 'view', args_dict['input_bam'], '|', self.requirements['python'], self.requirements['bam2fq']])
+        del args_dict['input_bam']
         cmd_args = []
 
         # Extract special arguments
