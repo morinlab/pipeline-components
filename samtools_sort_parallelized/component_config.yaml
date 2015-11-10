@@ -23,7 +23,7 @@ __TASK_1__:
         component_version: 'v1.0.0'
         seed_version: 'v1.2'
     run: 
-        use_cluster: False
+        use_cluster: True
         memory: '6G'
         num_cpus: 1
         forced_dependencies: []
@@ -32,14 +32,14 @@ __TASK_1__:
         boilerplate: 
     component: 
         input_files: 
-            input_bam: '__REQUIRED__'
+            input_dir: '__REQUIRED__'
         output_files: 
-            output_bam: '__REQUIRED__'
+            output_dir: '__REQUIRED__'
         parameters: 
-        "l": "__OPTIONAL__",
-                "m": "__OPTIONAL__"
-                "n": "__FLAG__"
-                "o": "__OPTIONAL__"
-                "O": "__OPTIONAL__"
-                "T": "__OPTIONAL__"
-                "@": "__OPTIONAL__"
+            "l": "__OPTIONAL__"
+            "m": "__OPTIONAL__"
+            "n": "__FLAG__"
+            "o": "__OPTIONAL__"
+            "O": "__OPTIONAL__"
+            "T": "__OPTIONAL__"
+            "@": "__OPTIONAL__"

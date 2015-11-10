@@ -5,9 +5,9 @@ component_params.py
 """
 
 
-input_files = {"input_bam": "__REQUIRED__"}
+input_files = {"input_dir": "__REQUIRED__"}
 
-output_files = {"output_bam": "__REQUIRED__"}
+output_files = {"output_dir": "__REQUIRED__"}
 
 input_params = {"l": "__OPTIONAL__",
                 "m": "__OPTIONAL__",

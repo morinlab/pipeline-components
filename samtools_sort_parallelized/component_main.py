@@ -1,14 +1,14 @@
 """
 component_main.py
 
-@author: samtools_sort
+@author: ppraraj
 """
 
 import glob
 import os.path
 import logging
 from pipeline_factory.utils import ComponentAbstract
-import component_test
+#import component_test
 
 
 class Component(ComponentAbstract):
@@ -23,7 +23,21 @@ class Component(ComponentAbstract):
         super(Component, self).__init__(component_name, component_parent_dir, seed_dir)
 
     def focus(self, args_dict, chunk):
-		pass
+        pattern = os.path.join(args_dict["input_dir"], "{}.bam".format(chunk))
+        files = glob.glob(pattern)
+        if len(files) > 1:
+            logging.warn("Found more than BAM file that matches the chunk pattern: {}".format(pattern))
+        elif len(files) == 0:
+            raise ValueError("No BAM files matches the chunk pattern: {}".format(pattern))
+        bam_file = files[0]
+        args_dict["input_bam"] = bam_file
+        exts = ["bam"]
+        base = os.path.basename(bam_file)
+        for ext in exts:
+            if bam_file.endswith(ext):
+                base = bam_file[:-len(ext)-1]
+                break
+        args_dict["output_bam"] = os.path.join(args_dict["output_dir"], base + ".sorted")
         return
 
     def make_cmd(self, chunk=None):
@@ -45,13 +59,13 @@ class Component(ComponentAbstract):
             self.focus(args_dict, chunk)
 
         # Extract special arguments
-        spec_args = ["output_bam"]
+        spec_args = ["input_dir", "output_dir"]
         spec_args_dict = {k: v for k, v in args_dict.items() if k in spec_args}
         for arg in spec_args:
             del args_dict[arg]
 
         # Extract positional arguments
-        pos_args = ["input_bam"]  # Order matters here
+        pos_args = ["input_bam", "output_bam"]  # Order matters here
         pos_args_dict = {k: v for k, v in args_dict.items() if k in pos_args}
         for arg in pos_args:
             del args_dict[arg]
@@ -87,8 +101,7 @@ class Component(ComponentAbstract):
         # Add positional arguments
         cmd_args.extend([pos_args_dict[arg] for arg in pos_args if arg in pos_args_dict])
 
-        # Handle special arguments
-        cmd_args.extend([">", spec_args_dict["output_bam"]])
+        #cmd_args.extend([">", spec_args_dict["output_bam"]])
 
         # Return cmd and cmg_args
         return cmd, cmd_args

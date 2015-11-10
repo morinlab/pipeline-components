@@ -8,7 +8,7 @@ env_vars = {}
 
 memory = '6G'
 
-parallel = False
+parallel = True
 
 requirements = {"samtools": "samtools"}
 
