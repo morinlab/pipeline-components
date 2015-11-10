@@ -8,7 +8,7 @@ import argparse
 
 parser = argparse.ArgumentParser(prog='bwa_mem',
                                  description="""Run BWA-MEM alignment on FASTQ files.""")
-
+parser.add_argument("output_dir", help="output directory")
 parser.add_argument("reference", help="Ensembl VEP-annotated VCF file")
 parser.add_argument("fastq_1", help="First FASTQ file")
 parser.add_argument("--fastq_2", help="Second FASTQ file")

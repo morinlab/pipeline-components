@@ -8,7 +8,7 @@ import glob
 import os.path
 import logging
 from pipeline_factory.utils import ComponentAbstract
-import component_test
+#import component_test
 
 
 class Component(ComponentAbstract):
@@ -24,7 +24,7 @@ class Component(ComponentAbstract):
 
     def focus(self, args_dict, chunk):
         # Find input FASTQ file
-        pattern = os.path.join(args_dict["input_dir"], "*{}*fastq*".format(chunk))
+        pattern = os.path.join(args_dict["input_dir"], "{}.fastq.gz".format(chunk))
         files = glob.glob(pattern)
         if len(files) > 1:
             logging.warn("Found more than one FASTQ file that matches the chunk pattern: {}".format(pattern))
@@ -42,7 +42,7 @@ class Component(ComponentAbstract):
         base = os.path.basename(fastq_file)
         for ext in exts:
             if fastq_file.endswith(ext):
-                base = fastq_file[:-len(ext)]
+                base = fastq_file[:-len(ext)-1]
                 break
         args_dict["output_bam"] = os.path.join(args_dict["output_dir"], base + ".bam")
         # Return
@@ -67,7 +67,7 @@ class Component(ComponentAbstract):
             self.focus(args_dict, chunk)
 
         # Extract special arguments
-        spec_args = ["input_dir", "output_dir"]
+        spec_args = ["input_dir", "output_dir", "output_bam"]
         spec_args_dict = {k: v for k, v in args_dict.items() if k in spec_args}
         for arg in spec_args:
             del args_dict[arg]
