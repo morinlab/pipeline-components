@@ -14,7 +14,8 @@ __GENERAL__:
 __SHARED__: 
 __SAMPLES__: 
     # sample_id:
-    #    in_bam: bam1
+    #    param1: value1
+    #    param2: value2
 
 __TASK_1__: 
     reserved: 
@@ -23,23 +24,21 @@ __TASK_1__:
         component_version: 'v1.0.0'
         seed_version: 'v1.1'
     run: 
+        # NOTE: component cannot run in parallel mode.
         use_cluster: False
-        memory: '1G'
+        memory: '5G'
         num_cpus: 1
         forced_dependencies: []
         add_breakpoint: False
         env_vars: 
         boilerplate: 
-        parallel_run: False
-        parallel_params: []
-        interval_file: 
     component: 
         input_files: 
             in_bams: '__REQUIRED__'
         output_files: 
             out_checksum: '__REQUIRED__'
         parameters: 
-            d: '__FLAG__'
-            R: '__FLAG__'
             Q: '__FLAG__'
             P: '__FLAG__'
+            R: '__FLAG__'
+            d: '__FLAG__'

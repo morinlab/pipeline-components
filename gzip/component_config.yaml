@@ -1,32 +1,39 @@
-__PIPELINE_INFO__:
-    name:
-    version:
-    author:
-    data_type:
-    input_type:
-    output_type:
-    host_cluster:
-    date_created:
-    date_last_updated:
+__PIPELINE_INFO__: 
+    name: 
+    version: 
+    author: 
+    data_type: 
+    input_type: 
+    output_type: 
+    host_cluster: 
+    date_created: 
+    date_last_updated: 
     factory_version: '1.12.0'
-__GENERAL__:
-    gzip: gzip
-__SHARED__:
-__SAMPLES__:
+__GENERAL__: 
+    gzip: 'gzip'
+__SHARED__: 
+__SAMPLES__: 
     # sample_id:
-    #    directory: dir1
-__TASK_1__:
-    reserved:
+    #    param1: value1
+    #    param2: value2
+
+__TASK_1__: 
+    reserved: 
         # do not change this section.
-        component_name: 'merge_mpileup'
+        component_name: 'gzip'
         component_version: 'v1.0.0'
         seed_version: 'v1.6'
-    run:
-        use_cluster: True
+    run: 
+        # NOTE: component cannot run in parallel mode.
+        use_cluster: False
         memory: '6G'
         num_cpus: 1
         forced_dependencies: []
         add_breakpoint: False
-    component:
-        input_files:
+        env_vars: 
+        boilerplate: 
+    component: 
+        input_files: 
             input_file: '__REQUIRED__'
+        output_files: 
+        parameters: 

@@ -1,21 +1,23 @@
 __PIPELINE_INFO__: 
-    name: bam2fq
-    version: 1.0.0
-    author: ppararaj
-    data_type: null
-    input_type: bam
-    output_type: directory
-    host_cluster: genesis
-    date_created: Oct 21 2015
-    date_last_updated: Oct 21 2015
+    name: 
+    version: 
+    author: 
+    data_type: 
+    input_type: 
+    output_type: 
+    host_cluster: 
+    date_created: 
+    date_last_updated: 
     factory_version: '1.12.0'
 __GENERAL__: 
     python: 'python'
     samtools: 'samtools'
+    bam2fq: 'bam2fq'
 __SHARED__: 
 __SAMPLES__: 
     # sample_id:
-    #    bam: value1
+    #    param1: value1
+    #    param2: value2
 
 __TASK_1__: 
     reserved: 
@@ -24,6 +26,7 @@ __TASK_1__:
         component_version: 'v1.0.0'
         seed_version: 'v1.0.0'
     run: 
+        # NOTE: component cannot run in parallel mode.
         use_cluster: False
         memory: '6G'
         num_cpus: 1
@@ -31,12 +34,9 @@ __TASK_1__:
         add_breakpoint: False
         env_vars: 
         boilerplate: 
-        parallel_run: False
-        parallel_params: []
-        interval_file: 
     component: 
         input_files: 
-            bam: ('__SAMPLES__', bam)
+            bam: '__REQUIRED__'
         output_files: 
             outdir: '__REQUIRED__'
         parameters: 

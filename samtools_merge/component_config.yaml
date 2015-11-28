@@ -14,16 +14,18 @@ __GENERAL__:
 __SHARED__: 
 __SAMPLES__: 
     # sample_id:
-    #    input_bam: unsorted_bam1
+    #    param1: value1
+    #    param2: value2
 
 __TASK_1__: 
     reserved: 
         # do not change this section.
-        component_name: 'samtools_sort_parallelized'
+        component_name: 'samtools_merge'
         component_version: 'v1.0.0'
         seed_version: 'v1.2'
     run: 
-        use_cluster: True
+        # NOTE: component cannot run in parallel mode.
+        use_cluster: False
         memory: '6G'
         num_cpus: 1
         forced_dependencies: []
@@ -34,12 +36,14 @@ __TASK_1__:
         input_files: 
             input_dir: '__REQUIRED__'
         output_files: 
-            output_dir: '__REQUIRED__'
+            output_file: '__REQUIRED__'
         parameters: 
-            "l": "__OPTIONAL__"
-            "m": "__OPTIONAL__"
-            "n": "__FLAG__"
-            "o": "__OPTIONAL__"
-            "O": "__OPTIONAL__"
-            "T": "__OPTIONAL__"
-            "@": "__OPTIONAL__"
+            1: '__FLAG__'
+            p: '__FLAG__'
+            c: '__FLAG__'
+            b: '__OPTIONAL__'
+            u: '__FLAG__'
+            f: '__FLAG__'
+            h: '__OPTIONAL__'
+            R: '__OPTIONAL__'
+            r: '__FLAG__'

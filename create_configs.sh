@@ -12,6 +12,9 @@
 # Set CWD
 CWD=$(pwd)
 
+# Add CWD to PYTHONPATH
+export PYTHONPATH="$CWD:$PYTHONPATH"
+
 # Iterate over components
 for COMP in $(ls -d */)
 do
