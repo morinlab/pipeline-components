@@ -27,8 +27,8 @@ class Component(ComponentAbstract):
         files = glob.glob(pattern)
         if len(files) > 1:
             logging.warn("Found more than BAM file that matches the chunk pattern: {}".format(pattern))
-        elif len(files) == 0:
-            raise ValueError("No BAM files matches the chunk pattern: {}".format(pattern))
+        #elif len(files) == 0:
+            #raise ValueError("No BAM files matches the chunk pattern: {}".format(pattern))
         bam_file = files[0]
         args_dict["input_bam"] = bam_file
         exts = ["bam"]
