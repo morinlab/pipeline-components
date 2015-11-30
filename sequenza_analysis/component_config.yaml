@@ -1,0 +1,49 @@
+__PIPELINE_INFO__: 
+    name: 
+    version: 
+    author: 
+    data_type: 
+    input_type: 
+    output_type: 
+    host_cluster: 
+    date_created: 
+    date_last_updated: 
+    factory_version: '1.12.0'
+__GENERAL__: 
+    Rscript: '__REQUIRED__'
+    sequenza_analysis.R: '__REQUIRED__'
+__SHARED__: 
+__SAMPLES__: 
+    # sample_id:
+    #    param1: value1
+    #    param2: value2
+
+__TASK_1__: 
+    reserved: 
+        # do not change this section.
+        component_name: 'sequenza_analysis'
+        component_version: 'v1.0.0'
+        seed_version: '1.0.0'
+    run: 
+        # NOTE: component cannot run in parallel mode.
+        use_cluster: False
+        memory: '1G'
+        num_cpus: 1
+        forced_dependencies: []
+        add_breakpoint: False
+        env_vars: 
+        boilerplate: 
+    component: 
+        input_files: 
+            input: '__OPTIONAL__'
+        output_files: 
+            output: '__OPTIONAL__'
+        parameters: 
+            chr: '__OPTIONAL__'
+            min_reads: '__OPTIONAL__'
+            ploidy_limit: '__OPTIONAL__'
+            sample_id: '__OPTIONAL__'
+            max_cn: '__OPTIONAL__'
+            gender: '__OPTIONAL__'
+            min_normal_reads: '__OPTIONAL__'
+            cellularity_limit: '__OPTIONAL__'
