@@ -28,8 +28,8 @@ class Component(ComponentAbstract):
         files = glob.glob(pattern)
         if len(files) > 1:
             logging.warn("Found more than one FASTQ file that matches the chunk pattern: {}".format(pattern))
-        elif len(files) == 0:
-            raise ValueError("No FASTQ files matches the chunk pattern: {}".format(pattern))
+        #elif len(files) == 0:
+            #raise ValueError("No FASTQ files matches the chunk pattern: {}".format(pattern))
         fastq_file = files[0]
         args_dict["reads_fastq"] = fastq_file
         # Determine if paired or unpaired, and update BWA options accordingly
