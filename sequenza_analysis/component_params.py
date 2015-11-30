@@ -5,9 +5,9 @@ component_params.py
 """
 
 
-input_files = {"input": "__OPTIONAL__"}
+input_files = {"input": "__REQUIRED__"}
 
-output_files = {"output": "__OPTIONAL__"}
+output_files = {"output": "__REQUIRED__"}
 
 input_params = {"chr": "__OPTIONAL__",
                 "sample_id": "__OPTIONAL__",

@@ -35,9 +35,9 @@ __TASK_1__:
         boilerplate: 
     component: 
         input_files: 
-            input: '__OPTIONAL__'
+            input: '__REQUIRED__'
         output_files: 
-            output: '__OPTIONAL__'
+            output: '__REQUIRED__'
         parameters: 
             chr: '__OPTIONAL__'
             min_reads: '__OPTIONAL__'
