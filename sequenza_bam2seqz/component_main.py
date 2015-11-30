@@ -13,10 +13,10 @@ from pipeline_factory.utils import ComponentAbstract
 class Component(ComponentAbstract):
 
     """
-    Template
+    Sequenza bam2seqz
     """
 
-    def __init__(self, component_name="template", component_parent_dir=None,
+    def __init__(self, component_name="sequenza_bam2seqz", component_parent_dir=None,
                  seed_dir=None):
         self.version = "1.0.0"
         super(Component, self).__init__(component_name, component_parent_dir, seed_dir)
@@ -36,7 +36,7 @@ class Component(ComponentAbstract):
         # Program or interpreter
         args_dict = vars(self.args)
         cmd = self.requirements["python"]
-        cmd_args = [self.requirements["sequenza-utils.py"]]
+        cmd_args = [self.requirements["sequenza-utils.py"], "bam2seqz"]
 
         # Parallelize if given chunk
         if chunk:
