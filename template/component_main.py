@@ -95,18 +95,3 @@ class Component(ComponentAbstract):
 
         # Return cmd and cmg_args
         return cmd, cmd_args
-
-    def test(self):
-        component_test.run_tests()
-
-
-# To run as stand alone
-def _main():
-    comp = Component()
-    comp.args = component_ui.args
-    comp.run()
-
-
-if __name__ == '__main__':
-    import component_ui
-    _main()
