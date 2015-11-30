@@ -1,20 +1,21 @@
-# samtools mpileup
+# Samtools Mpileup
+
 ```
 Development Information
 =======================
 
-Date Created : Oct 30 2015
-Last Update  : Oct 30 2015
-Developer    : Prasath Pararajalingam (ppararaj@gmail.com)
-Input        : BAM file
-Output       : pileup format file
-parameters   : -f FILE
+Date Created : Nov 29 2015
+Last Update  : Nov 29 2015
+Developer    : bgrande
+Input        : BAM
+Output       : mpileup
+Parameters   : 
 Seed Used    : samtools
 ```
 
 ### Dependencies
 
-- samtools (tested with v1.2)
+- samtools
 
 ### Known Issues
 
