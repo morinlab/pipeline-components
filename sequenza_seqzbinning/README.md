@@ -1,4 +1,4 @@
-# Samtools Mpileup
+# Sequenza seqz-binning
 
 ```
 Development Information
@@ -7,15 +7,16 @@ Development Information
 Date Created : Nov 29 2015
 Last Update  : Nov 29 2015
 Developer    : bgrande
-Input        : BAM
-Output       : mpileup
+Input        : SEQZ file
+Output       : Binned SEQZ file
 Parameters   : 
-Seed Used    : samtools
+Seed Used    : sequenza-utils.py
 ```
 
 ### Dependencies
 
-- samtools
+- python
+- sequenza-utils.py
 
 ### Known Issues
 

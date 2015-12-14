@@ -16,7 +16,7 @@ CWD=$(pwd)
 export PYTHONPATH="$CWD:$PYTHONPATH"
 
 # Iterate over components
-for COMP in $(ls -d */)
+for COMP in $(ls -d */ | grep -v template)
 do
 	COMP=$(basename $COMP "/")
 	cd "$COMP"

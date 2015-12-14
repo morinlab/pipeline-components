@@ -1,17 +1,18 @@
 """
 component_reqs.py
 
-@author: ppararaj
+@author: bgrande
 """
 
 env_vars = {}
 
-memory = '6G'
+memory = '1G'
 
-parallel = True
+parallel = False
 
-requirements = {"samtools": "samtools"}
+requirements = {"samtools": "__REQUIRED__",
+                "gzip": "__OPTIONAL__"}
 
-seed_version = 'v1.2'
+seed_version = '1.2.0'
 
 version = 'v1.0.0'

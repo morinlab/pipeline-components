@@ -27,7 +27,7 @@ class Component(ComponentAbstract):
     def make_cmd(self, chunk=None):
 
         # Component options
-        arg_prefix = "-"  # What is before every argument
+        arg_prefix = "--"  # What is before every argument
         arg_sep = "_"  # Separator in every argument, such as "-" or "". Set to "_" to leave as is
         val_sep = " "  # Separator in a list of them for one argument, such as " " or ","
         arg_val_sep = " "  # Separator between argument name and value, such as " " or "="
@@ -36,7 +36,7 @@ class Component(ComponentAbstract):
         # Program or interpreter
         args_dict = vars(self.args)
         cmd = self.requirements["interpreter"]
-        cmd_args = ["script.py"]
+        cmd_args = [self.requirements["script.py"]]
 
         # Parallelize if given chunk
         if chunk:
@@ -83,25 +83,15 @@ class Component(ComponentAbstract):
                 logging.warn("Command-line argument skipped: {}".format(arg))
 
         # Add positional arguments
-        cmd_args.extend([pos_args_dict[arg] for arg in pos_args if arg in pos_args_dict])
+        for arg in pos_args:
+            if arg in pos_args_dict:
+                if isinstance(pos_args_dict[arg], (list, tuple)):
+                    cmd_args.extend(pos_args_dict[arg])
+                else:
+                    cmd_args.append(pos_args_dict[arg])
 
         # Handle special arguments
         pass
 
         # Return cmd and cmg_args
         return cmd, cmd_args
-
-    def test(self):
-        component_test.run_tests()
-
-
-# To run as stand alone
-def _main():
-    comp = Component()
-    comp.args = component_ui.args
-    comp.run()
-
-
-if __name__ == '__main__':
-    import component_ui
-    _main()
