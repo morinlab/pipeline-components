@@ -8,7 +8,7 @@ import glob
 import os.path
 import re
 import logging
-from pipeline_factory.utils import ComponentAbstract
+from kronos.utils import ComponentAbstract
 import component_test
 
 

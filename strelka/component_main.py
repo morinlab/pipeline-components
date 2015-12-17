@@ -5,7 +5,7 @@ component_main.py
 """
 
 import os.path
-from pipeline_factory.utils import ComponentAbstract
+from kronos.utils import ComponentAbstract
 import component_test
 
 

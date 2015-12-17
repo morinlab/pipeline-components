@@ -4,7 +4,7 @@ component_main.py
 @author: autogen_component.py
 """
 
-from pipeline_factory.utils import ComponentAbstract
+from kronos.utils import ComponentAbstract
 import component_test
 
 
