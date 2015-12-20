@@ -20,7 +20,7 @@ for COMP in $(ls -d */ | grep -v template)
 do
 	COMP=$(basename $COMP "/")
 	cd "$COMP"
-	$1 $2 -w . make_config -c component_config $COMP
+	kronos -w . make_config -o component_config $COMP
 	cd "$CWD"
 done
 

@@ -27,7 +27,7 @@ Seed Used    : count_comparefiles.py, compare_deleteinput.py
 
 ### Last Updates
 
-- No new updates
+- Please refer to https://github.com/morinlab/lab_scripts/tree/master/file_eater for the most up to date seed dependency code
 
 ### Parameter definitions
 ```

@@ -8,7 +8,7 @@ the ComponentAbstract class. It is the core of a component.
 @Date Modified: 10 June 2015
 """
 
-from pipeline_factory.utils import ComponentAbstract
+from kronos.utils import ComponentAbstract
 import os
 import glob
 import re

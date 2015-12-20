@@ -4,7 +4,7 @@ component_main.py
 @author: bgrande
 """
 
-from pipeline_factory.utils import ComponentAbstract
+from kronos.utils import ComponentAbstract
 
 
 class Component(ComponentAbstract):
