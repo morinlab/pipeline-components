@@ -7,7 +7,7 @@ component_main.py
 import glob
 import os.path
 import logging
-from pipeline_factory.utils import ComponentAbstract
+from kronos.utils import ComponentAbstract
 #import component_test
 
 
