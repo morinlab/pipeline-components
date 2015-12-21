@@ -44,7 +44,7 @@ class Component(ComponentAbstract):
             if fastq_file.endswith(ext):
                 base = fastq_file[:-len(ext)-1]
                 break
-        args_dict["output_bam"] = os.path.join(args_dict["output_dir"], base + ".bam")
+        args_dict["output_bam"] = os.path.join(args_dict["output_dir"], base + ".unsorted.bam")
         # Return
         return
 
