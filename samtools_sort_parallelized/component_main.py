@@ -23,7 +23,7 @@ class Component(ComponentAbstract):
         super(Component, self).__init__(component_name, component_parent_dir, seed_dir)
 
     def focus(self, args_dict, chunk):
-        pattern = os.path.join(args_dict["input_dir"], "{}.bam".format(chunk))
+        pattern = os.path.join(args_dict["input_dir"], "{}.unsorted.bam".format(chunk))
         files = glob.glob(pattern)
         if len(files) > 1:
             logging.warn("Found more than BAM file that matches the chunk pattern: {}".format(pattern))
@@ -31,7 +31,7 @@ class Component(ComponentAbstract):
             #raise ValueError("No BAM files matches the chunk pattern: {}".format(pattern))
         bam_file = files[0]
         args_dict["input_bam"] = bam_file
-        exts = ["bam"]
+        exts = ["unsorted.bam"]
         base = os.path.basename(bam_file)
         for ext in exts:
             if bam_file.endswith(ext):
