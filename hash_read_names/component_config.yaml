@@ -1,0 +1,41 @@
+__PIPELINE_INFO__: 
+    name: 
+    version: 
+    author: 
+    data_type: 
+    input_type: 
+    output_type: 
+    host_cluster: 
+    date_created: 
+    date_last_updated: 
+    factory_version: '1.12.0'
+__GENERAL__: 
+    python: 'python' # Requires pysam module
+    hash_read_names: 'hash_read_names.py'
+__SHARED__: 
+__SAMPLES__: 
+    # sample_id:
+    #    param1: value1
+    #    param2: value2
+
+__TASK_1__: 
+    reserved: 
+        # do not change this section.
+        component_name: 'hash_read_names'
+        component_version: 'v1.0.0'
+        seed_version: 'v1.0'
+    run: 
+        use_cluster: True
+        memory: '8G'
+        num_cpus: 1
+        forced_dependencies: []
+        add_breakpoint: False
+        parallel_run: False 
+    component:
+        input_files:
+            original_bam: '__OPTIONAL__'
+            hash_sum_infile: '__OPTIONAL__'
+            new_fastqs: '__OPTIONAL__'
+            new_bams: '__OPTIONAL__'
+        output_files:
+            hash_sum_outfile: '__OPTIONAL__'
