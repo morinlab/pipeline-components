@@ -109,8 +109,10 @@ class Component(ComponentAbstract):
         # Add positional arguments
         cmd_args.extend([pos_args_dict[arg] for arg in pos_args if arg in pos_args_dict])
 
+        samtools = self.requirements['samtools']
+
         # Handle special arguments
-        cmd_args.extend(["|", "samtools", "view", "-b", "-S", "-", ">", spec_args_dict["output_bam"]])  # Convert SAM to BAM
+        cmd_args.extend(["|", samtools, "view", "-b", "-S", "-", ">", spec_args_dict["output_bam"]])  # Convert SAM to BAM
 
         # Return cmd and cmg_args
         return cmd, cmd_args
