@@ -84,6 +84,12 @@ class Component(ComponentAbstract):
         # Add special arguments
         cmd_args.extend(sorted_bams)
 
+        # Rename the file if there's only one file
+        if len(sorted_bams) == 1:
+            cmd = 'cp'
+            cmd_args = []
+            cmd_args.extend([sorted_bams[0], pos_args_dict['output_file']])
+
         # Return cmd and cmg_args
         return cmd, cmd_args
 
