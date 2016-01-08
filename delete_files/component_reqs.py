@@ -10,7 +10,7 @@ memory = '1G'
 
 parallel = False
 
-requirements = {"rm": "rm"}
+requirements = {}
 
 seed_version = 'v1.0.0'
 

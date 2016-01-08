@@ -20,21 +20,25 @@ class Component(ComponentAbstract):
 
     def make_cmd(self, chunk=None):
         # Program or interpreter
-        cmd = self.requirements["rm"]
+        cmd = []
         cmd_args = []
         args_dict = vars(self.args)
-        # Optional arguments
-        opt_args = {'recursive': '-r'}
-        cmd_args.extend(["{} {}".format(opt_args[k], v) for k, v in args_dict.items()
-                         if k in opt_args and not isinstance(v, bool) and v is not None])
-        cmd_args.extend(["{}".format(opt_args[k], v) for k, v in args_dict.items()
-                         if k in opt_args and isinstance(v, bool)])
-        # Positional arguments
-        pos_args = ['files']
-        cmd_args.extend([args_dict[arg] for arg in pos_args if arg in args_dict and
-                        not isinstance(args_dict[arg], list)])
-        cmd_args.extend([" ".join(args_dict[arg]) for arg in pos_args if arg in args_dict and
-                        isinstance(args_dict[arg], list)])
+        # Build command
+        # Deal with files using rm
+        if args_dict["files"]:
+            cmd_args.append("rm")
+            if isinstance(args_dict["files"], list):
+                cmd_args.extend(args_dict["files"])
+            else:
+                cmd_args.append(args_dict["files"])
+            cmd_args.append(";")
+        # Deal with input_dir using find
+        # find /path/to/directory -type f -maxdepth 1 -exec rm -iv {} \;
+        if args_dict["input_dir"]:
+            cmd_args.extend(["find", ".", "-type", "f", "-maxdepth", "1"])
+            if args_dict["file_extension"]:
+                cmd_args.extend(["-name", "*{}".format(args_dict["file_extension"])])
+            cmd_args.extend(["-exec", "rm", "{}", "\;"])
         # Return cmd and cmg_args
         return cmd, cmd_args
 

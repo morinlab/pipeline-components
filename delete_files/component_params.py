@@ -5,10 +5,11 @@ component_params.py
 """
 
 
-input_files = {'files': '__REQUIRED__'}
+input_files = {'files': '__OPTIONAL__',
+               'input_dir': '__OPTIONAL__'}
 
 output_files = {}
 
-input_params = {'recursive': False}
+input_params = {'file_extension': '__OPTIONAL__'}
 
 return_value = []
