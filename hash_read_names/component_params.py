@@ -14,4 +14,6 @@ input_files = {"original_bam": "__OPTIONAL__",
 
 output_files = {"hash_sum_outfile": "__OPTIONAL__"}
 
+input_params = {}
+
 return_value = []

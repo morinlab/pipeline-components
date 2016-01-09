@@ -12,8 +12,8 @@ input_files = {"read_set": "__OPTIONAL__",
 
 output_files = {"read_set_out": "__OPTIONAL__"}
 
-parameters = {"files_to_delete": "__OPTIONAL__",
-              "files_to_delete_path": "__OPTIONAL__",
-              "new_file_path": "__OPTIONAL__"}
+input_params = {"files_to_delete": "__OPTIONAL__",
+                "files_to_delete_path": "__OPTIONAL__",
+                "new_file_path": "__OPTIONAL__"}
 
 return_value = []
