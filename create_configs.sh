@@ -19,6 +19,7 @@ export PYTHONPATH="$CWD:$PYTHONPATH"
 for COMP in $(ls -d */ | grep -v template)
 do
 	COMP=$(basename $COMP "/")
+    echo $COMP
 	cd "$COMP"
 	kronos -w . make_config -o component_config $COMP
 	cd "$CWD"
