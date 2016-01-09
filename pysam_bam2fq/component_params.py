@@ -7,7 +7,8 @@ component_params.py
 
 input_files = {"bam": "__REQUIRED__"}
 
-output_files = {"output_dir": "__REQUIRED__"}
+output_files = {"output_dir": "__REQUIRED__",
+                "interval_file": "__REQUIRED__"}
 
 input_params = {"num_reads": "__OPTIONAL__"}
 
