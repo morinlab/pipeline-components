@@ -6,12 +6,12 @@ __PIPELINE_INFO__:
     input_type: 
     output_type: 
     host_cluster: 
-    date_created: '2015-12-16'
+    date_created: '2016-01-08'
     date_last_updated: 
     Kronos_version: '2.0.3'
 __GENERAL__: 
-    python: 'python' # Requires pysam
-    pysam_bam2fq: 'bam2fq'
+    python: 'python'
+    pysam_bam2fq: 'pysam_bam2fq'
 __SHARED__: 
 __SAMPLES__: 
     # sample_id:
@@ -37,6 +37,7 @@ __TASK_1__:
         input_files: 
             bam: '__REQUIRED__'
         output_files: 
+            interval_file: '__REQUIRED__'
             output_dir: '__REQUIRED__'
         parameters: 
             num_reads: '__OPTIONAL__'

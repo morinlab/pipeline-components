@@ -6,11 +6,10 @@ __PIPELINE_INFO__:
     input_type: 
     output_type: 
     host_cluster: 
-    date_created: '2015-12-16'
+    date_created: '2016-01-08'
     date_last_updated: 
     Kronos_version: '2.0.3'
 __GENERAL__: 
-    rm: 'rm'
 __SHARED__: 
 __SAMPLES__: 
     # sample_id:
@@ -34,7 +33,8 @@ __TASK_1__:
         boilerplate: 
     component: 
         input_files: 
-            files: '__REQUIRED__'
+            files: '__OPTIONAL__'
+            input_dir: '__OPTIONAL__'
         output_files: 
         parameters: 
-            recursive: False
+            file_extension: '__OPTIONAL__'

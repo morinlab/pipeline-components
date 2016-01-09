@@ -6,12 +6,12 @@ __PIPELINE_INFO__:
     input_type: 
     output_type: 
     host_cluster: 
-    date_created: 
+    date_created: '2016-01-08'
     date_last_updated: 
-    factory_version: '1.12.0'
+    Kronos_version: '2.0.3'
 __GENERAL__: 
-    python: 'python' # Requires pysam module
-    hash_read_names: 'hash_read_names.py'
+    python: 'python'
+    hash_read_names: 'hash_read_names'
 __SHARED__: 
 __SAMPLES__: 
     # sample_id:
@@ -25,17 +25,22 @@ __TASK_1__:
         component_version: 'v1.0.0'
         seed_version: 'v1.0'
     run: 
-        use_cluster: True
-        memory: '8G'
+        # NOTE: component cannot run in parallel mode.
+        use_cluster: False
+        memory: '24G'
         num_cpus: 1
         forced_dependencies: []
         add_breakpoint: False
-        parallel_run: False 
-    component:
-        input_files:
-            original_bam: '__OPTIONAL__'
+        env_vars: 
+        boilerplate: 
+    component: 
+        input_files: 
+            files: '__OPTIONAL__'
+            new_bams: '__FLAG__'
+            new_fastqs: '__FLAG__'
             hash_sum_infile: '__OPTIONAL__'
-            new_fastqs: '__OPTIONAL__'
-            new_bams: '__OPTIONAL__'
-        output_files:
+            original_bam: '__OPTIONAL__'
+            directory: '__OPTIONAL__'
+        output_files: 
             hash_sum_outfile: '__OPTIONAL__'
+        parameters: 
