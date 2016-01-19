@@ -59,6 +59,7 @@ class Component(ComponentAbstract):
 
             # Prepare formatted argument for command line
             arg = arg.replace("_", arg_sep)
+            exceptions = []
             if arg in exceptions:
                 fmtd_arg = "{}{}".format("-", arg)
             else:
