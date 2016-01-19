@@ -38,7 +38,7 @@ class Component(ComponentAbstract):
             del args_dict[arg]
 
         # Extract positional arguments
-        pos_args = ['bam', 'outdir']  # Order matters here
+        pos_args = ['bam', 'output_dir', 'interval_file']  # Order matters here
         pos_args_dict = {k: v for k, v in args_dict.items() if k in pos_args}
         for arg in pos_args:
             del args_dict[arg]

@@ -42,7 +42,7 @@ class Component(ComponentAbstract):
         for arg in spec_args:
             del args_dict[arg]
 
-        sorted_bams = glob.glob(os.path.join(spec_args_dict["input_dir"], "*.sorted.bam"))
+        sorted_bams = os.path.join(spec_args_dict["input_dir"], "*")
 
         # Extract positional arguments
         pos_args = ["output_file"]  # Order matters here
@@ -80,15 +80,7 @@ class Component(ComponentAbstract):
 
         # Add positional arguments
         cmd_args.extend([pos_args_dict[arg] for arg in pos_args if arg in pos_args_dict])
-
-        # Add special arguments
-        cmd_args.extend(sorted_bams)
-
-        # Rename the file if there's only one file
-        if len(sorted_bams) == 1:
-            cmd = 'cp'
-            cmd_args = []
-            cmd_args.extend([sorted_bams[0], pos_args_dict['output_file']])
+        cmd_args.append(sorted_bams)
 
         # Return cmd and cmg_args
         return cmd, cmd_args

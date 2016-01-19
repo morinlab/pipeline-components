@@ -27,6 +27,7 @@ class Component(ComponentAbstract):
         # Add memory to command
         memory = args_dict.pop("java_memory", "2G")
         cmd_args.extend(["-Xmx{}".format(memory)])
+        cmd_args.extend(["-Xms{}".format(memory)])
         # Optional arguments (i.e., all arguments for GATK)
         cmd_args.extend(["-jar", self.requirements["picard_binary"]])
         cmd_args.extend([args_dict.pop("picard_command")])

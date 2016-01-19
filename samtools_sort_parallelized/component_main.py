@@ -5,7 +5,7 @@ component_main.py
 """
 
 import glob
-import os.path
+import os
 import logging
 from kronos.utils import ComponentAbstract
 #import component_test
@@ -13,31 +13,15 @@ from kronos.utils import ComponentAbstract
 
 class Component(ComponentAbstract):
 
-    """
-    Template
-    """
-
     def __init__(self, component_name="samtools_sort_parallelized", component_parent_dir=None,
                  seed_dir=None):
         self.version = "1.0.0"
         super(Component, self).__init__(component_name, component_parent_dir, seed_dir)
 
     def focus(self, args_dict, chunk):
-        pattern = os.path.join(args_dict["input_dir"], "{}.unsorted.bam".format(chunk))
-        files = glob.glob(pattern)
-        if len(files) > 1:
-            logging.warn("Found more than BAM file that matches the chunk pattern: {}".format(pattern))
-        #elif len(files) == 0:
-            #raise ValueError("No BAM files matches the chunk pattern: {}".format(pattern))
-        bam_file = files[0]
-        args_dict["input_bam"] = bam_file
-        exts = ["unsorted.bam"]
-        base = os.path.basename(bam_file)
-        for ext in exts:
-            if bam_file.endswith(ext):
-                base = bam_file[:-len(ext)-1]
-                break
-        args_dict["output_bam"] = os.path.join(args_dict["output_dir"], base + ".sorted")
+        args_dict["input_bam"] = os.path.join(args_dict["input_dir"], chunk + ".*")
+
+        args_dict["output_bam"] = os.path.join(args_dict["output_dir"], chunk + ".sorted")
         return
 
     def make_cmd(self, chunk=None):
@@ -100,8 +84,6 @@ class Component(ComponentAbstract):
 
         # Add positional arguments
         cmd_args.extend([pos_args_dict[arg] for arg in pos_args if arg in pos_args_dict])
-
-        #cmd_args.extend([">", spec_args_dict["output_bam"]])
 
         # Return cmd and cmg_args
         return cmd, cmd_args

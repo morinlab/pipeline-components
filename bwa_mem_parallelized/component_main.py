@@ -23,28 +23,16 @@ class Component(ComponentAbstract):
         super(Component, self).__init__(component_name, component_parent_dir, seed_dir)
 
     def focus(self, args_dict, chunk):
-        # Find input FASTQ file
-        pattern = os.path.join(args_dict["input_dir"], "{}.fastq.gz".format(chunk))
-        files = glob.glob(pattern)
-        if len(files) > 1:
-            logging.warn("Found more than one FASTQ file that matches the chunk pattern: {}".format(pattern))
-        #elif len(files) == 0:
-            #raise ValueError("No FASTQ files matches the chunk pattern: {}".format(pattern))
-        fastq_file = files[0]
+        fastq_file = os.path.join(args_dict["input_dir"], chunk + '.*')
+
         args_dict["reads_fastq"] = fastq_file
+
         # Determine if paired or unpaired, and update BWA options accordingly
         if "unpaired" in fastq_file:
             args_dict["p"] = False
         elif "paired" in fastq_file:
             args_dict["p"] = True
-        # Set output file
-        exts = ["fastq.gz", "fq.gz", "fastq", "fq"]
-        base = os.path.basename(fastq_file)
-        for ext in exts:
-            if fastq_file.endswith(ext):
-                base = fastq_file[:-len(ext)-1]
-                break
-        args_dict["output_bam"] = os.path.join(args_dict["output_dir"], base + ".unsorted.bam")
+        args_dict["output_bam"] = os.path.join(args_dict["output_dir"], chunk + ".unsorted.bam")
         # Return
         return
 
