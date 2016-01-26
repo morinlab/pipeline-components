@@ -33,29 +33,17 @@ class Component(ComponentAbstract):
         cmd = self.requirements["perl"]
         cmd_args = [self.requirements["configureStrelkaWorkflow.pl"]]
         args_dict = vars(self.args)
-        # Handle is_genome param
-        component_extra_dir = os.path.join(os.path.dirname(__file__), "component_extra")
-        if args_dict["is_genome"]:
-            config = os.path.join(component_extra_dir, "strelka_config_bwa_genome.ini")
-        else:
-            config = os.path.join(component_extra_dir, "strelka_config_bwa_nongenome.ini")
-        args_dict["config"] = config
         # Ensure that there is a directory in the file path
         # If not, prepend file path with "./"
         # This prevents "Can't resolve directory path..." errors
-        if os.path.dirname(args_dict["normal_bam"]) == "":
-            args_dict["normal_bam"] = os.path.join(".", args_dict["normal_bam"])
-        if os.path.dirname(args_dict["tumour_bam"]) == "":
-            args_dict["tumour_bam"] = os.path.join(".", args_dict["tumour_bam"])
-        if os.path.dirname(args_dict["reference"]) == "":
-            args_dict["reference"] = os.path.join(".", args_dict["reference"])
-        if os.path.dirname(args_dict["config"]) == "":
-            args_dict["config"] = os.path.join(".", args_dict["config"])
+        for key in ["normal_bam", "tumour_bam", "reference", "config_file"]:
+            if os.path.dirname(args_dict[key]) == "":
+                args_dict[key] = os.path.join(".", args_dict[key])
         # Optional arguments
         opt_args = {"normal_bam": "--normal",
                     "tumour_bam": "--tumor",
                     "reference": "--ref",
-                    "config": "--config",
+                    "config_file": "--config",
                     "output_dir": "--output-dir"}
         cmd_args.extend(["{} {}".format(opt_args[k], v) for k, v in args_dict.items()
                         if k in opt_args and v is not True])
@@ -67,7 +55,7 @@ class Component(ComponentAbstract):
         if "num_threads" in args_dict:
             cmd_args.extend(["-j", args_dict["num_threads"]])
         cmd_args.append("&&")
-        # Symlink final output files to destinations
+        # Copy final output files to destinations
         cmd_args.extend(["cp", os.path.join(args_dict["output_dir"], "results", "passed.somatic.snvs.vcf"), args_dict["passed_snvs_vcf"]])
         cmd_args.append("&&")
         cmd_args.extend(["cp", os.path.join(args_dict["output_dir"], "results", "passed.somatic.indels.vcf"), args_dict["passed_indels_vcf"]])
