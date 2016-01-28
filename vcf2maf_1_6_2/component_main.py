@@ -7,6 +7,7 @@ component_main.py
 import logging
 from kronos.utils import ComponentAbstract
 import component_test
+import os.path
 
 
 class Component(ComponentAbstract):
@@ -31,9 +32,19 @@ class Component(ComponentAbstract):
 
         # Program or interpreter
         args_dict = vars(self.args)
-        cmd = self.requirements["perl"]
-        cmd_args = [self.requirements["vcf2maf.pl"]]
+        cmd = ""
+        cmd_args = []
 
+        # Symlink reference files (workaround for vcf2maf/VEP deleting FAI file)
+        output_dir = os.path.dirname(args_dict["output_maf"])
+        ref_fasta_basename = os.path.basename(args_dict["ref_fasta"])
+        ref_fasta_linked = os.path.join(output_dir, ref_fasta_basename)
+        ref_fasta_idx_linked = ref_fasta_linked + "fai"
+        cmd_args.extend(["ln", "-s", args_dict["ref_fasta"], ref_fasta_linked, "&&"])
+        cmd_args.extend(["ln", "-s", args_dict["ref_fasta"] + ".fai", ref_fasta_idx_linked, "&&"])
+
+        # Build vcf2maf command
+        cmd_args.extend([self.requirements["perl"], self.requirements["vcf2maf.pl"]])
         # Command-line arguments
         for arg, val in args_dict.items():
 
@@ -61,6 +72,13 @@ class Component(ComponentAbstract):
             # Everything else
             else:
                 logging.warn("Command-line argument skipped: {}".format(arg))
+
+        # Clean up .vep.vcf files
+        vcf_annot = os.path.splitext(args_dict["input_vcf"])[0] + ".vep.vcf"
+        cmd_args.extend(["&&", "rm", "-f", vcf_annot])
+
+        # Clean up reference symlinks
+        cmd_args.extend(["&&", "rm", "-f", ref_fasta_linked, ref_fasta_idx_linked])
 
         # Return cmd and cmg_args
         return cmd, cmd_args
