@@ -42,6 +42,7 @@ class Component(ComponentAbstract):
         ref_fasta_idx_linked = ref_fasta_linked + ".fai"
         cmd_args.extend(["ln", "-sf", args_dict["ref_fasta"], ref_fasta_linked, "&&"])
         cmd_args.extend(["ln", "-sf", args_dict["ref_fasta"] + ".fai", ref_fasta_idx_linked, "&&"])
+        args_dict["ref_fasta"] = ref_fasta_linked
 
         # Build vcf2maf command
         cmd_args.extend([self.requirements["perl"], self.requirements["vcf2maf.pl"]])
