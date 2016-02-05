@@ -1,0 +1,52 @@
+__PIPELINE_INFO__: 
+    name: 
+    version: 
+    author: 
+    data_type: 
+    input_type: 
+    output_type: 
+    host_cluster: 
+    date_created: '2016-01-08'
+    date_last_updated: 
+    Kronos_version: '2.0.3'
+__GENERAL__: 
+    python: '/home/jgrewal/anaconda/bin/python/'
+    java: '/gsc/software/linux-x86_64-centos5/java-1.7.0-u13/bin/'
+    picardtools: '/home/jgrewal/software/picard/picard-tools-1.119/'
+__SHARED__: 
+__SAMPLES__: 
+    # sample_id:
+    #    param1: value1
+    #    param2: value2
+
+__TASK_1__: 
+    reserved: 
+        # do not change this section.
+        component_name: 'picard_mergesam'
+        component_version: '1.0.0'
+        seed_version: '1.119'
+    run: 
+        # NOTE: component cannot run in parallel mode.
+        use_cluster: False
+        memory: '20G'
+        num_cpus: 1
+        forced_dependencies: []
+        add_breakpoint: False
+        env_vars: 
+        boilerplate: 
+    component: 
+        input_files: 
+            input_dir: '__REQUIRED__'
+        output_files: 
+            output_file: '__REQUIRED__'
+        parameters: 
+            max_perm_size: '4G'
+            val_stringency: 'SILENT'
+            max_ram_records: '500000000'
+            input_regex: '*.bam'
+            use_threading: 'true'
+            java_mem: '4G'
+            sort_order: 'coordinate'
+            verbosity: 'INFO'
+            delete_input: 'true'
+            quiet: 'false'

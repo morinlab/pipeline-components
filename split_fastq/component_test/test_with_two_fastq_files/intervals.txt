@@ -1,0 +1,2 @@
+/Users/bgrande/Repos/pipeline-components/split_fastq/component_test/test_with_two_fastq_files/test_with_two_fastq_files_chunk1
+/Users/bgrande/Repos/pipeline-components/split_fastq/component_test/test_with_two_fastq_files/test_with_two_fastq_files_chunk2

@@ -1,0 +1,149 @@
+__PIPELINE_INFO__: 
+    name: 
+    version: 
+    author: 
+    data_type: 
+    input_type: 
+    output_type: 
+    host_cluster: 
+    date_created: '2016-01-08'
+    date_last_updated: 
+    Kronos_version: '2.0.3'
+__GENERAL__: 
+    variant_effect_predictor.pl: '__REQUIRED__'
+    perl: '__REQUIRED__'
+__SHARED__: 
+__SAMPLES__: 
+    # sample_id:
+    #    param1: value1
+    #    param2: value2
+
+__TASK_1__: 
+    reserved: 
+        # do not change this section.
+        component_name: 'ensembl_vep_79'
+        component_version: 'v1.0.0'
+        seed_version: '79'
+    run: 
+        # NOTE: component cannot run in parallel mode.
+        use_cluster: False
+        memory: '10G'
+        num_cpus: 1
+        forced_dependencies: []
+        add_breakpoint: False
+        env_vars: 
+        boilerplate: 
+    component: 
+        input_files: 
+            dir_plugins: '__OPTIONAL__'
+            fasta: '__OPTIONAL__'
+            dir_cache: '__OPTIONAL__'
+            dir: '__OPTIONAL__'
+            input_file: '__REQUIRED__'
+        output_files: 
+            output_file: '__REQUIRED__'
+            stats_file: '__OPTIONAL__'
+        parameters: 
+            no_escape: '__FLAG__'
+            freq_pop: '__OPTIONAL__'
+            pick_order: '__OPTIONAL__'
+            ccds: '__FLAG__'
+            vcf_info_field: '__OPTIONAL__'
+            tsl: '__FLAG__'
+            cache: '__FLAG__'
+            failed: '__FLAG__'
+            allow_non_variant: '__FLAG__'
+            merged: '__FLAG__'
+            check_svs: '__FLAG__'
+            format: '__OPTIONAL__'
+            maf_1kg: '__FLAG__'
+            db: '__FLAG__'
+            all_refseq: '__FLAG__'
+            variant_class: '__FLAG__'
+            password: '__OPTIONAL__'
+            no_intergenic: '__FLAG__'
+            check_alleles: '__FLAG__'
+            fields: '__OPTIONAL__'
+            allele_number: '__FLAG__'
+            summary: '__FLAG__'
+            assembly: '__OPTIONAL__'
+            registry: '__OPTIONAL__'
+            stats_text: '__FLAG__'
+            force: '__FLAG__'
+            old_maf: '__FLAG__'
+            no_progress: '__FLAG__'
+            individual: '__OPTIONAL__'
+            pass: '__FLAG__'
+            terms: '__OPTIONAL__'
+            port: '__OPTIONAL__'
+            canonical: '__FLAG__'
+            cell_type: '__FLAG__'
+            check_frequency: '__FLAG__'
+            vcf: '__FLAG__'
+            gvf: '__FLAG__'
+            per_gene: '__FLAG__'
+            everything: '__FLAG__'
+            force_overwrite: '__FLAG__'
+            phased: '__FLAG__'
+            filter_common: '__FLAG__'
+            total_length: '__FLAG__'
+            offline: '__FLAG__'
+            minimal: '__FLAG__'
+            coding_only: '__FLAG__'
+            flag_pick: '__FLAG__'
+            skip_db_check: '__FLAG__'
+            sift: '__OPTIONAL__'
+            flag_pick_allele: '__FLAG__'
+            regulatory: '__FLAG__'
+            gmaf: '__FLAG__'
+            refseq: '__FLAG__'
+            convert: '__OPTIONAL__'
+            plugin: '__OPTIONAL__'
+            cache_region_size: '__OPTIONAL__'
+            check_existing: '__FLAG__'
+            quiet: '__FLAG__'
+            keep_csq: '__FLAG__'
+            uniprot: '__FLAG__'
+            pick: '__FLAG__'
+            domains: '__FLAG__'
+            no_stats: '__FLAG__'
+            biotype: '__FLAG__'
+            verbose: '__FLAG__'
+            poly: '__FLAG__'
+            buffer_size: '__OPTIONAL__'
+            freq_filter: '__OPTIONAL__'
+            custom: '__OPTIONAL__'
+            show_cache_info: '__FLAG__'
+            cache_version: '__FLAG__'
+            chr: '__OPTIONAL__'
+            check_ref: '__FLAG__'
+            json: '__FLAG__'
+            fork: '__OPTIONAL__'
+            freq_freq: '__OPTIONAL__'
+            no_whole_genome: '__FLAG__'
+            shift_hgvs: '__OPTIONAL__'
+            most_severe: '__FLAG__'
+            freq_gt_lt: '__OPTIONAL__'
+            db_version: '__OPTIONAL__'
+            pubmed: '__FLAG__'
+            numbers: '__FLAG__'
+            host: '__OPTIONAL__'
+            protein: '__FLAG__'
+            species: '__OPTIONAL__'
+            lrg: '__FLAG__'
+            genomes: '__FLAG__'
+            polyphen: '__OPTIONAL__'
+            html: '__OPTIONAL__'
+            build: '__OPTIONAL__'
+            hgvs: '__FLAG__'
+            config: '__OPTIONAL__'
+            symbol: '__FLAG__'
+            compress: '__OPTIONAL__'
+            user: '__OPTIONAL__'
+            write_cache: '__FLAG__'
+            humdiv: '__FLAG__'
+            pick_allele: '__FLAG__'
+            database: '__FLAG__'
+            xref_refseq: '__FLAG__'
+            maf_esp: '__FLAG__'
+            gencode_basic: '__FLAG__'
