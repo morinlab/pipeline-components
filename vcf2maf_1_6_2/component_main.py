@@ -79,7 +79,7 @@ class Component(ComponentAbstract):
         cmd_args.extend(["&&", "rm", "-f", vcf_annot])
 
         # Clean up reference symlinks
-        cmd_args.extend(["&&", "rm", "-f", ref_fasta_linked, ref_fasta_idx_linked])
+        cmd_args.extend(["&&", "rm", "-f", ref_fasta_linked + "*"])
 
         # Return cmd and cmg_args
         return cmd, cmd_args
