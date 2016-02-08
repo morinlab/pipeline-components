@@ -45,7 +45,7 @@ class Component(ComponentAbstract):
         cmd_args.extend(["{}".format(opt_args[k], v) for k, v in args_dict.items()
                          if k in opt_args and isinstance(v, bool)])
         # Positional arguments
-        pos_args = ['bam_files']
+        pos_args = ['tumour_bam', 'normal_bam']
         cmd_args.extend([args_dict[arg] for arg in pos_args if arg in args_dict and
                         not isinstance(args_dict[arg], list)])
         cmd_args.extend([" ".join(args_dict[arg]) for arg in pos_args if arg in args_dict and

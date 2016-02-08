@@ -5,7 +5,8 @@ component_params.py
 """
 
 
-input_files = {'bam_files': '__REQUIRED__'}
+input_files = {'tumour_bam': '__REQUIRED__',
+               'normal_bam': '__REQUIRED__'}
 
 output_files = {'vcf_file': '__REQUIRED__'}
 

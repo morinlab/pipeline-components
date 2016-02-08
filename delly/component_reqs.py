@@ -10,7 +10,7 @@ memory = '4G'
 
 parallel = False
 
-requirements = {"delly": "delly"}
+requirements = {"delly": "__REQUIRED__"}
 
 seed_version = 'v0.6.3'
 
