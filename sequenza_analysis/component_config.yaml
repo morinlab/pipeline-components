@@ -6,9 +6,9 @@ __PIPELINE_INFO__:
     input_type: 
     output_type: 
     host_cluster: 
-    date_created: '2016-01-08'
+    date_created: '2016-06-09'
     date_last_updated: 
-    Kronos_version: '2.0.3'
+    Kronos_version: '2.1.0'
 __GENERAL__: 
     Rscript: '__REQUIRED__'
     sequenza_analysis.R: '__REQUIRED__'

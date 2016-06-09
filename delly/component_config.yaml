@@ -6,11 +6,11 @@ __PIPELINE_INFO__:
     input_type: 
     output_type: 
     host_cluster: 
-    date_created: '2016-01-08'
+    date_created: '2016-06-09'
     date_last_updated: 
-    Kronos_version: '2.0.3'
+    Kronos_version: '2.1.0'
 __GENERAL__: 
-    delly: 'delly'
+    delly: '__REQUIRED__'
 __SHARED__: 
 __SAMPLES__: 
     # sample_id:
@@ -34,7 +34,8 @@ __TASK_1__:
         boilerplate: 
     component: 
         input_files: 
-            bam_files: '__REQUIRED__'
+            normal_bam: '__REQUIRED__'
+            tumour_bam: '__REQUIRED__'
         output_files: 
             vcf_file: '__REQUIRED__'
         parameters: 

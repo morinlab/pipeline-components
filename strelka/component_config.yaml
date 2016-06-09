@@ -6,9 +6,9 @@ __PIPELINE_INFO__:
     input_type: 
     output_type: 
     host_cluster: 
-    date_created: '2016-01-08'
+    date_created: '2016-06-09'
     date_last_updated: 
-    Kronos_version: '2.0.3'
+    Kronos_version: '2.1.0'
 __GENERAL__: 
     make: 'make'
     configureStrelkaWorkflow.pl: '__REQUIRED__'
@@ -36,6 +36,7 @@ __TASK_1__:
         boilerplate: 
     component: 
         input_files: 
+            config_file: '__REQUIRED__'
             reference: '__REQUIRED__'
             normal_bam: '__REQUIRED__'
             tumour_bam: '__REQUIRED__'
@@ -44,5 +45,4 @@ __TASK_1__:
             output_dir: '__REQUIRED__'
             passed_indels_vcf: '__REQUIRED__'
         parameters: 
-            num_threads: 1
-            is_genome: True
+            num_threads: '__OPTIONAL__'
