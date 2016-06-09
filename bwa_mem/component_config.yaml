@@ -6,9 +6,9 @@ __PIPELINE_INFO__:
     input_type: 
     output_type: 
     host_cluster: 
-    date_created: '2016-01-08'
+    date_created: '2016-06-09'
     date_last_updated: 
-    Kronos_version: '2.0.3'
+    Kronos_version: '2.1.0'
 __GENERAL__: 
     bwa: 'bwa'
     samtools: 'samtools'
@@ -21,10 +21,11 @@ __SAMPLES__:
 __TASK_1__: 
     reserved: 
         # do not change this section.
-        component_name: 'bwa_mem_parallelized'
+        component_name: 'bwa_mem'
         component_version: 'v1.0.0'
         seed_version: 'v0.7.10'
     run: 
+        # NOTE: component cannot run in parallel mode.
         use_cluster: False
         memory: '6G'
         num_cpus: 1
@@ -32,15 +33,13 @@ __TASK_1__:
         add_breakpoint: False
         env_vars: 
         boilerplate: 
-        parallel_run: False
-        parallel_params: []
-        interval_file: 
     component: 
         input_files: 
-            input_dir: '__REQUIRED__'
+            reads_fastq2: '__OPTIONAL__'
+            reads_fastq1: '__REQUIRED__'
             bwa_index_prefix: '__REQUIRED__'
         output_files: 
-            output_dir: '__REQUIRED__'
+            output_bam: '__REQUIRED__'
         parameters: 
             A: '__OPTIONAL__'
             a: '__FLAG__'
