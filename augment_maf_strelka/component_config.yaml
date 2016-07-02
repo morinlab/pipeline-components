@@ -1,0 +1,43 @@
+__PIPELINE_INFO__: 
+    name: 
+    version: 
+    author: 
+    data_type: 
+    input_type: 
+    output_type: 
+    host_cluster: 
+    date_created: '2016-07-01'
+    date_last_updated: 
+    Kronos_version: '2.1.0'
+__GENERAL__: 
+    python: '__REQUIRED__'
+    augment_maf_strelka.py: '__REQUIRED__'
+__SHARED__: 
+__SAMPLES__: 
+    # sample_id:
+    #    param1: value1
+    #    param2: value2
+
+__TASK_1__: 
+    reserved: 
+        # do not change this section.
+        component_name: 'augment_maf_strelka'
+        component_version: 'v1.0.0'
+        seed_version: '1.0.0'
+    run: 
+        # NOTE: component cannot run in parallel mode.
+        use_cluster: False
+        memory: '1G'
+        num_cpus: 1
+        forced_dependencies: []
+        add_breakpoint: False
+        env_vars: 
+        boilerplate: 
+    component: 
+        input_files: 
+            strelka_vcf_file: '__REQUIRED__'
+            maf_file: '__REQUIRED__'
+        output_files: 
+            output: '__REQUIRED__'
+        parameters: 
+            replace: '__OPTIONAL__'
