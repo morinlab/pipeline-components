@@ -5,9 +5,9 @@
 # accessible. 
 # 
 # Run this script in the repository directory. 
-# It assumes that the Pipeline Factory dependencies are already installed.
+# It assumes that Kronos is in the current Python environment.
 # Usage: 
-# bash create_configs.sh /path/to/python /path/to/factory.py
+# bash create_configs.sh
 
 # Set CWD
 CWD=$(pwd)

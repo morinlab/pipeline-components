@@ -6,7 +6,7 @@ __PIPELINE_INFO__:
     input_type: 
     output_type: 
     host_cluster: 
-    date_created: '2016-06-09'
+    date_created: '2016-07-01'
     date_last_updated: 
     Kronos_version: '2.1.0'
 __GENERAL__: 
