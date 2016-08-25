@@ -16,4 +16,6 @@ parser.add_argument('interval_file', type=argparse.FileType('w'),
                     help='Interval file that will be created.')
 parser.add_argument('--num_reads', '-n', type=int, default=75000000,
                     help='Maximum number of reads per FASTQ file.')
+parser.add_argument('--trim_bases','-b',type=int,default=0,
+                        help="trim the first n bases from the 5' of the fastq")
 args, unknown = parser.parse_known_args()
