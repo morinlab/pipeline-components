@@ -20,7 +20,7 @@ class Component(ComponentAbstract):
     def make_cmd(self, chunk=None):
 
         # Component options
-        arg_prefix = "--"  # What is before every argument
+        arg_prefix = "-"  # What is before every argument
         arg_sep = "_"  # Separator in every argument, such as "-" or "". Set to "_" to leave as is
         val_sep = " "  # Separator in a list of them for one argument, such as " " or ","
         arg_val_sep = " "  # Separator between argument name and value, such as " " or "="
