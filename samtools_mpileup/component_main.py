@@ -80,7 +80,7 @@ class Component(ComponentAbstract):
                     cmd_args.append(pos_args_dict[arg])
 
         # Handle special arguments
-        cmd_args.append("> {}".format(spec_args_dict["output_pileup"])
+        cmd_args.append("> {}".format(spec_args_dict["output_pileup"]))
 
         # Return cmd and cmg_args
         return cmd, cmd_args
