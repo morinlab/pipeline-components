@@ -28,11 +28,18 @@ class Component(ComponentAbstract):
 
         # Program or interpreter
         args_dict = vars(self.args)
-        cmd = self.requirements["java"]
-        cmd_args = ["-jar " + self.requirements["varscan2_jar"], "somatic"]
+        cmd = self.requirements["java_binary"]
+        cmd_args = []
+
+        # Add memory to command
+        memory = args_dict.pop("java_memory", "2G")
+        cmd_args.extend(["-Xmx{}".format(memory)])
+
+        # Add varscan2 binary
+        cmd_args.extend(["-jar {}".format(self.requirements["varscan2_binary"])])
 
         # Extract positional arguments
-        pos_args = ["normal_pileup","tumour_pileup","output_basename"]  # Order matters here
+        pos_args = ["varscan2_command","normal_pileup","tumour_pileup","output_basename"]  # Order matters here
         pos_args_dict = {k: v for k, v in args_dict.items() if k in pos_args}
         for arg in pos_args:
             del args_dict[arg]
