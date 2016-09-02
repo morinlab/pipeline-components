@@ -9,7 +9,9 @@ input_files = {"normal_pileup","tumour_pileup"}
 
 output_files = {"output_basename"}
 
-input_params = {"output_snp": "__OPTIONAL__",
+input_params = {"varscan2_command": "somatic",
+		"java_memory": "__OPTIONAL__",
+		"output_snp": "__OPTIONAL__",
 		"output_indel": "__OPTIONAL__",
 		"min_coverage": "__OPTIONAL__",
 		"min_coverage_normal": "__OPTIONAL__",
