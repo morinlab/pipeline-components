@@ -21,7 +21,8 @@ input_params = {"output_snp": "__OPTIONAL__",
 		"p_value": "__OPTIONAL__",
 		"somatic_p_value": "__OPTIONAL__",
 		"strand_filter": "__OPTIONAL__",
-		"validation": "__OPTIONAL__"
+		"validation": "__OPTIONAL__",
+                "output_vcf": "__OPTIONAL__"
 		}
 
 return_value = []
