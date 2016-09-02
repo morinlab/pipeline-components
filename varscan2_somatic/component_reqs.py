@@ -6,12 +6,12 @@ component_reqs.py
 
 env_vars = {}
 
-memory = '35G'
+memory = '8G'
 
 parallel = False
 
-requirements = {"java": "__REQUIRED__",
-                "varscan2_jar": "__REQUIRED__"}
+requirements = {"java_binary": "__REQUIRED__",
+                "varscan2_binary": "__REQUIRED__"}
 
 seed_version = '2.3.9'
 
