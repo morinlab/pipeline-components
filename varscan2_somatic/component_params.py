@@ -8,8 +8,7 @@ component_params.py
 input_files = {"normal_pileup": "__REQUIRED__",
 		"tumour_pileup": "__REQUIRED__"}
 
-output_files = {"output_dir": "__REQUIRED__", 
-		"output_basename": "__REQUIRED__"}
+output_files = {"output_basename": "__REQUIRED__"}
 
 input_params = {"varscan2_command": "somatic",
 		"java_memory": "__OPTIONAL__",

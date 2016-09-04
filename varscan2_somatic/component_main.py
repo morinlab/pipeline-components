@@ -39,7 +39,7 @@ class Component(ComponentAbstract):
         cmd_args.extend(["-jar {}".format(self.requirements["varscan2_binary"])])
 
         # Extract positional arguments
-        pos_args = ["varscan2_command","normal_pileup","tumour_pileup"]  # Order matters here
+        pos_args = ["varscan2_command","normal_pileup","tumour_pileup","output_basename"]  # Order matters here
         pos_args_dict = {k: v for k, v in args_dict.items() if k in pos_args}
         for arg in pos_args:
             del args_dict[arg]
@@ -51,8 +51,6 @@ class Component(ComponentAbstract):
                     cmd_args.extend(pos_args_dict[arg])
                 else:
                     cmd_args.append(pos_args_dict[arg])
-
-        cmd_args.append(os.path.join(args_dict["output_dir"], args_dict["output_basename"]))
 
         # Command-line arguments
         for arg, val in args_dict.items():
