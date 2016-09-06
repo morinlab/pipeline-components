@@ -38,13 +38,13 @@ class Component(ComponentAbstract):
         # Add seurat binary
         cmd_args.append("-jar {}".format(self.requirements["seurat_binary"]))
 
-        seurat_args = ["T","I:dna_normal","I:dna_tumor"]
+        seurat_args = ["T","I_dna_normal","I_dna_tumor"]
 
-        if "I:rna_normal" in arg_dict:
-            seurat_args.append("I:rna_normal")
+        if "I_rna_normal" in arg_dict:
+            seurat_args.append("I_rna_normal")
 
-        if "I:rna_tumor" in arg_dict:
-            seurat_args.append("I:rna_tumor")
+        if "I_rna_tumor" in arg_dict:
+            seurat_args.append("I_rna_tumor")
 
         seurat_args_dict = {k: v for k, v in args_dict.items() if k in seurat_args}
         for arg in seurat_args:
@@ -56,8 +56,17 @@ class Component(ComponentAbstract):
         for arg in spec_args:
             del args_dict[arg]
 
+        seurat_args_mapping = { "I_dna_normal": "I:dna_normal",
+                                "I_dna_tumor": "I:dna_tumor",
+                                "I_rna_normal": "I:rna_normal",
+                                "I_rna_tumor": "I:rna_tumor"
+                              }
+
         # Seurat specific arguments
         for arg, val in seurat_args_dict.items():
+
+            if arg in seurat_args_mapping:
+                arg = seurat_args_mapping[arg]
 
             # Prepare formatted argument for command line
             if arg_sep:
