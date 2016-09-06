@@ -114,11 +114,11 @@ class Component(ComponentAbstract):
 
         # Move SNVs into separate file
         cmd_args.append("&&")
-        cmd_args.append("cat <( grep '#' " + args_dict["out"] + ") <( grep -v '#' " + args_dict["out"] + " | awk '$8 ~ \"TYPE=somatic_SNV\" {print}' > " + spec_args_dict["output_snv"])
+        cmd_args.append("cat <( grep '#' " + args_dict["out"] + ") <( grep -v '#' " + args_dict["out"] + " | awk '$8 ~ \"TYPE=somatic_SNV\" {print}') > " + spec_args_dict["output_snv"])
 
         # Move indels into separate file
         cmd_args.append("&&")
-        cmd_args.append("cat <( grep '#' " + args_dict["out"] ") <( grep -v '#' " + args_dict["out"] + " | awk '$8 ~ \"TYPE=somatic_insertion\" || $8 ~ \"TYPE=somatic_deletion\" {print}' > " + spec_args_dict["output_indel"])
+        cmd_args.append("cat <( grep '#' " + args_dict["out"] ") <( grep -v '#' " + args_dict["out"] + " | awk '$8 ~ \"TYPE=somatic_insertion\" || $8 ~ \"TYPE=somatic_deletion\" {print}') > " + spec_args_dict["output_indel"])
 
         # Return cmd and cmg_args
         return cmd, cmd_args
