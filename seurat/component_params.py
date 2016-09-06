@@ -8,8 +8,6 @@ component_params.py
 input_files = {
 		"I:dna_normal": "__REQUIRED__",
 		"I:dna_tumor": "__REQUIRED__",
-		"I:rna_normal": "__OPTIONAL__",
-		"I:rna_tumor": "__OPTIONAL__"
               }
 
 output_files = {
@@ -20,6 +18,8 @@ output_files = {
                }
 
 input_params = {
+		"I:rna_normal": "__OPTIONAL__",
+                "I:rna_tumor": "__OPTIONAL__",
 		"T": "Seurat",
 		"reference_sequence": "__REQUIRED__",
 		"java_memory": "__OPTIONAL__",
