@@ -50,6 +50,12 @@ class Component(ComponentAbstract):
         for arg in seurat_args:
             del arg_dict[arg]
 
+        # Extract special arguments
+        spec_args = ["output_snv","output_indel"]
+        spec_args_dict = {k: v for k, v in args_dict.items() if k in spec_args}
+        for arg in spec_args:
+            del args_dict[arg]
+
         # Seurat specific arguments
         for arg, val in seurat_args_dict.items():
 
@@ -105,6 +111,14 @@ class Component(ComponentAbstract):
             # Everything else
             else:
                 logging.warn("Command-line argument skipped: {}".format(arg))
+
+        # Move SNVs into separate file
+        cmd_args.append("&&")
+        cmd_args.append("cat <( grep '#' " + args_dict["out"] + ") <( grep -v '#' " + args_dict["out"] + " | awk '$8 ~ \"TYPE=somatic_SNV\" {print}' > " + spec_args_dict["output_snv"])
+
+        # Move indels into separate file
+        cmd_args.append("&&")
+        cmd_args.append("cat <( grep '#' " + args_dict["out"] ") <( grep -v '#' " + args_dict["out"] + " | awk '$8 ~ \"TYPE=somatic_insertion\" || $8 ~ \"TYPE=somatic_deletion\" {print}' > " + spec_args_dict["output_indel"])
 
         # Return cmd and cmg_args
         return cmd, cmd_args
