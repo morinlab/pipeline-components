@@ -40,15 +40,15 @@ class Component(ComponentAbstract):
 
         seurat_args = ["T","I_dna_normal","I_dna_tumor"]
 
-        if "I_rna_normal" in arg_dict:
+        if "I_rna_normal" in args_dict:
             seurat_args.append("I_rna_normal")
 
-        if "I_rna_tumor" in arg_dict:
+        if "I_rna_tumor" in args_dict:
             seurat_args.append("I_rna_tumor")
 
         seurat_args_dict = {k: v for k, v in args_dict.items() if k in seurat_args}
         for arg in seurat_args:
-            del arg_dict[arg]
+            del args_dict[arg]
 
         # Extract special arguments
         spec_args = ["output_snv","output_indel"]
@@ -127,7 +127,7 @@ class Component(ComponentAbstract):
 
         # Move indels into separate file
         cmd_args.append("&&")
-        cmd_args.append("cat <( grep '#' " + args_dict["out"] ") <( grep -v '#' " + args_dict["out"] + " | awk '$8 ~ \"TYPE=somatic_insertion\" || $8 ~ \"TYPE=somatic_deletion\" {print}') > " + spec_args_dict["output_indel"])
+        cmd_args.append("cat <( grep '#' " + args_dict["out"] + ") <( grep -v '#' " + args_dict["out"] + " | awk '$8 ~ \"TYPE=somatic_insertion\" || $8 ~ \"TYPE=somatic_deletion\" {print}') > " + spec_args_dict["output_indel"])
 
         # Return cmd and cmg_args
         return cmd, cmd_args
